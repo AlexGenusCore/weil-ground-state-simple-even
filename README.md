@@ -568,11 +568,11 @@ Corrections and error reports are very welcome.
 ## How to cite
 
 Archived on Zenodo. DOI for all versions (resolves to the newest): [10.5281/zenodo.23832220](https://doi.org/10.5281/zenodo.23832220);
-the previous version, v1.1.1: [10.5281/zenodo.23832221](https://doi.org/10.5281/zenodo.23832221). Zenodo assigns the DOI of
-v2.0.0 on release. See also `CITATION.cff`:
+this version, v2.0.0: [10.5281/zenodo.23852617](https://doi.org/10.5281/zenodo.23852617); the previous version, v1.1.1:
+[10.5281/zenodo.23832221](https://doi.org/10.5281/zenodo.23832221). See also `CITATION.cff`:
 
 > Johann Alexander Botha, *A certified simple, even ground state of the localized Weil quadratic form for all windows
-> L in (0, 2]*, computer-assisted paper and code, version 2.0.0 (2026-11-01), Zenodo, doi:10.5281/zenodo.23832220.
+> L in (0, 2]*, computer-assisted paper and code, version 2.0.0 (2026-11-01), Zenodo, doi:10.5281/zenodo.23852617.
 > Unrefereed, produced with AI assistance.
 
 Please also cite Zhu (arXiv:2608.24827), whose reduction the proof uses; Elston (`weil-windows`), whose certifier
