@@ -41,7 +41,7 @@ adapted.
 | `indep.py`, `mp_entries.py` | Independent gates. G0i checks 8 entries by eq. (P) with its own prime list. C-ind recomputes τ_core, τ_pole, t_N and r_M in mpmath. |
 | `ritz.py` | Float Rayleigh–Ritz value used by gate G-S, as a sanity guard on s(L). |
 | `stage_s.py`, `liu.py` | Stage S: the certified s(L) ≥ ‖C_p‖. It uses Elston's Collatz–Wielandt Schur test (`code/gap/elston/grid_norm.py`). |
-| `check_steps.py` | The step test (gluing) exactly as used for Piece IV. It requires the provenance checks (`--stamp`), and it has the unused `--l2-from` fallback. Piece III uses the older `code/gap/check_steps.py`. |
+| `check_steps.py` | The step test (gluing) exactly as used for Piece IV. It requires the provenance checks (`--stamp`), and it has the `--l2-from` fallback, which gives the route without rule E. Piece III uses the older `code/gap/check_steps.py`. |
 | `amend.py` | The append-only amendment log, a hash chain. `python amend.py LOG --verify` checks it. |
 | `pilot.py`, `grid.py`, `run_grid.sh` | Drivers for grid G. `grid.py` implements the rung ladders, the controls, rule E (`ladder`) and the glue. They are shipped as the record of what ran. |
 | `g4.py` | Mutation harness for G4 (`data/piece4/mutations/G4_1.5.json`). |
@@ -100,10 +100,15 @@ python code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt \
 
 Run this from the repository root. The output is byte-identical to `data/piece4/logs/GLUE_r2.log`. The stamp is the sha256 of
 the original `GRID.stamp`, which every Piece IV record carries. With `data/piece4/windows_partial.txt` you get the
-registered partial outcome, `logs/GLUE_P.log`. `check_theorem.sh` in the repository root runs this together with Pieces
+registered partial outcome, `logs/GLUE_P.log`. Adding `--l2-from 1.92364501953125=1.9326171875` glues without the rule-E
+record: the λ_2 bound at `1.92364501953125` is then read from the registered record at `1.9326171875` (Lemma `lem:mono`,
+paper Remark 7.5), and all 53 steps still pass. `check_theorem.sh` in the repository root runs both, together with Pieces
 I–III.
 
-## Not included
+## Specification and proofs
 
-`SPEC.md` and `PROOFS.md` are the specification and proofs that the code cites (Theorem V, Lemma SR, P1–P23). They are not
-part of this release. GAP.stamp records their hashes, and they are available on request (info@genuscore.com).
+`SPEC.md` and `PROOFS.md`, the specification and proofs that the code cites (Theorem V, Lemma SR, P1–P23), are shipped in
+`supplement/` since the second AI review: `PROOFS.md` is byte-identical to the file hashed in `data/piece4/GAP.stamp`, and
+`SPEC.md` is a copy with one host name redacted (`supplement/REDACTION.sha256`). `supplement/MAP.md` maps every formula
+to the code here and to the record fields. Other development documents they cite (review.md, spec_changes.md, PREREG.md,
+AUDIT.md, FIXES.md) are not shipped; they are available on request (info@genuscore.com).

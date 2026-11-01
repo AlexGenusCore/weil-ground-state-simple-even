@@ -16,6 +16,9 @@ grep -q "^$STAMP  .*data/piece4/GRID.stamp$" data/piece4/REDACTION.sha256 || { e
 
 echo "== file hashes"
 (cd data/piece3 && sha256sum -c --quiet SHA256SUMS) && (cd data/piece4 && sha256sum -c --quiet SHA256SUMS) && echo "data/piece3, data/piece4: OK"
+# The Piece IV proofs (supplement/PROOFS.md) must be the file stamped in GAP.stamp before the gap run.
+(cd supplement && sha256sum -c --quiet SHA256SUMS) && grep -q "^$(sha256sum supplement/PROOFS.md | cut -d' ' -f1)  .*/PROOFS.md$" data/piece4/GAP.stamp \
+  && echo "supplement: OK (PROOFS.md matches GAP.stamp)" || { echo "FAIL: supplement hashes"; exit 1; }
 
 echo; echo "== Pieces I-II: code/theorem.py --check"
 p12=$($PY code/theorem.py --check); echo "$p12"
@@ -23,6 +26,11 @@ echo; echo "== Piece III: code/gap/check_steps.py data/piece3"
 p3=$($PY code/gap/check_steps.py data/piece3); echo "$p3"
 echo; echo "== Piece IV: code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt --stamp $STAMP"
 p4=$($PY code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt --stamp "$STAMP"); echo "$p4"
+# The same glue without the rule-E record: the lambda_2 bound at 1.92364501953125 is taken from the registered grid record at
+# 1.9326171875 by Lemma lem:mono (paper Remark rem:noE).
+echo; echo "== Piece IV without rule E: --l2-from 1.92364501953125=1.9326171875"
+p4m=$($PY code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt --stamp "$STAMP" --l2-from 1.92364501953125=1.9326171875)
+echo "$p4m" | grep "lem:mono\|^\[1.91912841796875\|^ALL\|^NOT"
 
 echo
 fail() { echo "NOT CERTIFIED: $1"; exit 1; }
@@ -30,6 +38,7 @@ echo "$p12" | tail -n 1 | grep -qx "THEOREM CERTIFIED for all L in (0, 1.19]" ||
 e3=$(echo "$p3" | tail -n 1 | sed -n 's/^CERTIFIED: simple-even for all L in \[1\.19, \([0-9.]*\)\].*/\1/p')
 [ -n "$e3" ] && awk "BEGIN { exit !($e3 >= 1.4035) }" || fail "Piece III does not reach 1.4035"
 echo "$p4" | tail -n 1 | grep -q "^ALL STEPS PASS (53 comparisons): simple-even on \[1.4035, 2\]" || fail "Piece IV"
-echo "COMBINED: Pieces I-II (0, 1.19], Piece III [1.19, $e3], Piece IV [1.4035, 2]."
+echo "$p4m" | tail -n 1 | grep -q "^ALL STEPS PASS (53 comparisons): simple-even on \[1.4035, 2\]" || fail "Piece IV without rule E"
+echo "COMBINED: Pieces I-II (0, 1.19], Piece III [1.19, $e3], Piece IV [1.4035, 2] (with rule E, and also without it)."
 echo "For every L in (0, 2], the lowest eigenvalue of A_L is simple and its eigenfunction is even."
 echo "(Computer-assisted, unrefereed, AI-assisted; conditional on the imported trust listed in REVIEWING.md.)"

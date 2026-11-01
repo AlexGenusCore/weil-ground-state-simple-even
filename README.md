@@ -13,12 +13,17 @@ function on `L^2(-L, L)` is simple, and its eigenfunction is even.
   Claude Code). The author directed the work but is not a professional mathematician. Every review and audit so far was run
   by AI agents, including the fresh-agent audit of the new Piece IV (`data/piece4/AUDIT_GRID.md`). No human expert has
   checked any part. See [AI assistance](#ai-assistance).
-- **Piece IV, `[1.4035, 2]`, rests on a fix that was registered after the fact.** The pre-registered grid G **failed as
-  registered**. At `L = 1.92364501953125` the second even eigenvalue could not be certified at the planned truncation `N`,
-  because of a boundary effect of the cut. On its own, grid G certifies `[1.4035, 1.91912841796875]`. The gap was closed by
-  **rule E** (`N -> N + 1024`), which was written after the failure but stamped before its scored run. Without rule E the
-  theorem holds for `L` in `(0, 1.91912841796875]`. The negative control of rule E failed as required, but at V2 rather
-  than V4, so it does not exercise Lemma SR at the new `N`. See [Disclosures](#disclosures-for-release-200).
+- **The pre-registered grid of Piece IV, `[1.4035, 2]`, failed as registered.** At `L = 1.92364501953125` the second even
+  eigenvalue could not be certified at the planned truncation `N`, because of a boundary effect of the cut. As registered,
+  grid G certifies `[1.4035, 1.91912841796875]`. The one open step is closed in two ways:
+  - by **rule E** (`N -> N + 1024`), which was written after the failure but stamped before its scored run (its negative
+    control failed as required, but at V2 rather than V4, so it does not exercise Lemma SR at the new `N`);
+  - **without rule E**, by min-max monotonicity (`lem:mono`) from the registered grid record at the next window
+    `1.9326171875`: `lambda_2^even(1.92364501953125) >= lambda_2^even(1.9326171875) >= 1.3019e-236`, above the odd bound
+    `1.2323e-236` there. This uses no computation made after the failure. `check_theorem.sh` runs both routes.
+
+  Earlier drafts said the theorem shrinks to `(0, 1.91912841796875]` without rule E. That was too strong; the second AI
+  review (Codex) pointed it out. See [Disclosures](#disclosures-for-release-200).
 - It is computer-assisted. Its correctness depends on:
   - the code in `code/`: our certifiers, Zac Elston's certifier in `code/gap/elston/`, and our clean-room
     rh_60-route certifier in `code/rh60route/`;
@@ -27,8 +32,10 @@ function on `L^2(-L, L)` is simple, and its eigenfunction is even.
   - the imported trust listed under [Weakest links](#weakest-links).
 - It is **not** a result about the Riemann hypothesis and brings no proof of RH closer in any quantified sense.
   - In the Connes–van Suijlekom / Connes–Consani–Moscovici programme, "the lowest eigenvalue of `Q_L` is simple with an even
-    eigenfunction" is one hypothesis. Assumed for a given `L`, it implies that the Fourier transform of that ground state has
-    only real zeros.
+    eigenfunction" is one hypothesis. Connes–van Suijlekom (Thm 6.1) show that it implies real zeros for the Fourier
+    transform of that ground state **if** the form also defines an essentially self-adjoint operator on trigonometric
+    polynomials. Our operator is the closure of `Q_L` on `C_c^inf(-L, L)`, and we have **not** verified that hypothesis, so
+    we claim nothing about those zeros.
   - Reaching RH would also need that hypothesis for every `L`, and control of the limit `L -> inf` (that those zeros converge
     to the zeta zeros). Neither is addressed here.
   - We verify the hypothesis only on the bounded range `(0, 2]`.
@@ -37,7 +44,8 @@ function on `L^2(-L, L)` is simple, and its eigenfunction is even.
 statement; see [Reproducing](#reproducing).
 
 The paper is [`paper/main.pdf`](paper/main.pdf), with source in `paper/main.tex` and `paper/refs.bib`. Piece IV is
-documented in three more places:
+documented in four more places:
+- its specification, its proofs P1–P23 and a formula → code → record-field map in [`supplement/`](supplement/MAP.md);
 - its pre-registrations, scored results and audit in `data/piece4/`;
 - its code in `code/rh60route/`, with a README;
 - [`data/README.md`](data/README.md).
@@ -68,6 +76,9 @@ The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
   - the independent gates G0i and C-ind;
   - rule E;
   - the gluing.
+- **Second AI review.** A release candidate was reviewed by a second AI system, OpenAI's Codex (1 November 2026). It found
+  no fatal error and raised 3 major and 9 minor points; all are addressed in this version. The review and our point-by-point
+  responses are in [`reviews/`](reviews/). Codex did not re-run the large certificates and does not certify the proof.
 - **Pre-registration.** Grid G was run under `PREREG_GRID.md` and the gap under `PREREG_GAP.md`. Both have run-time stamps
   (hashes of every registered document and executed file) and an append-only amendment log with a hash chain. All are in
   `data/piece4/`.
@@ -78,7 +89,11 @@ The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
   - `code/rh60route/`;
   - `data/piece4/` (106 glued records, the upper bounds, rule-E records, controls, mutation summary, glue logs,
     pre-registrations, stamps, amendment log, results, audit, SHA-256 sums, and the redaction map);
-  - 5 new files in `data/piece3/`.
+  - 5 new files in `data/piece3/`;
+  - `supplement/` (Piece IV specification, proofs P1–P23, formula–code–field map);
+  - `data/upper/` (the original records behind the paper's table of upper bounds at `L = 1.5 ... 2.25`) and `data/kinks/`
+    (the raw jump measurements of paper §9);
+  - `reviews/` (the Codex review and our responses).
 
 ## Disclosures for release 2.0.0
 
@@ -99,8 +114,9 @@ The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
    at V2, the float core proposal, rather than at V4 (prediction RG-2 missed), so it does not exercise Lemma SR at the new `N`.
    The evidence that V4 is live comes from elsewhere: the 6/6 grid G controls that fail at V4, the four grid FAIL records at
    the last label, and diagnostic D1.
-4. **The registered fallback was not used.** That fallback was a `lem:mono` substitution (`check_steps.py --l2-from`). Its
-   trigger did not hold.
+4. **The registered fallback also closes the gap.** That fallback is a `lem:mono` substitution (`check_steps.py --l2-from
+   1.92364501953125=1.9326171875`). Its trigger (rule E failing) did not hold, so it was not scored. It reads only a
+   registered grid record and passes all 53 steps (paper Remark `rem:noE`), so rule E is not needed for the theorem.
 5. **The window `1.8958740234375` passed only narrowly.** It passed on its last rung (`2^-10`), at the last SR label of a
    different `N`, which is the same edge effect. Future grids should register an `N` rule up front.
 6. **The shipped records are redacted.** Host names, a user name and home paths are replaced. No number or field was
@@ -108,8 +124,9 @@ The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
    `data/piece4/REDACTION.sha256` maps original to redacted sha256, and the originals are available on request.
 7. **What the audit covered.** The fresh-agent audit recomputed the step chain independently, but with the same Arb library.
    It did not re-prove the certifier.
-   - The specification and proofs that the code cites (SPEC.md, PROOFS.md: Theorem V, Lemma SR) are **not** in this release.
-     Their hashes are in `GAP.stamp`, and they are available on request.
+   - The specification and proofs that the code cites are shipped in `supplement/` since the Codex review: `PROOFS.md`
+     (P1–P23, Theorem V, Lemma SR) is byte-identical to the file hashed in `GAP.stamp`; `SPEC.md` is a copy with one host
+     name redacted. Both were written with AI assistance and reviewed only by AI agents.
 8. **The method comes from AI-agent preprints** reviewed only by AI agents (see above). Our code is clean room: no rStation
    code was opened, copied or adapted.
 
@@ -151,7 +168,8 @@ The proof has four pieces.
   (`code/rh60route/`). That certifier does a full-source Schur elimination with an exact core, a rank-one deflation for
   `lambda_2^even`, and Lemma SR, an exact-integer structured LDL^T. Each window also has a rigorous upper bound `U(L)`.
   Every step passes. The smallest step ratio is `2.0986`, and the odd sector binds everywhere. The gap at
-  `1.92364501953125` is closed by the post-hoc rule E (see [Disclosures](#disclosures-for-release-200)).
+  `1.92364501953125` is closed by the post-hoc rule E, and also without it by `lem:mono` from the next window (see
+  [Disclosures](#disclosures-for-release-200)).
 
 Each step test proves simple-even on a closed interval `[L_i, L_{i+1}]` (paper Cor. `cor:step` with Lemma `lem:mono`). The
 pieces share endpoints, so together they cover `(0, 2]`.
@@ -167,8 +185,12 @@ The certified numbers are in `data/theorem_bounds.json` (Pieces I–II), `data/p
 
 The convention throughout is that `L` is the half-width and `p^k` enters when `log p^k < 2L`.
 
-- **Believed new: `(0.8, 2]`.** Our search (arXiv, Zenodo, GitHub and rStation; refreshed 2026-10-31) found no
-  public proof or certificate of simple-even for any continuum window `L > 0.8`. The only exception is the non-explicit neighbourhood of `0.8` in
+- **Believed new: `(0.8, 2]`.** Our search (arXiv, Zenodo, GitHub and rStation; refreshed 2026-10-31, plus two items the
+  Codex review found on 2026-11-01) found no certified proof of simple-even for any continuum window `L > 0.8`. Brendan
+  Siche's repository `Architect-Resonance/Riemann-Hypothesis` (first commit 2026-04-03, unrefereed) claims simplicity for
+  all windows via Krein–Rutman positivity; we do not regard it as established (paper §1.3: a finite sum of compressed
+  translations is in general not compact, and the even pole term has norm `2(L + sinh L)`, not `O(log lambda)`). If it is
+  correct, it contains our theorem. The only exception is the non-explicit neighbourhood of `0.8` in
   mathia PL-287. Andrade (Zenodo 20887028) and Andrews Jr. (Zenodo 22715669) certify simple-even for *finite* Galerkin matrices at
   `L ≈ 1.28, 1.68, 1.99`; those are not statements about the continuum form. Much of this literature is unrefereed
   Zenodo/GitHub work and appears quickly, so the search may have missed items. On rStation, lihongmin
@@ -229,13 +251,14 @@ See paper §1.3–1.4 for the full list with citations.
 
 The parts least checked, in order of how much the theorem depends on them. `REVIEWING.md` has the same list, with the checks.
 
-1. **Piece IV, `[1.4035, 2]`.** The registered grid failed, and the gap rests on the post-hoc rule E. The only audit was by
-   an AI agent. The piece also rests on imported trust that no audit re-verified (`data/piece4/AUDIT_GRID.md` §7):
+1. **Piece IV, `[1.4035, 2]`.** The registered grid failed; the gap is closed by the post-hoc rule E, or without it by
+   `lem:mono` from a registered record. The audits were by AI agents (Claude-based, and one Codex review). The piece also rests on imported trust that no audit re-verified (`data/piece4/AUDIT_GRID.md` §7):
    - Stage S `s(L)`: Elston's `schur_upper`, via `code/rh60route/stage_s.py`.
    - Elston's integer Cholesky. It decides V2 in every Piece IV run and is the whole certifier of Piece III. It was
      independently audited only at `L = 1.19`, and that audit included our `--deflate` addition.
    - `fr_sweep` `U(L)`.
-   - The pipeline `certify.py` / `sr.c` / `sr_kernel`, and its proofs (Theorem V, Lemma SR). The proofs are not shipped.
+   - The pipeline `certify.py` / `sr.c` / `sr_kernel`, and its proofs (Theorem V, Lemma SR, P1–P23 in `supplement/`,
+     reviewed only by AI agents).
    - Arb/FLINT.
    - The paper's lemmas `lem:M`, `lem:deflation`, `cor:step` and `lem:mono`.
    Every step ratio is above 2, but the code base is new and large.
@@ -257,10 +280,12 @@ Items 1–7 are taken from the paper's caveats. For Piece IV, see [Disclosures](
 
 1. **Normalization.** Our `Q` follows Zhu §6 and was checked against the zero side of the explicit formula. It is
    matched to the Connes–van Suijlekom / Connes–Consani–Moscovici form `QW_lambda` only up to a positive affine
-   rescaling `aQ + b||.||^2`, which does not affect simple-even. It has not been checked line by line. A mismatch in
-   the relative weights of the pole, archimedean or prime terms would not be covered.
-2. **Self-adjoint realization.** The operator is the one of the closure of `Q` on `C_c^inf(-L, L)`. The trial
-   functions are polynomials and are argued to lie in the form domain (paper §5.2).
+   rescaling `aQ + b||.||^2`, which does not affect simple-even. The Codex review matched the pole, prime and archimedean
+   terms against Connes–Consani–Moscovici (3.7)–(3.11); no human has checked this line by line. A mismatch in the
+   relative weights of the pole, archimedean or prime terms would not be covered.
+2. **Self-adjoint realization.** The operator is the one of the closure of `Q` on `C_c^inf(-L, L)` (closability: paper
+   §2.3). The trial functions are polynomials and are argued to lie in the form domain (paper §5.2). We have not shown
+   that trigonometric polynomials are an operator core, which Connes–van Suijlekom's Thm 6.1 needs.
 3. **Python `min` on balls.** The gluing and a few steps in `certify.py` use Python `min` on Arb balls. That is not
    rigorous when balls overlap. In every current use they are separated by many orders of magnitude.
 4. **Piece I precision anomaly.** The certified upper end of one integral grows with working precision (paper Remark 5.2).
@@ -456,6 +481,10 @@ data/                   certified bounds, history, scrubbed logs (see data/READM
 data/piece3/            Piece III certificates, upper bounds, check log, SHA256SUMS
 code/rh60route/         Piece IV: our clean-room rh_60-route certifier, Lemma SR kernel, step test, grid drivers (README)
 data/piece4/            Piece IV records, upper bounds, controls, pre-registrations, stamps, results, audit, SHA256SUMS
+data/upper/             original records of the paper's upper-bound table (L = 1.5 ... 2.25)
+data/kinks/             raw jump measurements of paper §9 (L = 1.19, four resolutions)
+supplement/             Piece IV specification (SPEC.md), proofs P1-P23 (PROOFS.md), formula -> code -> field map (MAP.md)
+reviews/                the second AI review (Codex) of the release candidate and our point-by-point responses
 exploratory/            NON-RIGOROUS scripts behind `paper/NOTE.md` Appendix A and the normalization check
 ```
 
@@ -465,7 +494,8 @@ The code, the computations, the paper drafts and the internal "reviews" in the p
 largely by an AI assistant: Anthropic's Claude, used through Claude Code, in sessions directed by the author, who
 decides what to publish. The author is not a professional mathematician. The mathematical arguments have been
 checked only by AI-run internal reviews, not by an independent human expert. That includes the pre-registrations, the
-scoring and the fresh-agent audit of Piece IV in `data/piece4/`.
+scoring and the fresh-agent audit of Piece IV in `data/piece4/`. One review was by a different AI system (OpenAI's Codex,
+`reviews/`); it is still an AI review.
 
 Errors were found during the work. Known ones are documented in the paper (Remark 5.9, §10) and in `paper/NOTE.md` (erratum, §7):
 

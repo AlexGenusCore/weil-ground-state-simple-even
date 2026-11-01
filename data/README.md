@@ -19,6 +19,8 @@ All bounds are Arb balls written as strings `"[midpoint +/- radius]"`. Each wind
 | `piece3/rerun_U1.19.jsonl` | Re-run of `U(1.19)` with the shipped `code/upper/` on 2026-10-31 | Reproduces the stored line exactly. The revision of `fast_recurrence.py` used on 2026-10-30 was not recorded; the file was edited afterwards (per the project log, a fix of the `primes=False` path, which the upper bounds do not use). |
 | `piece3/check.log` | Output of `python code/gap/check_steps.py` on `data/piece3/` | Ends with `CERTIFIED: ... simple-even for all L in (0, 1.4885]` (12 steps, minimum ratio 1.129); the theorem uses it only up to `1.4035`. |
 | `piece3/SHA256SUMS` | SHA-256 of every file in `piece3/` | `cd data/piece3 && sha256sum -c SHA256SUMS`. |
+| `upper/rig_L2.jsonl`, `upper/rig_L225.jsonl`, `upper/odd.jsonl` | The original runs behind the paper's table of upper bounds (`tab:upper`): even `L = 2` (`K = 1024`) and `L = 2.25` (`K = 2048`), odd `L = 1.5, 1.75, 2, 2.25`. Copied verbatim (release 2.0.0). | `code/upper/fr_sweep.py`, 28–30 October 2026. The two even records print `lam0_upper` without the relative `1e-13` raise (fields `lam0_mid` and `lam0_upper` are equal), so the paper uses the `L = 2` rerun (`piece4/glue/upper_rerun_L2.jsonl`) and rounds the `L = 2.25` value up to 12 digits (paper Remark 8.2(a)). None of these enters the theorem. |
+| `kinks/kink_119_<N>.json` | Raw measurements of paper §9, Table `tab:kinks` (`L = 1.19`, `N_tot = 600, 800, 1200, 1600`): every breakpoint `y`, prime power `n`, value jump `jump_f`, weight `Λ(n)/√n` and `f(L)`. Copied verbatim (release 2.0.0). | Non-rigorous split-window Galerkin computation (not shipped code). The table entries are `abs(jump_f)/(weight·f_at_L)`. |
 
 ## Piece IV (`piece4/`, release 2.0.0): rh_60-route grid G on `[1.4035, 2]`
 
@@ -56,7 +58,8 @@ bytes differ.
 
 The documents use development paths (`grid_run/`, `grid_run_gap/`, `gap/out_all/`, `highprec/…`). Their shipped
 counterparts are `piece4/` and `piece3/` as listed above. Files that the documents name but this release does not ship are
-GAP_DIAG, VERIFY_GRID, SPEC, PROOFS, the per-window G0 records and the run logs. They are available on request.
+GAP_DIAG, VERIFY_GRID, the per-window G0 records and the run logs. They are available on request. SPEC and PROOFS are
+shipped in `supplement/` (see `supplement/MAP.md`).
 
 Notes.
 

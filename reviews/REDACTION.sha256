@@ -1,0 +1,7 @@
+# The Codex review as received differs from the shipped review_codex_20261101_0407.md only on line 1, where a Markdown link
+# to the author's local path of main.tex is replaced by `main.tex` (release candidate); nothing else changed.
+# The review session log (review_codex_20261101_0407.md.log, 614 KB) is not shipped: it lists many paths of the author's
+# private working tree. Originals of both are available on request (info@genuscore.com).
+# original sha256                                                   shipped sha256                                                    file
+b71d1b5b0270e3991afe8a495a28f7b8046ce23717ae7f448995343e1ce99d31  e67ca67e7b5e186e467b132a0035f7b89140559c77fd18942cda60b89a6a4f41  reviews/review_codex_20261101_0407.md
+ea73f74581a3ef8b2b7d004068138b47bd64eff6a5767ffef3f88882f7f5aae6  (not shipped)                                                     review_codex_20261101_0407.md.log

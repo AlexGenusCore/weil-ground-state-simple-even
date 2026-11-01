@@ -1,0 +1,7 @@
+# Redacted copy: SPEC.md differs from the stamped original only by the substitutions
+#   <compute host>4 -> vm4, <account name>@<private IP of that host> -> user@vm4
+# (four lines: 27, 571, 573, 613); nothing else changed. The original's sha256 is the SPEC.md line of
+# data/piece4/GAP.stamp. PROOFS.md is not redacted (byte-identical to the stamped file). Originals are available on request
+# (info@genuscore.com).
+# original sha256                                                   redacted sha256                                                   file
+c9862cb73dd55d44bf23c71658fb78065b132bc9ff55608d23c1dfa66748f446  337fba6dca09e87579df1b78456a1b65e58ae038083841dd5366f70572c37e91  supplement/SPEC.md

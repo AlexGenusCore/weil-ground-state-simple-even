@@ -3,7 +3,8 @@
 This is a computer-assisted proof that has **not been peer-reviewed**. All checking so far was done by the
 author with AI assistance: independent recomputation, two separate code paths, and AI-run review rounds
 (see the paper, §"Verification and audits"). Piece IV was also pre-registered and audited by a fresh AI agent
-(`data/piece4/`). No independent human expert has checked the proofs or the code.
+(`data/piece4/`), and a release candidate of 2.0.0 was reviewed by a second AI system, OpenAI's Codex (`reviews/`).
+No independent human expert has checked the proofs or the code.
 
 **Independent review is welcome from anyone.** You do not need to check everything: one verified step,
 one reproduced window, or one well-founded objection is a real contribution and will be credited
@@ -26,7 +27,9 @@ These are the parts we consider least checked, roughly in order of how much the 
    - **Rule E.** The pre-registered grid failed at L = 1.92364501953125. The gap is closed by rule E, which raises the
      truncation N by 1024 at that window. Rule E is post hoc: it was written after the failure and after a diagnostic that
      showed it passes, and stamped before its scored run. Is rule E sound? `data/piece4/PREREG_GAP.md` §2 and
-     `AUDIT_GRID.md` §3 argue that it is.
+     `AUDIT_GRID.md` §3 argue that it is. Rule E is not needed for the theorem: by Lemma `lem:mono` the registered
+     grid record at 1.9326171875 bounds λ_2^even at 1.92364501953125 from below (paper Remark 7.5), and
+     `check_theorem.sh` also runs that route (`--l2-from 1.92364501953125=1.9326171875`, 53 steps pass).
    - **Weak negative control.** The negative control of rule E failed at V2, not at V4. So no control exercises Lemma SR at
      the new N.
    - **Audit.** The only audit was by an AI agent, which used the same Arb library.
@@ -34,8 +37,9 @@ These are the parts we consider least checked, roughly in order of how much the 
      - Stage S s(L): Elston's `schur_upper`.
      - Elston's integer Cholesky, which decides V2.
      - `fr_sweep` U(L).
-     - `certify.py`, `sr.c`, `sr_kernel`, and their proofs: Theorem V, Lemma SR, P1–P23. The proofs are not in this
-       release; they are available on request.
+     - `certify.py`, `sr.c`, `sr_kernel`, and their proofs: Theorem V, Lemma SR, P1–P23. The proofs are in
+       `supplement/PROOFS.md` (byte-identical to the stamped file), with `supplement/SPEC.md` and the map
+       `supplement/MAP.md`; they were reviewed only by AI agents.
      - Arb/FLINT.
      - Lemmas `lem:M`, `lem:deflation`, `cor:step` and `lem:mono`.
    - **Step ratios.** They are at least 2.0986, so breaking a step would need one bound to be wrong by a factor of about 2.
@@ -52,14 +56,14 @@ These are the parts we consider least checked, roughly in order of how much the 
    not been through any review round.
 5. **The rigorous Gauss–Legendre bound** in `code/upper/fast_recurrence.py`, `quad_bounds` (Bernstein
    ellipse, n-point rule exponent ρ^(−2n+2)), which all upper bounds U(L) rely on. The revision of that file
-   used for the U runs was not recorded (paper, Remark 7.2).
+   used for the U runs was not recorded (paper, Remark 8.2).
 
 ## Checks by effort
 
 ### Minutes (no heavy computation)
 
-- **Run `./check_theorem.sh`.** It checks the SHA-256 sums and runs all three gluing checks (Pieces I–II, III, IV). It
-  should end with the combined statement for (0, 2].
+- **Run `./check_theorem.sh`.** It checks the SHA-256 sums (including `supplement/` against `GAP.stamp`) and runs the
+  gluing checks (Pieces I–II, III, and IV with and without rule E). It should end with the combined statement for (0, 2].
 - **Check the Piece IV provenance.**
   - Every glued record in `data/piece4/glue/` should be a PASS with all 15 gates true.
   - Each record should carry `stamp_sha256` 7a3c6b28…, and an amendment pin that is a prefix of the chain.
@@ -87,6 +91,11 @@ These are the parts we consider least checked, roughly in order of how much the 
 - **Re-run one upper bound U(L)** with `code/upper/fr_sweep.py` (K = 640, 3000 bits, about 12 minutes) and
   compare `lam0_upper` with `data/piece3/upper640.jsonl`.
 - **Re-run one Piece II window** with `code/certify.py`.
+
+- **Check the Piece IV far-block and tail constants against the code.** Read `supplement/PROOFS.md` P14–P22 (moment
+  bounds, L_ab, r̄, V_h/E_h/J_2/J_4, τ_N, t′_q, S_M, ε_asm, r_M) and follow `supplement/MAP.md` to the lines of
+  `code/rh60route/certify.py` and the record fields that hold each value. The paper (§7.3, "The explicit constants")
+  states the same formulas.
 
 ### Days (cluster or patience)
 
