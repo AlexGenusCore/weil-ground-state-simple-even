@@ -54,6 +54,28 @@ documented in four more places:
 
 The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
 
+## Progress
+
+Public releases across the author's three related repositories, as of 1 November 2026. All are **unrefereed** and
+**AI-assisted** (Anthropic's Claude, used through Claude Code, directed by the author). Every review so far was run by AI
+systems: internal Claude-based referees, and for the later items a second AI system, OpenAI's Codex. **No human expert has
+checked any of them.** Independent review is welcome: info@genuscore.com.
+
+| Date | Release | Result | Review status |
+|---|---|---|---|
+| 2026-10-25 | [weil-ground-state-simple-even](https://github.com/AlexGenusCore/weil-ground-state-simple-even), first release (commit `26fd9e6`; no tag, no DOI) | Certified simple, even ground state of the localized Weil form for `L` in `(0, 1.09]` | Internal AI review rounds only |
+| 2026-10-26 | weil-ground-state-simple-even, version of 2026-10-26 (commit `8adfbe5`; no tag, no DOI) | Range extended to `(0, 1.19]` | Internal AI review only; the new windows 1.03–1.19 had no review round at release |
+| 2026-10-31 | weil-ground-state-simple-even v1.1.0, archived as v1.1.1 (credits corrected): [10.5281/zenodo.23832221](https://doi.org/10.5281/zenodo.23832221) | Range extended to `(0, 1.4035]` (Piece III, with Elston's certifier) | Internal AI review only; Piece III not audited beyond `L = 1.19` |
+| 2026-10-31 | [weil-edge-laws](https://github.com/AlexGenusCore/weil-edge-laws) v0.1.2, research notes: [10.5281/zenodo.23832560](https://doi.org/10.5281/zenodo.23832560) | Edge law, Hadamard formula, kink (echo) and tail laws | Internal AI referee rounds only |
+| 2026-10-31 | [log-laplacian-interval-trace](https://github.com/AlexGenusCore/log-laplacian-interval-trace) v1.0.0, paper: [10.5281/zenodo.23832744](https://doi.org/10.5281/zenodo.23832744) | Boundary trace identity and simple Dirichlet spectrum for the logarithmic Laplacian on an interval | Internal AI referees; two reviews by GPT-6.1 Sol (the second through Codex): release as a preprint after minor corrections, which were made |
+| 2026-10-31 | weil-edge-laws v0.2.0, paper: [10.5281/zenodo.23834265](https://doi.org/10.5281/zenodo.23834265) | The notes consolidated into a paper with complete proofs | Internal AI referees; Codex (GPT-6.1 Sol): release as a preprint after minor fixes, which were made; the changes were not reviewed again |
+| 2026-11-01 | weil-ground-state-simple-even v2.0.0: [10.5281/zenodo.23852617](https://doi.org/10.5281/zenodo.23852617) | Range extended to `(0, 2]` (Piece IV) | Fresh-agent AI audits of Piece IV; two Codex (GPT-6.1 Sol) rounds, the first "not yet" (three major points), the second "release as a preprint after minor corrections"; all points addressed. Neither round re-ran the large certificates |
+
+Several of these results, or parts of them, were obtained earlier by others; each repository's README and paper give
+the credits (among them Zhu, Kramarenko-Byrd, Elston, the rStation authors bramble_trace and lihongmin, and the mathia
+notes). None of the results is a result about the Riemann hypothesis. Work on extending the range and on computer-light
+proofs continues; nothing beyond the releases above is claimed.
+
 ## What is new in 2.0.0
 
 - **The range grows from `(0, 1.4035]` to `(0, 2]`.** The new part is **Piece IV**, `[1.4035, 2]`.
