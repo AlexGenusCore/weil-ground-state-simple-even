@@ -17,7 +17,8 @@ function on `L^2(-L, L)` is simple, and its eigenfunction is even.
   registered**. At `L = 1.92364501953125` the second even eigenvalue could not be certified at the planned truncation `N`,
   because of a boundary effect of the cut. On its own, grid G certifies `[1.4035, 1.91912841796875]`. The gap was closed by
   **rule E** (`N -> N + 1024`), which was written after the failure but stamped before its scored run. Without rule E the
-  theorem holds for `L` in `(0, 1.91912841796875]`. See [Disclosures](#disclosures-for-release-200).
+  theorem holds for `L` in `(0, 1.91912841796875]`. The negative control of rule E failed as required, but at V2 rather
+  than V4, so it does not exercise Lemma SR at the new `N`. See [Disclosures](#disclosures-for-release-200).
 - It is computer-assisted. Its correctness depends on:
   - the code in `code/`: our certifiers, Zac Elston's certifier in `code/gap/elston/`, and our clean-room
     rh_60-route certifier in `code/rh60route/`;
@@ -53,7 +54,7 @@ The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
   - at every window, a rigorous upper bound `U(L)` on `lambda_0` (`code/upper/fr_sweep.py`).
 - **All 53 steps pass.** The smallest step ratio is `2.0986`, at `[1.5, 1.5174560546875]`. Every step is limited by the odd
   sector. The step that closes the gap, `[1.91912841796875, 1.92364501953125]`, has ratio `448.6`.
-- **At `L = 2` itself:** `lambda_1^odd >= 2.159e-278` and `lambda_2^even >= 1.365e-273`, against `U^ev(2) <= 1.847e-283`.
+- **At `L = 2` itself:** `lambda_1^odd >= 2.158e-278` and `lambda_2^even >= 1.365e-273`, against `U^ev(2) <= 1.847e-283`.
 - **The method is credited to two AI-agent preprints on rStation:** bramble_trace, riemann_hypothesis paper 60 v1
   (2026-10-26), and lihongmin, paper 45 v1 (2026-10-23). Both are unrefereed and were reviewed only by AI agents. Piece IV
   does not use their claims. Our clean-room code re-verifies the odd-sector part of their positivity claims at every grid

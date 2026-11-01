@@ -1,0 +1,6 @@
+# Redacted copy (release 2.0.0): run_extend.log differs from the run original only by the substitutions
+#   <home of the local account> -> ~, <cluster account>@<private IP of node 1> -> user@hostA, <...node 2> -> user@hostB
+# applied to the text of the traceback near line 38-61; no number, field or line was changed otherwise. Earlier releases
+# shipped the original. The original is available on request (info@genuscore.com).
+# original_sha256  redacted_sha256  path
+394a17c1dfe778d3302ad6564666ae38b1a5fbb4e7f152fea16eb4c93073bb58  486d42598fd999ab15612f98d6a00d4ca761a47181bfacbb7caf6023125a9e81  data/logs/run_extend.log

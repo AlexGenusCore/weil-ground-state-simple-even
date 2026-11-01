@@ -35,30 +35,30 @@ L=0.99   [2.782e-29 +/- 3.80e-33] <= lam0 <= [3.551e-29 +/- 1.09e-33]   lam1even
 L=1.0    [4.532e-30 +/- 4.92e-34] <= lam0 <= [6.600e-30 +/- 6.37e-35]   lam1even >= [1.650e-23 +/- 3.79e-27]   lam0odd >= [1.142e-26 +/- 1.24e-30]   (0s)
 L=1.03   [2.096e-32 +/- 2.30e-36] <= lam0 <= [4.109e-32 +/- 2.31e-36]   lam1even >= [1.056e-25 +/- 1.21e-29]   lam0odd >= [6.604e-29 +/- 2.78e-33]   (2859s)
 Traceback (most recent call last):
-  File "/home/alexander/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/theorem.py", line 36, in <module>
+  File "~/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/theorem.py", line 36, in <module>
     rows[L] = certify.window_bounds(L, pool)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/alexander/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 433, in window_bounds
+  File "~/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 433, in window_bounds
     (We, Ae, eDe, eBe), (Wo, Ao, eDo, eBo) = fe.result(), fo.result()
                                              ^^^^^^^^^^^
-  File "/home/alexander/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+  File "~/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 456, in result
     return self.__get_result()
            ^^^^^^^^^^^^^^^^^^^
-  File "/home/alexander/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+  File "~/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
     raise self._exception
-  File "/home/alexander/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+  File "~/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
     result = self.fn(*self.args, **self.kwargs)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/alexander/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 268, in head
+  File "~/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 268, in head
     W, A, eD, eB = _head(W, Ldec, parity, pool)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/alexander/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 284, in _head
+  File "~/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 284, in _head
     C = assemble_C(Ldec, parity, N, TS, pool)
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/alexander/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 252, in assemble_C
+  File "~/Downloads/rh-moment-geometry-experiment/weil-mechanism/extend/certify.py", line 252, in assemble_C
     assert not errors and todo.empty(), errors
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ['alexadmin@10.10.30.43 group 2: admin/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n', 'alexadmin@10.10.30.42 group 1: admin/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n']
+AssertionError: ['user@hostB group 2: admin/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n', 'user@hostA group 1: admin/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result\n    raise self._exception\nconcurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.\n']
 
 real	230m41.771s
 user	13m4.229s
