@@ -1,5 +1,7 @@
 # Piece IV supplement (release 2.0.0): specification, proofs, and a formula → code → record map
 
+Corrections to the stamped SPEC.md/PROOFS.md are listed in [`ERRATA.md`](ERRATA.md).
+
 This folder holds the derivations behind Piece IV of the paper (§7, Theorem `thm:V`). Before release 2.0.0 they were
 "available on request"; the second AI review (Codex, `reviews/`) asked for them to be public, because the paper states
 τ_N, r_M, the generators, the diagonal and the assembly debit but did not prove them.
