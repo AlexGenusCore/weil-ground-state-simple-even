@@ -1,0 +1,440 @@
+{
+ "Ldec": "1.83642578125",
+ "eps": -1,
+ "sector": "od",
+ "K": 512,
+ "deflate": false,
+ "mut": null,
+ "tmin": 1.0,
+ "gates": {
+  "G-S": true,
+  "G0-mini": true,
+  "G0i": true,
+  "V2": true,
+  "V3": true,
+  "C-tau": true,
+  "C-rbar": true,
+  "C-J2": true,
+  "C-ind": true,
+  "G5p": true,
+  "C-rM": true,
+  "G5": true,
+  "V4": true,
+  "R6": true,
+  "V5": true
+ },
+ "prec_core": 2560,
+ "prec_T": 1152,
+ "prec_src": 192,
+ "P_core": 1536,
+ "P": 96,
+ "b": 666,
+ "s": "1323218376111906300661912121644228802599099477592263006702183/200867255532373784442745261542645325315275374222849104412672",
+ "s_float": 6.587526536392803,
+ "s_sha256": "6dcb0ac4d11e1cf5b6206b81ea8edfa2b8e8f04875e8f5fea9566ac2fc42bd55",
+ "G-S_guard": 6.5827670308481565,
+ "G0i": {
+  "ok": true,
+  "n_pp": 19,
+  "dps": 30,
+  "tol": "1e-20",
+  "entries": [
+   {
+    "q": 0,
+    "r": 0,
+    "eqP": "0.05122294575895906317836217",
+    "diff": "2.74e-30",
+    "ok": true
+   },
+   {
+    "q": 1,
+    "r": 1,
+    "eqP": "0.05211574717675875540736771",
+    "diff": "1.74e-30",
+    "ok": true
+   },
+   {
+    "q": 2,
+    "r": 2,
+    "eqP": "0.05410682442060670522140895",
+    "diff": "5.59e-27",
+    "ok": true
+   },
+   {
+    "q": 7,
+    "r": 7,
+    "eqP": "0.3768887586777519182349702",
+    "diff": "2.86e-30",
+    "ok": true
+   },
+   {
+    "q": 40,
+    "r": 40,
+    "eqP": "3.806861083430805461626746",
+    "diff": "3.0e-29",
+    "ok": true
+   },
+   {
+    "q": 0,
+    "r": 1,
+    "eqP": "0.05166416743559417407522203",
+    "diff": "5.04e-30",
+    "ok": true
+   },
+   {
+    "q": 3,
+    "r": 7,
+    "eqP": "0.1166953605988889632271713",
+    "diff": "5.24e-30",
+    "ok": true
+   },
+   {
+    "q": 2,
+    "r": 40,
+    "eqP": "0.03047983204849375761716625",
+    "diff": "2.05e-30",
+    "ok": true
+   }
+  ]
+ },
+ "mu": "6929064432606991727/21545516652742137885659094560277007014094191832363720128504958578969526904000843047377578132593002296225722240434905979752527594496752860623371529300590103961416596156942109074193054752294185849943217159109760516096",
+ "mu_float": 3.2160121960803e-196,
+ "theta": "0",
+ "mu_rel": "2/3",
+ "mu_ref": "4.82401829412045e-196",
+ "lam_min_core_float": "3.1688514e-196",
+ "m_core": "1.5844257e-196",
+ "solve_err_a": "5.93e-255",
+ "solve_err_b": "1.23e-259",
+ "A_f_log2max": 347.7640395840334,
+ "balance": [
+  "1/256",
+  "256"
+ ],
+ "rbar": "0.43149056",
+ "V_h": "1.408643757",
+ "E_h": "135.1269323",
+ "N": 26624,
+ "tau_core": "1.21481",
+ "tau_pole": "4.73565e-15",
+ "tau_N": "1.21481",
+ "M": 106496,
+ "t_N": "1.0862780",
+ "tprime_N": "298593836633/274877906944",
+ "tprime_M": "2718606629645/1099511627776",
+ "r_M": "0.110712",
+ "C-tau_pole_sum": "4.661e-15",
+ "C-tau_sumQ": "0.4045",
+ "C-rbar_max": "0.1524",
+ "C-J2_sum": "3.9670e-5",
+ "J2": "5.3100e-5",
+ "C-ind": {
+  "tau_core": {
+   "mp": "1.21481418461",
+   "rel_excess": 6.147558423012503e-51,
+   "ok": true
+  },
+  "tau_pole": {
+   "mp": "4.73565124059e-15",
+   "rel_excess": 1.8054424544076806e-57,
+   "ok": true
+  },
+  "r_M": {
+   "mp": "0.110712393882",
+   "rel_excess": 1.637526098927609e-13,
+   "ok": true
+  },
+  "t_N": {
+   "mp": "1.0862780496",
+   "tprime_N": "1.0862780496",
+   "ok": true
+  },
+  "L_ab": [
+   "11068.33",
+   "2.410464e+8",
+   "2.7383912e+8",
+   "7.2697888e+12"
+  ],
+  "n_pp": 19,
+  "dps": 144,
+  "ok": true
+ },
+ "G5p_Rq_max": 287,
+ "G5p_tail_log2_max": -225.71449160251535,
+ "C-rM_finite": "0.03484",
+ "eps_asm": "2.942e-27",
+ "H": "0.0218167",
+ "delta0": "29/256",
+ "e_h": "1.26e-29",
+ "SR_labels": {
+  "first": 1050625,
+  "last": 2835243009,
+  "n": 26112
+ },
+ "G5_core_solves": true,
+ "G5_Q_maxreldiff": 2.2580683978745126e-47,
+ "G5_parts": {
+  "Q_and_core_solves": true,
+  "S_input_entries": true
+ },
+ "float_pmin": 0.9784631017986354,
+ "float_fail": -1,
+ "proj_SR_hours": 0.07762178000244171,
+ "SR_fail": -1,
+ "SR_seconds": 171.2,
+ "eps_E": 2.9222806114138305e-17,
+ "min_pivot": 0.9784631017986308,
+ "SR_checksum": {
+  "T": "6084da494ef6597adaa6fd52a4b7b30f",
+  "sump": "312ab3c719d8f47a029322b8b2111",
+  "sumL": "-2cb56cd43dcd8335f0f19eca549d"
+ },
+ "V5_margin": "0.00256886",
+ "result": "PASS",
+ "failed_gates": [],
+ "certified_lower_bound": "[3.2160121960803000000e-196 +/- 2.83e-216]",
+ "label": "odd_1.83642578125_2o3",
+ "seconds": 533,
+ "peak_gb": 1.79,
+ "argv": [
+  "--L",
+  "1.83642578125",
+  "--Uev",
+  "5.02786990086050e-201",
+  "--s-file",
+  "~/rh60route/data/s/s_1.83642578125.json",
+  "--ritz",
+  "~/rh60route/data/ritz_1.83642578125.json",
+  "--workdir",
+  "~/rh60route/work",
+  "--cD",
+  "8.196639222927604e-07",
+  "--eps",
+  "-1",
+  "--mu-ref",
+  "4.82401829412045e-196",
+  "--tmin",
+  "1",
+  "--mu-rel",
+  "2/3",
+  "--sr-if-pmin",
+  "0.015625",
+  "--out",
+  "~/rh60route/grid_run/out/odd_1.83642578125_2o3.json",
+  "--label",
+  "odd_1.83642578125_2o3"
+ ],
+ "utc": "2026-10-31T21:57:13Z",
+ "log": [
+  {
+   "stage": "start",
+   "Ldec": "1.83642578125",
+   "eps": -1,
+   "K": 512,
+   "prec_core": 2560,
+   "prec_T": 1152,
+   "deflate": false,
+   "mut": null,
+   "t": 0.0,
+   "gb": 0.05
+  },
+  {
+   "stage": "G-S/G0-mini/G0i",
+   "gs": true,
+   "g0": true,
+   "g0i": true,
+   "t": 53.2,
+   "gb": 0.07
+  },
+  {
+   "stage": "M0",
+   "t": 59.5,
+   "gb": 0.28
+  },
+  {
+   "stage": "mu",
+   "mu": 3.2160121960803e-196,
+   "t": 59.5,
+   "gb": 0.28
+  },
+  {
+   "stage": "core",
+   "lmin": "3.1688514e-196",
+   "m_core": "1.5844257e-196",
+   "V2": true,
+   "t": 124.1,
+   "gb": 1.1
+  },
+  {
+   "stage": "solves",
+   "a": "5.93e-255",
+   "b": "1.23e-259",
+   "t": 125.5,
+   "gb": 1.1
+  },
+  {
+   "stage": "moments",
+   "Rmax": 400,
+   "A_f_log2": 347.7640395840334,
+   "t": 126.3,
+   "gb": 1.1
+  },
+  {
+   "stage": "balance",
+   "scal": [
+    "1/256",
+    "256"
+   ],
+   "t": 128.0,
+   "gb": 1.11
+  },
+  {
+   "stage": "N",
+   "N": 26624,
+   "tau_N": "1.21481",
+   "t_N": "1.08628",
+   "t": 128.1,
+   "gb": 1.11
+  },
+  {
+   "stage": "entries",
+   "M": 106496,
+   "t": 163.4,
+   "gb": 1.16
+  },
+  {
+   "stage": "transfer conv",
+   "Q2": 212992,
+   "t": 208.1,
+   "gb": 1.47
+  },
+  {
+   "stage": "generators",
+   "Gmax": [
+    "3.70e+3",
+    "5.76e+2"
+   ],
+   "Grad": [
+    "5.51e-44",
+    "5.33e-46"
+   ],
+   "Gradarg": [
+    211871,
+    201663
+   ],
+   "uradarg": 211871,
+   "urad": "1.41e-41",
+   "Qmax": "0.449",
+   "t": 212.4,
+   "gb": 1.47
+  },
+  {
+   "stage": "r_M",
+   "M": 106496,
+   "r_M": "0.11071",
+   "t": 213.0,
+   "gb": 1.47
+  },
+  {
+   "stage": "controls",
+   "Ctau": true,
+   "Crbar": true,
+   "CJ2": true,
+   "t": 214.3,
+   "gb": 1.47
+  },
+  {
+   "stage": "C-ind",
+   "ok": true,
+   "tau_core": 6.147558423012503e-51,
+   "tau_pole": 1.8054424544076806e-57,
+   "r_M": 1.637526098927609e-13,
+   "t": 217.1,
+   "gb": 1.47
+  },
+  {
+   "stage": "G5'",
+   "ok": true,
+   "Rq": [
+    39,
+    287
+   ],
+   "tail_log2_max": -225.71449160251535,
+   "t": 232.2,
+   "gb": 1.47
+  },
+  {
+   "stage": "stage I",
+   "n": 26112,
+   "t": 243.4,
+   "gb": 1.47
+  },
+  {
+   "stage": "C-rM",
+   "fin": "0.03484",
+   "ok": true,
+   "t": 252.9,
+   "gb": 1.47
+  },
+  {
+   "stage": "assembly",
+   "eps_asm": "2.942e-27",
+   "delta0": "29/256",
+   "t": 253.2,
+   "gb": 1.47
+  },
+  {
+   "stage": "G5",
+   "ok": true,
+   "Qrel": 2.2580683978745126e-47,
+   "t": 349.9,
+   "gb": 1.79
+  },
+  {
+   "stage": "float LDL",
+   "pmin": 0.9784631017986354,
+   "fail": -1,
+   "t": 360.7,
+   "gb": 1.79
+  },
+  {
+   "stage": "SR",
+   "fail": -1,
+   "sec": 171.2,
+   "eps_E": 2.9222806114138305e-17,
+   "V5": true,
+   "t": 532.0,
+   "gb": 1.79
+  }
+ ],
+ "code_sha256": {
+  "gap/elston/grid_certificate_rigorous.py": "3c988aa73f8b6f964bdc3304ba27637537a109085ce48dc97d34eeab677c8378",
+  "gap/elston/grid_norm.py": "f55399597a9affeffc050f4933227019148c03ae694a8e03b3aaaf71864c59b4",
+  "gap/elston/progress.py": "a1dcccae73f6b93d54106a1d049075bd0fbe4f7d31dcb23c64353e6fd86cc792",
+  "lb/rh60route/code/amend.py": "c5fc19d8bdfeb9b25234d2268d8400256ebe13ae263ed31fa727d658c6a0aeb2",
+  "lb/rh60route/code/bench_sr.py": "da6e507731a129c19f056383038633c2c273719810fd9c6f28cd27efdbf76f25",
+  "lb/rh60route/code/certify.py": "0cbb7e7f82c4bc935e2c14be1e0381ff4932e97012d4313a54147e2b98acaa3c",
+  "lb/rh60route/code/entries.py": "e01ff644fc09cde4d5307a8e5b724d83e36630e94fd15667f93edc7675f72db6",
+  "lb/rh60route/code/eqp.py": "b31e9227c7a56b3401888d45a2163c0a3b6790c171beeec9d060aa974ad372ca",
+  "lb/rh60route/code/g3.py": "b458efddc6810957dd3a14835db7a354a16a14dbd81d3da34514f996bee8344d",
+  "lb/rh60route/code/g4.py": "4b50b6ec2d4416c6e9a0cdf9f8b9ab656baf22743005bb5a2dce68d9e52ecec9",
+  "lb/rh60route/code/indep.py": "43bb28badd706eb1103ff77d808bf05b08ea0100ca9ecf43cd8765f07869b6cb",
+  "lb/rh60route/code/mp_entries.py": "84c801797164fda6d423b6797c2fa486942583bbe25b814171207e2cc1f6d483",
+  "lb/rh60route/code/p2.sh": "a7d77b1f4f8d230502ad9f04790dc9094417af261084c1668a2e4c381e4584d5",
+  "lb/rh60route/code/pilot.py": "e289962afc886204da73cbc1caa38f12aee34bee486a78fb3fedeebb566050de",
+  "lb/rh60route/code/ritz.py": "affc4d46b081a7e25a99fe9540fd435f5fc0be0f76550e0cbffb75aaac035f33",
+  "lb/rh60route/code/sr.c": "a2092c487eda0c16a27b94c358116e165a46cdee37d7670f56fb21d08d260426",
+  "lb/rh60route/code/sr.py": "d0bb8c895f544d007c162481c8c6ff879c04d7382bdf2ae0a992bf56e05e8f41",
+  "lb/rh60route/code/sr_kernel": "f46d6646c5c427f280adaa5fc47276175c623ab7b2a47e1d60656832f40d9a7c",
+  "lb/rh60route/code/stamp.sh": "6d288af8b614aa40a8b65ec5aac578773b83914f861b8e2c02bd19cdb148e117",
+  "lb/rh60route/code/summarize.py": "b600a41c1b485f4f682f61913972753fb774da37281c728724e703d341cdbff4",
+  "lb/rh60route/code/watchdog.sh": "f96f526f71cac0f001043df85e30b6f25d668fc480412ab6f140bfb0bf5e744a"
+ },
+ "archive_dir": "~/rh60route/hp/lb/rh60route/archive",
+ "amendments": {
+  "path": "~/rh60route/AMENDMENTS.log",
+  "sha256": "8fe0ff9b1b35add45089953bb8103b65d030b8e4ce49d1879aa8305ecea5e1d6",
+  "entries": 14
+ },
+ "stamp_sha256": "7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8"
+}

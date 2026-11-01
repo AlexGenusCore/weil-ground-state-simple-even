@@ -1,0 +1,151 @@
+{
+ "Ldec": "1.5",
+ "odd_mu_rel": "2/3",
+ "l2_mu_rel": "1/4",
+ "mutations": {
+  "pole0": {
+   "expected": "G0",
+   "result": "FAIL",
+   "failed_gates": [
+    "G0-mini",
+    "G0i"
+   ],
+   "reason": null,
+   "caught": true,
+   "full_G0_passed": false
+  },
+  "gamma1": {
+   "expected": "G0",
+   "result": "FAIL",
+   "failed_gates": [
+    "proposal"
+   ],
+   "reason": "mid(M0) Cholesky proposal failed at 1",
+   "caught": true,
+   "full_G0_passed": false
+  },
+  "Qq0": {
+   "expected": "G5",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5",
+    "G5p"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "s_half": {
+   "expected": "G-S",
+   "result": "FAIL",
+   "failed_gates": [
+    "G-S"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "rM0": {
+   "expected": "C-rM",
+   "result": "FAIL",
+   "failed_gates": [
+    "C-rM",
+    "C-ind"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "defl_sign": {
+   "expected": "G5",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "tau0": {
+   "expected": "C-tau",
+   "result": "FAIL",
+   "failed_gates": [
+    "C-tau",
+    "C-ind"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "M0": {
+   "expected": "G2/G5",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "gen": {
+   "expected": "G5p",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5p"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "aud_sr_q0": {
+   "expected": "G5 (F3)",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "aud_tau_half": {
+   "expected": "C-ind (F7)",
+   "result": "FAIL",
+   "failed_gates": [
+    "C-ind"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "aud_rM_half": {
+   "expected": "C-ind (F7)",
+   "result": "FAIL",
+   "failed_gates": [
+    "C-ind"
+   ],
+   "reason": null,
+   "caught": true
+  },
+  "pp_drop": {
+   "expected": "G0i (F1)",
+   "result": "FAIL",
+   "failed_gates": [
+    "V2"
+   ],
+   "reason": "core Cholesky proposal failed",
+   "caught": true,
+   "full_G0_passed": true
+  },
+  "lam_n": {
+   "expected": "G0i (F1)",
+   "result": "FAIL",
+   "failed_gates": [
+    "V2"
+   ],
+   "reason": "core Cholesky proposal failed",
+   "caught": true,
+   "full_G0_passed": true
+  },
+  "gen2K": {
+   "expected": "G5p (F2)",
+   "result": "FAIL",
+   "failed_gates": [
+    "G5p"
+   ],
+   "reason": null,
+   "caught": true
+  }
+ },
+ "all_caught": true
+}

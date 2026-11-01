@@ -1,0 +1,46 @@
+# PREREG_GAP stamp: rh_60-route grid G, lambda_2 gap at 1.92364501953125 (rule E + lem:mono fallback). Written on vm3 before any scored PREREG_GAP run.
+# Paths relative to ~/rh60route. Verify: cd ~/rh60route && grep -E '^[0-9a-f]{64}  ' GAP.stamp | sha256sum -c
+# md5 9651618dbfb1747591ee1eec5f593c8b  hp/lb/rh60route/PREREG_GAP.md
+# registered documents
+211c4266f256e31d5e7b01d579ffcbae31770474cca2a8f870235d6ddf96c930  hp/lb/rh60route/PREREG_GAP.md
+11fd999529cbf6968ed39af8a1db37c69bd79b2adcdf884af21296d2bd5fe35c  hp/lb/rh60route/GAP_DIAG.md
+a25884e7b7d250b4da453755c40915e43a818219f89441578c337388dfdc107c  hp/lb/rh60route/RESULTS_GRID.md
+b89a2937fa559054548436a5879bd17f2bc7e0169b7e7f90b686fa429e6b14de  hp/lb/rh60route/VERIFY_GRID.md
+e29d8ce374511ccbba72d1539fd3cf3f075e3e3f60155d39df0762a3a9022999  hp/lb/rh60route/PREREG_GRID.md
+beeee1a353438830990ddacb36c01e211ade3b5ef389db0680fdefa811630d78  hp/lb/rh60route/GRID_PLAN.md
+7e18f2d09bf1a5ec5cd59a5bd9b08074c413e4cb40ee1bb494f4a1b86da4c8a2  hp/lb/rh60route/PROOFS.md
+c9862cb73dd55d44bf23c71658fb78065b132bc9ff55608d23c1dfa66748f446  hp/lb/rh60route/SPEC.md
+# executed code, job and window files; each also the blob hp/lb/rh60route/archive/<sha256>.<name> (20/20 present)
+49eefc2cd6f13807e6cc009d3b5641855c969fbe85c00bf8dbe3bad7bdd1df0a  hp/lb/rh60route/grid/grid.py
+8c0f07bd62f56db24ca763cf7a618dc70067d46bc3c94e1c095e6a60e9e90eff  hp/lb/rh60route/grid/run_grid.sh
+b64e3620276745913adb34fcb9f124e2f4922a437294d9ea4c4d711b8c1d79ea  hp/lb/rh60route/grid/jobs_gap.txt
+6d5c041781f3009ea382548bd20facdaaef3294918515256d9bb1fb34b361345  hp/lb/rh60route/grid/jobs_gap_mono.txt
+dce63890c702fb06bc4ddc70a0a880586e9c47587bc52e61cf4061defd12a87e  hp/lb/rh60route/grid/windows_partial.txt
+312401ea6cbfc410589a2be073adef80987df0630dc367b3b76eaa254b4a8f56  hp/lb/rh60route/grid/windows.txt
+cc7764e933213e47c9652f8b99881abd66c5c502404c9de9449c57753c0847d0  hp/gap/check_steps.py
+0cbb7e7f82c4bc935e2c14be1e0381ff4932e97012d4313a54147e2b98acaa3c  hp/lb/rh60route/code/certify.py
+e01ff644fc09cde4d5307a8e5b724d83e36630e94fd15667f93edc7675f72db6  hp/lb/rh60route/code/entries.py
+b31e9227c7a56b3401888d45a2163c0a3b6790c171beeec9d060aa974ad372ca  hp/lb/rh60route/code/eqp.py
+43bb28badd706eb1103ff77d808bf05b08ea0100ca9ecf43cd8765f07869b6cb  hp/lb/rh60route/code/indep.py
+84c801797164fda6d423b6797c2fa486942583bbe25b814171207e2cc1f6d483  hp/lb/rh60route/code/mp_entries.py
+d0bb8c895f544d007c162481c8c6ff879c04d7382bdf2ae0a992bf56e05e8f41  hp/lb/rh60route/code/sr.py
+a2092c487eda0c16a27b94c358116e165a46cdee37d7670f56fb21d08d260426  hp/lb/rh60route/code/sr.c
+f46d6646c5c427f280adaa5fc47276175c623ab7b2a47e1d60656832f40d9a7c  hp/lb/rh60route/code/sr_kernel
+b458efddc6810957dd3a14835db7a354a16a14dbd81d3da34514f996bee8344d  hp/lb/rh60route/code/g3.py
+4b50b6ec2d4416c6e9a0cdf9f8b9ab656baf22743005bb5a2dce68d9e52ecec9  hp/lb/rh60route/code/g4.py
+affc4d46b081a7e25a99fe9540fd435f5fc0be0f76550e0cbffb75aaac035f33  hp/lb/rh60route/code/ritz.py
+e289962afc886204da73cbc1caa38f12aee34bee486a78fb3fedeebb566050de  hp/lb/rh60route/code/pilot.py
+c5fc19d8bdfeb9b25234d2268d8400256ebe13ae263ed31fa727d658c6a0aeb2  hp/lb/rh60route/code/amend.py
+# records rule E reads (3 FAIL rungs) and records the fallback uses (certified under GRID.stamp)
+469f3f161d2e7b79077012badc3d9b98aa4363de0f3f37f91b3379a8ef9bf238  grid_run/out/l2_1.92364501953125_1o4.json
+4567157f6d045e888a7b4121d36a0c6c187adde57cc8defa1dbbbceb33b0c9f3  grid_run/out/l2_1.92364501953125_1o1024.json
+139bea2a124caed47531cb086ec80a5f14211e64b2f356a1925cc7e87f625632  grid_run/out/l2_1.92364501953125_2.json
+8817657b1eb1ba6451e387577150df1c3bfaf1eeb196828074dc7aad6dc1640b  grid_run/out/l2_1.9326171875_1o4.json
+3edb63b444e4f738e9cc4ac461f3eba89b35aaa30d6e45e409ca39bfd1d0c80d  grid_run/out/odd_1.92364501953125_2o3.json
+838766cf25437fa91fb31b64bdafacd28acb29c7ce04f5be4cded25dc892d493  grid_run/out/l2_1.91912841796875_1o4.json
+6290fdf9dd31fae2007a32288113b352e1c49f395a6421fff2f5d104ff26ac96  grid_run/upper/upper_1.91912841796875_0.jsonl
+8a1f1bce17063416f1845452bf102d1698390f998258d8fe6f3e36bc24da8c4b  grid_run/out/REFINE_1.91912841796875_1.92364501953125
+# run-time stamp the new records carry (RH60_STAMP unchanged)
+7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8  GRID.stamp
+# AMENDMENTS.log before entry 20: chain OK, 19 entries, sha256 2e5b71cd69b68b90a90779815838d8d4d887a00dc66320ac7ac7798681e9233f
+# UTC 2026-11-01T01:12:01Z

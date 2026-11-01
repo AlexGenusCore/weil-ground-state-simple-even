@@ -7,11 +7,10 @@
 [1.3315, 1.3565]     1.692e-66        1.436e-62       2.188e-66   1.29  True
 [1.3565, 1.3805]     1.961e-70        2.247e-66       3.033e-70   1.55  True
 [1.3805, 1.4035]     2.250e-74        2.992e-70       3.493e-74   1.55  True
-[1.4035, 1.4255]  missing: l2 
+[1.4035, 1.4255]     2.493e-78        3.367e-74       3.564e-78   1.43  True
 [1.4255, 1.447]     2.370e-82        3.421e-78       3.270e-82   1.38  True
-[1.447, 1.468]  missing: l2 odd
-[1.468, 1.4885]  missing: l2 odd
+[1.447, 1.468]     2.107e-86        2.886e-82       2.835e-86   1.35  True
+[1.468, 1.4885]     1.740e-90        2.142e-86       1.964e-90   1.13  True
 [1.4885, 1.5]  missing: l2 odd
-Also passing, not contiguous with the certified range (data points only): [1.4255, 1.447] (ratio 1.38)
-NOT (yet) certified on [1.4035, 1.5]
-CERTIFIED: simple-even for all L in [1.19, 1.4035] (contiguous Piece III steps, minimum step ratio 1.132); with Pieces I-II (code/theorem.py --check): simple-even for all L in (0, 1.4035]
+NOT (yet) certified on [1.4885, 1.5]
+CERTIFIED: simple-even for all L in [1.19, 1.4885] (contiguous Piece III steps, minimum step ratio 1.129); with Pieces I-II (code/theorem.py --check): simple-even for all L in (0, 1.4885]

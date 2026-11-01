@@ -10,3 +10,4 @@ code/validate_1.0.json
 !data/logs/*.log
 !data/piece3/check.log
 .venv/
+!data/piece4/**

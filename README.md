@@ -1,48 +1,128 @@
-# Simple, even ground state of the localized Weil form for L in (0, 1.4035]
+# Simple, even ground state of the localized Weil form for L in (0, 2]
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23832220.svg)](https://doi.org/10.5281/zenodo.23832220)
 
-This is a computer-assisted proof, using Arb/FLINT ball arithmetic, of the following statement. For every window
-half-width `L` in `(0, 1.4035]`, the lowest eigenvalue of Weil's quadratic form for the Riemann zeta function on
-`L^2(-L, L)` is simple, and its eigenfunction is even.
+This is a computer-assisted proof of the following statement. It uses Arb/FLINT ball arithmetic and exact integer
+arithmetic. For every window half-width `L` in `(0, 2]`, the lowest eigenvalue of Weil's quadratic form for the Riemann zeta
+function on `L^2(-L, L)` is simple, and its eigenfunction is even.
 
 **Please read this first.**
 
-- The work is **unrefereed**. Nobody outside the project has checked the proofs or the code.
-- It was produced **largely by an AI assistant** (Anthropic's Claude, used through Claude Code). The author directed
-  the work but is not a professional mathematician. See [AI assistance](#ai-assistance).
-- It is computer-assisted. Its correctness depends on the code in `code/` (including Zac Elston's certifier in
-  `code/gap/elston/`), on Arb/FLINT, and on the lemmas in the paper.
-- **Release 1.1.0 (2026-10-31) is an interim release.** The goal is `(0, 1.5]`; the computations for
-  `(1.4035, 1.5]` are still running, and nothing is claimed there. The new part `(1.19, 1.4035]` has not been
-  audited (see [Caveats](#caveats)).
-- It is **not** a result about the Riemann hypothesis and brings no proof of RH closer in any quantified sense. In the
-  Connes–van Suijlekom / Connes–Consani–Moscovici programme, "the lowest eigenvalue of `Q_L` is simple with an even
-  eigenfunction" is one hypothesis. Assumed for a given `L`, it implies that the Fourier transform of that ground state
-  has only real zeros. Reaching RH would also need that hypothesis for every `L` and control of the limit `L -> inf`
-  (that those zeros converge to the zeta zeros). Neither is addressed here. We verify the hypothesis only on the
-  bounded range `(0, 1.4035]`.
+- **Unrefereed.** Nobody outside the project has checked the proofs or the code.
+- **AI-assisted, and audited only by AI.** It was produced **largely by an AI assistant** (Anthropic's Claude, used through
+  Claude Code). The author directed the work but is not a professional mathematician. Every review and audit so far was run
+  by AI agents, including the fresh-agent audit of the new Piece IV (`data/piece4/AUDIT_GRID.md`). No human expert has
+  checked any part. See [AI assistance](#ai-assistance).
+- **Piece IV, `[1.4035, 2]`, rests on a fix that was registered after the fact.** The pre-registered grid G **failed as
+  registered**. At `L = 1.92364501953125` the second even eigenvalue could not be certified at the planned truncation `N`,
+  because of a boundary effect of the cut. On its own, grid G certifies `[1.4035, 1.91912841796875]`. The gap was closed by
+  **rule E** (`N -> N + 1024`), which was written after the failure but stamped before its scored run. Without rule E the
+  theorem holds for `L` in `(0, 1.91912841796875]`. See [Disclosures](#disclosures-for-release-200).
+- It is computer-assisted. Its correctness depends on:
+  - the code in `code/`: our certifiers, Zac Elston's certifier in `code/gap/elston/`, and our clean-room
+    rh_60-route certifier in `code/rh60route/`;
+  - Arb/FLINT and GMP;
+  - the lemmas in the paper;
+  - the imported trust listed under [Weakest links](#weakest-links).
+- It is **not** a result about the Riemann hypothesis and brings no proof of RH closer in any quantified sense.
+  - In the Connes–van Suijlekom / Connes–Consani–Moscovici programme, "the lowest eigenvalue of `Q_L` is simple with an even
+    eigenfunction" is one hypothesis. Assumed for a given `L`, it implies that the Fourier transform of that ground state has
+    only real zeros.
+  - Reaching RH would also need that hypothesis for every `L`, and control of the limit `L -> inf` (that those zeros converge
+    to the zeta zeros). Neither is addressed here.
+  - We verify the hypothesis only on the bounded range `(0, 2]`.
 
-The paper is [`paper/main.pdf`](paper/main.pdf) (source `paper/main.tex`, `paper/refs.bib`). The note of the
-previous release, which covers `(0, 1.19]`, is kept as [`paper/NOTE.md`](paper/NOTE.md).
+**Check it in seconds:** `./check_theorem.sh`. It runs the three gluing checks on the shipped data and prints the combined
+statement; see [Reproducing](#reproducing).
 
-## What is new in 1.1.0
+The paper is [`paper/main.pdf`](paper/main.pdf), with source in `paper/main.tex` and `paper/refs.bib`. Piece IV is
+documented in three more places:
+- its pre-registrations, scored results and audit in `data/piece4/`;
+- its code in `code/rh60route/`, with a README;
+- [`data/README.md`](data/README.md).
 
-- The certified range grows from `(0, 1.19]` to `(0, 1.4035]` (**Piece III**, paper §5.4 and Table 4).
+The note of the `(0, 1.19]` release is kept as [`paper/NOTE.md`](paper/NOTE.md).
+
+## What is new in 2.0.0
+
+- **The range grows from `(0, 1.4035]` to `(0, 2]`.** The new part is **Piece IV**, `[1.4035, 2]`.
+- **Piece IV covers 54 windows (53 steps) from `1.4035` to `2`.** They include the refinement window
+  `31443/2^14 = 1.91912841796875`. We certify:
+  - at each of the 53 windows past `1.4035`, lower bounds on the odd-sector bottom `lambda_1^odd` and on the second even eigenvalue `lambda_2^even`, from our
+    clean-room implementation of the rh_60-route certifier (`code/rh60route/certify.py`);
+  - at every window, a rigorous upper bound `U(L)` on `lambda_0` (`code/upper/fr_sweep.py`).
+- **All 53 steps pass.** The smallest step ratio is `2.0986`, at `[1.5, 1.5174560546875]`. Every step is limited by the odd
+  sector. The step that closes the gap, `[1.91912841796875, 1.92364501953125]`, has ratio `448.6`.
+- **At `L = 2` itself:** `lambda_1^odd >= 2.159e-278` and `lambda_2^even >= 1.365e-273`, against `U^ev(2) <= 1.847e-283`.
+- **The method is credited to two AI-agent preprints on rStation:** bramble_trace, riemann_hypothesis paper 60 v1
+  (2026-10-26), and lihongmin, paper 45 v1 (2026-10-23). Both are unrefereed and were reviewed only by AI agents. Piece IV
+  does not use their claims. Our clean-room code re-verifies the odd-sector part of their positivity claims at every grid
+  window. In the even sector the grid certifies `lambda_2^even`, which is what simple-even needs, not `lambda_0^even`.
+- **Our additions:**
+  - the formulas for general `L`;
+  - the μ-shift;
+  - the rank-one deflation, which raises the core displacement rank from 2 to 4;
+  - Lemma SR, an exact-integer structured LDL^T with an explicit residual;
+  - the form-core argument;
+  - the independent gates G0i and C-ind;
+  - rule E;
+  - the gluing.
+- **Pre-registration.** Grid G was run under `PREREG_GRID.md` and the gap under `PREREG_GAP.md`. Both have run-time stamps
+  (hashes of every registered document and executed file) and an append-only amendment log with a hash chain. All are in
+  `data/piece4/`.
+- **Piece III data.** The Elston-route certificates at `1.4255` (λ_2), `1.468` and `1.4885` (both sectors) are added. That
+  route now passes on `[1.19, 1.4885]`, in 12 steps with minimum ratio `1.129`. The theorem needs it only up to `1.4035`.
+- **New files:**
+  - `check_theorem.sh`;
+  - `code/rh60route/`;
+  - `data/piece4/` (106 glued records, the upper bounds, rule-E records, controls, mutation summary, glue logs,
+    pre-registrations, stamps, amendment log, results, audit, SHA-256 sums, and the redaction map);
+  - 5 new files in `data/piece3/`.
+
+## Disclosures for release 2.0.0
+
+1. **Grid G failed as registered** (kill criterion K3g). The registered outcome is the partial range
+   `[1.4035, 1.91912841796875]`, 43 steps (`data/piece4/logs/GLUE_P.log`).
+   - The three registered λ_2 rungs at `1.92364501953125` all FAIL at V4, that is, in Lemma SR at its last label, with every
+     hard gate true. One refinement level was allowed, and it did not help.
+   - A ratio was never the problem.
+2. **Rule E is post hoc.** We wrote it after the failure, and after a diagnostic run (D2) had shown that `N + 1024` passes.
+   We stamped it (`GAP.stamp`, 01:12:01Z) before the scored run (01:13:06Z). The scored run reproduced D2 bit for bit, so the
+   outcome was known when the rule was registered.
+   - Rule E changes one argument, `--tmin`, and that argument only selects `N`. No tolerance, gate or certified formula
+     changes. Theorem V does not constrain `N`, and every gate is recomputed at the new `N`.
+   - For a deductive certificate, choosing `N` after the fact carries no false-positive risk, unless the code has an
+     `N`-dependent bug (`AUDIT_GRID.md` §3).
+   - Rule E is applied at one window only.
+3. **The negative control was weaker than planned.** The rule-E control (`μ = 1.01·λ̂_2(M_0)`) FAILED, as it must. It failed
+   at V2, the float core proposal, rather than at V4 (prediction RG-2 missed), so it does not exercise Lemma SR at the new `N`.
+   The evidence that V4 is live comes from elsewhere: the 6/6 grid G controls that fail at V4, the four grid FAIL records at
+   the last label, and diagnostic D1.
+4. **The registered fallback was not used.** That fallback was a `lem:mono` substitution (`check_steps.py --l2-from`). Its
+   trigger did not hold.
+5. **The window `1.8958740234375` passed only narrowly.** It passed on its last rung (`2^-10`), at the last SR label of a
+   different `N`, which is the same edge effect. Future grids should register an `N` rule up front.
+6. **The shipped records are redacted.** Host names, a user name and home paths are replaced. No number or field was
+   changed otherwise. Hashes recorded during the runs (stamps, pins, amendment chain) refer to the originals.
+   `data/piece4/REDACTION.sha256` maps original to redacted sha256, and the originals are available on request.
+7. **What the audit covered.** The fresh-agent audit recomputed the step chain independently, but with the same Arb library.
+   It did not re-prove the certifier.
+   - The specification and proofs that the code cites (SPEC.md, PROOFS.md: Theorem V, Lemma SR) are **not** in this release.
+     Their hashes are in `GAP.stamp`, and they are available on request.
+8. **The method comes from AI-agent preprints** reviewed only by AI agents (see above). Our code is clean room: no rStation
+   code was opened, copied or adapted.
+
+## What was new in 1.1.0
+
+- The certified range grew from `(0, 1.19]` to `(0, 1.4035]` (**Piece III**).
 - Lower bounds come from Elston's window-compressed prime-norm certifier (`weil-windows`, MIT, upstream commit
-  `3cc4cb7b`), run unchanged except for one added option, `--deflate`. It adds `v v^T` (`v` an approximate
-  ground vector) to the certified matrix, so the certificate bounds the **second** even eigenvalue (paper
-  Lemma 5.14, Corollary 5.15).
-- Upper bounds `U(L)` come from Legendre–Galerkin Rayleigh quotients (`K = 640`, 3000 bits) with a rigorous
-  Gauss–Legendre bound (paper §7). `U(1.19) <= 8.712e-48` is sharper than Piece II's `1.312e-47`, and the first step
-  needs it.
-- 8 grid steps `1.19, 1.2205, 1.25, 1.2785, 1.3055, 1.3315, 1.3565, 1.3805, 1.4035` all pass. The smallest step
-  ratio is `1.131`, on `[1.2205, 1.25]`, and the odd sector binds everywhere.
-- Data point, **not** part of the theorem: the step `[1.4255, 1.447]` also passes (ratio `1.379`). The step
-  `[1.4035, 1.4255]` before it waits for the even run at `1.4255`.
-- Still running: the even sector at `1.4255`, and both sectors at `1.468`, `1.4885` and `1.5`.
-- New files: `code/gap/` (certifier, step test, parameter rule), `code/upper/` (upper-bound code),
-  `data/piece3/` (19 certificate files, the upper bounds, the check log and SHA-256 sums), the LaTeX paper.
+  `3cc4cb7b`). It is run unchanged except for one added option, `--deflate`. That option adds `v v^T`, where `v` is an
+  approximate ground vector, to the certified matrix. The certificate then bounds the **second** even eigenvalue (paper
+  Lemma `lem:deflation`).
+- Upper bounds `U(L)` come from Legendre–Galerkin Rayleigh quotients (`K = 640`, 3000 bits) with a rigorous Gauss–Legendre
+  bound. `U(1.19) <= 8.712e-48` is sharper than Piece II's `1.312e-47`, and the first step needs it.
+- 8 grid steps `1.19, 1.2205, 1.25, 1.2785, 1.3055, 1.3315, 1.3565, 1.3805, 1.4035` all pass. The smallest step ratio is
+  `1.131`, on `[1.2205, 1.25]`, and the odd sector binds everywhere.
 
 ## What is proved
 
@@ -50,10 +130,9 @@ Take real `f` supported in `[-L, L]` (log scale) and form `Q(f) = W(f * f~)`. He
 functional. It has the pole terms, the archimedean term `Re psi(1/4 + it/2) - log pi`, and every prime power `n` with
 `log n < 2L` (paper §2). Let `A_L` be the self-adjoint operator of the closed form on `L^2(-L, L)`.
 
-**Theorem.** For every `L` in `(0, 1.4035]`, the lowest eigenvalue of `A_L` is simple, and its eigenfunction is
-even.
+**Theorem.** For every `L` in `(0, 2]`, the lowest eigenvalue of `A_L` is simple, and its eigenfunction is even.
 
-The proof has three pieces.
+The proof has four pieces.
 
 - **Piece I, `(0, 0.05]`.** A Lipschitz argument for a rescaled form, anchored at the certified window `0.05`. The
   gaps are `>= 0.4172` (second even eigenvalue) and `>= 0.6624` (odd sector).
@@ -64,19 +143,30 @@ The proof has three pieces.
 
 - **Piece III, `[1.19, 1.4035]`.** 8 grid steps. At each window, certified lower bounds on the second even
   eigenvalue and on the odd sector (Elston's certifier with `--deflate`) and a rigorous upper bound on the lowest
-  eigenvalue (Galerkin Rayleigh quotient). Every step passes; the smallest step ratio is `1.131`.
+  eigenvalue (Galerkin Rayleigh quotient). Every step passes; the smallest step ratio is `1.131`. (The same route also
+  passes on `[1.4035, 1.4885]`, which the theorem does not need.)
+- **Piece IV, `[1.4035, 2]` (new in 2.0.0).** 53 grid steps, from 54 dyadic windows. At each window there are certified
+  lower bounds on the odd sector and on the second even eigenvalue, from our clean-room rh_60-route certifier
+  (`code/rh60route/`). That certifier does a full-source Schur elimination with an exact core, a rank-one deflation for
+  `lambda_2^even`, and Lemma SR, an exact-integer structured LDL^T. Each window also has a rigorous upper bound `U(L)`.
+  Every step passes. The smallest step ratio is `2.0986`, and the odd sector binds everywhere. The gap at
+  `1.92364501953125` is closed by the post-hoc rule E (see [Disclosures](#disclosures-for-release-200)).
+
+Each step test proves simple-even on a closed interval `[L_i, L_{i+1}]` (paper Cor. `cor:step` with Lemma `lem:mono`). The
+pieces share endpoints, so together they cover `(0, 2]`.
 
 The prime powers 2, 3, 4, 5, 7, 8 and 9 enter inside Piece II, at `L = (1/2) log n`; 11, 13 and 16 enter inside
-Piece III (at `1.1989`, `1.2825`, `1.3863`).
+Piece III (at `1.1989`, `1.2825`, `1.3863`); 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43, 47, 49 and 53 enter inside Piece IV
+(`1.4166` ... `1.9851`).
 
-The certified numbers are in `data/theorem_bounds.json` (Pieces I–II, Table 2 of the paper) and `data/piece3/`
-(Piece III, Table 4). Windows past `1.4035` are **not** part of the theorem.
+The certified numbers are in `data/theorem_bounds.json` (Pieces I–II), `data/piece3/` (Piece III) and
+`data/piece4/glue/` (Piece IV). Nothing past `L = 2` is claimed.
 
 ## What is new, and what is not
 
 The convention throughout is that `L` is the half-width and `p^k` enters when `log p^k < 2L`.
 
-- **Believed new: `(0.8, 1.4035]`.** Our search (arXiv, Zenodo, GitHub and rStation; refreshed 2026-10-31) found no
+- **Believed new: `(0.8, 2]`.** Our search (arXiv, Zenodo, GitHub and rStation; refreshed 2026-10-31) found no
   public proof or certificate of simple-even for any continuum window `L > 0.8`. The only exception is the non-explicit neighbourhood of `0.8` in
   mathia PL-287. Andrade (Zenodo 20887028) and Andrews Jr. (Zenodo 22715669) certify simple-even for *finite* Galerkin matrices at
   `L ≈ 1.28, 1.68, 1.99`; those are not statements about the continuum form. Much of this literature is unrefereed
@@ -85,9 +175,10 @@ The convention throughout is that `L` is the half-width and `p^k` enters when `l
   certify positivity of both parity sectors on `(0, (1/2) log 11]` and `(0, 2]` respectively; both use our form, and
   their support radius `a` is our `L`. Neither identifies the ground state or compares the sectors (paper 45 §1: "our
   lower certificate neither identifies the ground state nor estimates the sharp minimum"). What we claim as new on
-  `(0.8, 1.4035]` is therefore simple-even itself (the ground state is simple and even) and the certified lower
-  bounds on the second even eigenvalue `lambda_2^even` that prove it (Piece II, and the rank-one deflation of
-  Piece III), not positivity.
+  `(0.8, 2]` is therefore simple-even itself (the ground state is simple and even) and the certified lower
+  bounds on the second even eigenvalue `lambda_2^even` that prove it, not positivity. Those bounds come from Piece II,
+  from the rank-one deflation of Piece III, and from the deflated rh_60-route certificate of Piece IV. Piece IV
+  re-implements bramble_trace's method in clean room and does not use their results.
 - **Not new: `(0, 0.8]`.** Kramarenko-Byrd (Zenodo 23007100, v1 of 2026-09-27, unrefereed) claims a rigorous proof of
   simple-even for all `0 < L <= 4/5`, in the same convention. We have not checked that proof. Our certificate on
   `(0, 0.8]` is an independent computer-assisted confirmation of that range (independent of Kramarenko-Byrd; not
@@ -117,6 +208,15 @@ Our own contributions are:
 - the Lipschitz piece at small `L`;
 - the rank-one deflation that turns Elston's lowest-eigenvalue certifier into a second-eigenvalue certifier, and
   the Piece III covering built on it;
+- Piece IV, which builds on the rh_60 / rh_45 method:
+  - the formulas for general `L`;
+  - the μ-shift;
+  - the rank-one deflation, which raises the core displacement rank from 2 to 4;
+  - Lemma SR, an exact-integer structured LDL^T;
+  - the form-core argument;
+  - the independent gates G0i and C-ind;
+  - rule E;
+  - the pre-registered grid and its gluing;
 - the numerics that reach `L = 1.19`: a hybrid rigorous spherical Bessel evaluation (classical
   recurrence / continued-fraction scheme, cf. Gautschi 1967), and a sharper cutoff certified by
   interval subdivision (`psi_floor`, paper §5.2);
@@ -124,9 +224,35 @@ Our own contributions are:
 
 See paper §1.3–1.4 for the full list with citations.
 
+## Weakest links
+
+The parts least checked, in order of how much the theorem depends on them. `REVIEWING.md` has the same list, with the checks.
+
+1. **Piece IV, `[1.4035, 2]`.** The registered grid failed, and the gap rests on the post-hoc rule E. The only audit was by
+   an AI agent. The piece also rests on imported trust that no audit re-verified (`data/piece4/AUDIT_GRID.md` §7):
+   - Stage S `s(L)`: Elston's `schur_upper`, via `code/rh60route/stage_s.py`.
+   - Elston's integer Cholesky. It decides V2 in every Piece IV run and is the whole certifier of Piece III. It was
+     independently audited only at `L = 1.19`, and that audit included our `--deflate` addition.
+   - `fr_sweep` `U(L)`.
+   - The pipeline `certify.py` / `sr.c` / `sr_kernel`, and its proofs (Theorem V, Lemma SR). The proofs are not shipped.
+   - Arb/FLINT.
+   - The paper's lemmas `lem:M`, `lem:deflation`, `cor:step` and `lem:mono`.
+   Every step ratio is above 2, but the code base is new and large.
+2. **Piece III, `(1.19, 1.4035]`.** It uses Elston's certifier at larger `L`, with per-window parameters and our `--deflate`.
+   None of these has been audited. The step ratios are small (`1.131`–`1.552`).
+3. **One form, several codes.** The lower bounds (Elston's code in Piece III, our rh_60-route code in Piece IV) and the
+   upper bounds (`code/upper/`) must evaluate exactly the same form with the same norm.
+   - In Piece IV, gates G0 and G0i check selected matrix entries against the paper's eq. (P). G0i computes them
+     independently in mpmath, with its own prime list.
+   - At the overlap windows, our Piece IV bounds are consistent with Elston's: neither exceeds an upper bound.
+4. **Pieces I–II past `L = 1`.** The sharp-cutoff path and the windows `1.03`–`1.19` have not been through any review round.
+5. **The rigorous Gauss–Legendre bound** in `code/upper/fast_recurrence.py`. Every `U(L)` relies on it, in Piece III and in
+   Piece IV.
+
 ## Caveats
 
-These are taken from paper §10.
+Items 1–7 are taken from the paper's caveats. For Piece IV, see [Disclosures](#disclosures-for-release-200) and
+[Weakest links](#weakest-links).
 
 1. **Normalization.** Our `Q` follows Zhu §6 and was checked against the zero side of the explicit formula. It is
    matched to the Connes–van Suijlekom / Connes–Consani–Moscovici form `QW_lambda` only up to a positive affine
@@ -174,7 +300,23 @@ pip install -r code/requirements.txt
 cd code && make            # builds vchol and veig
 ```
 
-### Check the glued theorem from the stored bounds (a few seconds)
+### Check the whole theorem (about 10 seconds)
+
+```sh
+PYTHON=.venv/bin/python ./check_theorem.sh
+```
+
+The script does four things:
+- It checks the SHA-256 sums of `data/piece3/` and `data/piece4/`.
+- It runs `code/theorem.py --check` for Pieces I–II.
+- It runs `code/gap/check_steps.py` on `data/piece3/` for Piece III.
+- It runs `code/rh60route/check_steps.py` on `data/piece4/glue/` for Piece IV. That check runs with `--stamp`, so every
+  record must be a PASS, of the right window and sector, unmutated, and carry the grid stamp.
+
+It ends with `COMBINED: ...` and the statement for `(0, 2]`. It does not recompute any window. The sections below run each
+piece on its own.
+
+### Check Pieces I–II from the stored bounds (a few seconds)
 
 ```sh
 cd code && python theorem.py --check
@@ -192,8 +334,25 @@ python code/gap/check_steps.py
 ```
 
 This compares, in Arb, `min(lambda_2^even, lambda_1^odd)(L_{i+1})` with `U(L_i)` for every step. It reads
-`data/piece3/` and should end with `CERTIFIED: ... simple-even for all L in (0, 1.4035]` (compare
-`data/piece3/check.log`). Together with `theorem.py --check` above this is the whole theorem.
+`data/piece3/`, and it should end with `CERTIFIED: ... simple-even for all L in (0, 1.4885]` (compare
+`data/piece3/check.log`). The theorem needs it only up to `1.4035`.
+
+### Check Piece IV from the stored certificates (seconds)
+
+```sh
+(cd data/piece4 && sha256sum -c SHA256SUMS)
+python code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt \
+  --stamp 7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8
+```
+
+The output is byte-identical to `data/piece4/logs/GLUE_r2.log`, and it ends with `ALL STEPS PASS (53 comparisons):
+simple-even on [1.4035, 2] (minimum step ratio 2.099)`. With `data/piece4/windows_partial.txt` in place of
+`windows.txt` you get the registered partial outcome (`GLUE_P.log`).
+
+### Recompute a Piece IV window
+
+See `code/rh60route/README.md`. It covers building the Lemma SR kernel, a re-run of `L = 1.5`, odd sector (about
+3 minutes), and the inputs for every other window. Grid G took 87.4 core-hours (7 h 27 min wall) on one 64-vCPU VM, and the gap closure took about 0.34 core-hours.
 
 ### Recompute Piece III
 
@@ -269,10 +428,11 @@ at that window rather than the rerun's row.
 
 ```
 README.md               this file
+check_theorem.sh        checks Pieces I-IV from the shipped data and prints the combined statement
 REVIEWING.md            how to review: weakest links and checks by effort
 LICENSE                 MIT (code)
 CITATION.cff            citation metadata
-paper/main.tex, main.pdf the paper, release 1.1.0 (CC BY 4.0, see paper/LICENSE); refs.bib
+paper/main.tex, main.pdf the paper (CC BY 4.0, see paper/LICENSE); refs.bib
 paper/NOTE.md           the note of the (0, 1.19] release of 2026-10-26
 code/certify.py         per-window certificate: lower bounds (frequency side, Zhu's reduction), upper bound
                         (position-side Rayleigh quotient), sharp-cutoff path (SHARP_TS, psi_floor), cluster dispatch
@@ -293,6 +453,8 @@ code/gap/params.py      design rule for the Piece III window parameters (not use
 code/upper/             rigorous Legendre-Galerkin upper bounds (fast_recurrence.py, hp.py, fr_sweep.py)
 data/                   certified bounds, history, scrubbed logs (see data/README.md)
 data/piece3/            Piece III certificates, upper bounds, check log, SHA256SUMS
+code/rh60route/         Piece IV: our clean-room rh_60-route certifier, Lemma SR kernel, step test, grid drivers (README)
+data/piece4/            Piece IV records, upper bounds, controls, pre-registrations, stamps, results, audit, SHA256SUMS
 exploratory/            NON-RIGOROUS scripts behind `paper/NOTE.md` Appendix A and the normalization check
 ```
 
@@ -301,7 +463,8 @@ exploratory/            NON-RIGOROUS scripts behind `paper/NOTE.md` Appendix A a
 The code, the computations, the paper drafts and the internal "reviews" in the paper's review log were produced
 largely by an AI assistant: Anthropic's Claude, used through Claude Code, in sessions directed by the author, who
 decides what to publish. The author is not a professional mathematician. The mathematical arguments have been
-checked only by AI-run internal reviews, not by an independent human expert.
+checked only by AI-run internal reviews, not by an independent human expert. That includes the pre-registrations, the
+scoring and the fresh-agent audit of Piece IV in `data/piece4/`.
 
 Errors were found during the work. Known ones are documented in the paper (Remark 5.9, §10) and in `paper/NOTE.md` (erratum, §7):
 
@@ -331,7 +494,8 @@ the cited prior work, especially Zhu and Kramarenko-Byrd.
   - Mori (Zenodo 23281236).
   - Senke (Zenodo 22871384), positivity at `L = 77/64`.
   - Andrews Jr. (Zenodo 22715669), finite-matrix simple-even at `L ≈ 1.282`.
-  - Elston (`weil-windows`, Zenodo 10.5281/zenodo.23174403). His certifier produces every Piece III lower bound.
+  - Elston (`weil-windows`, Zenodo 10.5281/zenodo.23174403). His certifier produces every Piece III lower bound. His
+    integer Cholesky, and the Schur test behind `s(L)`, are used in every Piece IV run.
   - Elder (Zenodo 23113186).
   - Eberwein (Zenodo 23177438).
   - "Eureka" (arXiv:2608.19047).
@@ -342,6 +506,9 @@ the cited prior work, especially Zhu and Kramarenko-Byrd.
   - bramble_trace, "Full-source Schur certificates for Weil positivity at support radius two", rStation
     riemann_hypothesis paper 60, v1, published 2026-10-26T19:12:17Z,
     https://rstation.ai/problems/riemann_hypothesis/papers/60/v1. Positivity of both parity sectors on `(0, 2]`.
+  - **Method credit for Piece IV.** Piece IV follows the method of bramble_trace (rh_60 v1) and lihongmin (rh_45 v1), in a
+    clean-room implementation with the additions listed above. Both are unrefereed AI-agent preprints reviewed only by AI
+    agents.
 
   See paper §1.3 for what each one did.
 - **Software.**
@@ -367,12 +534,14 @@ Corrections and error reports are very welcome.
 ## How to cite
 
 Archived on Zenodo. DOI for all versions (resolves to the newest): [10.5281/zenodo.23832220](https://doi.org/10.5281/zenodo.23832220);
-this version, v1.1.1: [10.5281/zenodo.23832221](https://doi.org/10.5281/zenodo.23832221). See also `CITATION.cff`:
+the previous version, v1.1.1: [10.5281/zenodo.23832221](https://doi.org/10.5281/zenodo.23832221). Zenodo assigns the DOI of
+v2.0.0 on release. See also `CITATION.cff`:
 
 > Johann Alexander Botha, *A certified simple, even ground state of the localized Weil quadratic form for all windows
-> L in (0, 1.4035]*, computer-assisted paper and code, version 1.1.1 (2026-10-31), Zenodo,
-> doi:10.5281/zenodo.23832221. Unrefereed, produced with AI assistance.
+> L in (0, 2]*, computer-assisted paper and code, version 2.0.0 (2026-11-01), Zenodo, doi:10.5281/zenodo.23832220.
+> Unrefereed, produced with AI assistance.
 
-Please also cite Zhu (arXiv:2608.24827), whose reduction the proof uses, Elston (`weil-windows`), whose certifier
-Piece III uses, and the prior work listed above where
+Please also cite Zhu (arXiv:2608.24827), whose reduction the proof uses; Elston (`weil-windows`), whose certifier
+Piece III uses; bramble_trace (rStation rh_60 v1) and lihongmin (rh_45 v1), whose method Piece IV uses; and the prior work
+listed above where
 relevant.

@@ -1,0 +1,51 @@
+# GRID stamp, rh_60-route grid G on [1.4035, 2]
+PREREG_GRID.stamp sha256 3982e0bf4fa6241bfbd67b843d35215f834ea7daf8bd58dbdd37e0b1814eee86 (ALLOW_DIFF=0)
+64a84a7faaae6f98e266d42f7a9a1bac  ~/rh60route/hp/lb/rh60route/PREREG_GRID.md
+9a8876fc94c5513917ae22ca826e8660  ~/rh60route/hp/lb/rh60route/GRID_PLAN.md
+007c919b39c0f43123eba4ac813a7518  ~/rh60route/hp/lb/rh60route/SPEC.md
+35547407b223745b2f383117e0121f61  ~/rh60route/hp/lb/rh60route/PROOFS.md
+a7928506ef30344c23bf3939d45853ad  ~/rh60route/hp/lb/rh60route/review.md
+2795e789c26037037a30eb76d37c22cf  ~/rh60route/hp/lb/rh60route/spec_changes.md
+e9dc46560f605677f1374b306b3f8dce  ~/rh60route/hp/lb/rh60route/PREREG.md
+8b1ee38ed718bd76f17b0c5cc155bc9b  ~/rh60route/hp/lb/rh60route/AUDIT.md
+ae2d8e894236d7e5fbf4d5e6e393f30f  ~/rh60route/hp/lb/rh60route/FIXES.md
+12bd6f01a84ff410306ff5c527c52a4d  ~/rh60route/hp/lb/rh60route/grid/jobs.txt
+1beaea143e1899efac29aa9ff4462ba3  ~/rh60route/hp/lb/rh60route/grid/windows.txt
+82eb2a1d2d1522bf5c08da7768cb1875  ~/rh60route/hp/lb/rh60route/grid/run_grid.sh
+b194695d082250cb02f49a1cbf0a8db6  ~/rh60route/hp/lb/rh60route/grid/grid.py
+74ab8335ca78356c16e4323eb7171f85  ~/rh60route/hp/lb/rh60route/grid/plan.py
+be670e414997f11c76f34cc5fde5e68d  ~/rh60route/hp/lb/rh60route/grid/forecast.py
+85dffd0b867ce042dfe8392ebb7b0992  ~/rh60route/hp/lb/rh60route/grid/forecast.jsonl
+26548e3528dba9b517c57a7c9f70e559  ~/rh60route/hp/lb/rh60route/grid/forecast_check.jsonl
+5c14918be1ab9d6c4f5726f794533bb5  ~/rh60route/hp/lb/rh60route/code/certify.py
+fb321a73ae7325f0d6fdcb36732a4f45  ~/rh60route/hp/lb/rh60route/code/entries.py
+f650944544d3c861970bfca6f784c2a4  ~/rh60route/hp/lb/rh60route/code/eqp.py
+bc1411024f9ed4e0c2709bd6c34ad707  ~/rh60route/hp/lb/rh60route/code/indep.py
+4423117d42719b942e6710b886f53e57  ~/rh60route/hp/lb/rh60route/code/mp_entries.py
+2448bf224622e49dfd652b172ca3e29c  ~/rh60route/hp/lb/rh60route/code/sr.py
+84d8d078c9f9293849facd7b6df82bf5  ~/rh60route/hp/lb/rh60route/code/sr.c
+5298b33587835750ac51ed8ae8cb6a70  ~/rh60route/hp/lb/rh60route/code/sr_kernel
+3fe534aeae9313e7007b4901f5b23bdf  ~/rh60route/hp/lb/rh60route/code/g3.py
+ff4460a6c228eca733acab76e53dcacd  ~/rh60route/hp/lb/rh60route/code/g4.py
+311778b6b89e605e43a5c98bde22e601  ~/rh60route/hp/lb/rh60route/code/ritz.py
+c7955c28c54d4e4338202d605fda02d1  ~/rh60route/hp/lb/rh60route/code/pilot.py
+1ca02dc972083c580c04162fbae2513b  ~/rh60route/hp/lb/rh60route/code/amend.py
+33b83435d719728099ec8665cede183d  ~/rh60route/hp/lb/liu/stage_s.py
+34c45c00b861e023914b010e5bd454a0  ~/rh60route/hp/lb/liu/liu.py
+fc8391b90695d4f18cbd326abda2ed79  ~/rh60route/hp/gap/elston/grid_norm.py
+65102caa93d0f83f08916999dc8def90  ~/rh60route/hp/gap/elston/grid_certificate_rigorous.py
+5158566f70a460c857a8fa1f361d851e  ~/rh60route/hp/gap/elston/progress.py
+b4fd108c63342f0bc3aca10c9df11db1  ~/rh60route/hp/gap/check_steps.py
+0ff72402143ea3ebebcb5f896b2d3d89  ~/rh60route/upper/fr_sweep.py
+e1332236700c5f67fdfa00c2929c6402  ~/rh60route/upper/fast_recurrence.py
+bc87377d68e4be27db61e5b350146fd5  ~/rh60route/upper/hp.py
+2878cf86fff2129a640e838aebfac7bc  ~/rh60route/grid_run/upper/upper640.jsonl
+97cc19fb7bb2a1b460ae1e3d2fd92ca3  ~/rh60route/grid_run/upper/upper_1.5_1.jsonl
+ea503cee5129f51982bae18212467d54  ~/rh60route/grid_run/upper/upper_k384.jsonl
+948112adea41596fd8e869bc8af1b6d8  ~/rh60route/grid_run/upper/upper_rerun_L2.jsonl
+14cd37bf563bc039af48283317096186  ~/rh60route/data/s/s_1.5.json
+76c77fa2f1939badd0cac33f8b640269  ~/rh60route/data/s/s_2.json
+588a9dd766d02cbff18b000019c49de8  ~/rh60route/data/ritz_1.5.json
+cb983adb43f8bd59d9d91af492880ed7  ~/rh60route/data/ritz_2.json
+chain OK, 14 entries, sha256 8fe0ff9b1b35add45089953bb8103b65d030b8e4ce49d1879aa8305ecea5e1d6
+Sat Oct 31 16:28:47 UTC 2026

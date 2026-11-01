@@ -1,14 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below. It is unrefereed and was produced largely with AI assistance (see README.md)."
-title: "A certified simple, even ground state of the localized Weil quadratic form for all windows L in (0, 1.4035]"
-abstract: "Computer-assisted proof, in Arb ball arithmetic, that the lowest eigenvalue of the localized Weil quadratic form for the Riemann zeta function on L^2(-L, L) is simple with an even eigenfunction for every L in (0, 1.4035]. Pieces I-II cover (0, 1.19] (release of 2026-10-26); Piece III covers [1.19, 1.4035] with second-eigenvalue lower bounds from Elston's certifier plus a rank-one deflation and rigorous Legendre-Galerkin upper bounds. Interim release: the extension to L = 1.5 is in progress and not claimed. Unrefereed; produced largely with AI assistance."
+title: "A certified simple, even ground state of the localized Weil quadratic form for all windows L in (0, 2]"
+abstract: "Computer-assisted proof, in Arb ball arithmetic and exact integer arithmetic, that the lowest eigenvalue of the localized Weil quadratic form for the Riemann zeta function on L^2(-L, L) is simple with an even eigenfunction for every L in (0, 2]. Pieces I-II cover (0, 1.19]; Piece III covers [1.19, 1.4035] with second-eigenvalue lower bounds from Elston's certifier plus a rank-one deflation; Piece IV (new in 2.0.0) covers [1.4035, 2] with a clean-room implementation of the rh_60-route full-source Schur certificate (method of bramble_trace and lihongmin, unrefereed AI-agent preprints) extended by a rank-one deflation and an exact-integer structured LDL (Lemma SR), on a pre-registered grid of 54 windows. The registered grid failed at one window; the gap was closed by a post-hoc, pre-stamped rule (rule E). Upper bounds are rigorous Legendre-Galerkin Rayleigh quotients. Not a result about the Riemann hypothesis. Unrefereed; produced largely with AI assistance and audited only by AI agents."
 type: software
 authors:
   - given-names: "Johann Alexander"
     family-names: "Botha"
     email: "info@genuscore.com"
-version: "1.1.1"
-date-released: "2026-10-31"
+version: "2.0.0"
+date-released: "2026-11-01"
 license: MIT
 keywords:
   - Weil explicit formula
@@ -42,3 +42,15 @@ references:
       - type: doi
         value: "10.5281/zenodo.23174403"
     notes: "Window-compressed prime-norm certifier; produces every Piece III lower bound (used with an added --deflate option)."
+  - type: generic
+    title: "Full-source Schur certificates for Weil positivity at support radius two"
+    authors:
+      - name: bramble_trace
+    url: "https://rstation.ai/problems/riemann_hypothesis/papers/60/v1"
+    notes: "rStation riemann_hypothesis paper 60 v1 (2026-10-26), unrefereed AI-agent preprint. Method of Piece IV (clean-room implementation)."
+  - type: generic
+    title: "Cutoff-free positivity of localized Weil forms through the (log 11)/2 threshold"
+    authors:
+      - name: lihongmin
+    url: "https://rstation.ai/problems/riemann_hypothesis/papers/45/v1"
+    notes: "rStation riemann_hypothesis paper 45 v1 (2026-10-23), unrefereed AI-agent preprint. Green-response identity and bases used in Piece IV."

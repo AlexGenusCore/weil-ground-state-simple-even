@@ -1,0 +1,440 @@
+{
+ "Ldec": "1.9052734375",
+ "eps": -1,
+ "sector": "od",
+ "K": 512,
+ "deflate": false,
+ "mut": null,
+ "tmin": 1.0,
+ "gates": {
+  "G-S": true,
+  "G0-mini": true,
+  "G0i": true,
+  "V2": true,
+  "V3": true,
+  "C-tau": true,
+  "C-rbar": true,
+  "C-J2": true,
+  "C-ind": true,
+  "G5p": true,
+  "C-rM": true,
+  "G5": true,
+  "V4": true,
+  "R6": true,
+  "V5": true
+ },
+ "prec_core": 2880,
+ "prec_T": 1344,
+ "prec_src": 192,
+ "P_core": 1536,
+ "P": 96,
+ "b": 770,
+ "s": "89694121710811139340536752987915060632791032595076089035829/12554203470773361527671578846415332832204710888928069025792",
+ "s_float": 7.144548988681145,
+ "s_sha256": "28cd96568b7be174fec4cec7e023f3d4c833e67593318680bb960636f0266a88",
+ "G-S_guard": 7.139330357521754,
+ "G0i": {
+  "ok": true,
+  "n_pp": 21,
+  "dps": 30,
+  "tol": "1e-20",
+  "entries": [
+   {
+    "q": 0,
+    "r": 0,
+    "eqP": "0.04397171976298285919829239",
+    "diff": "6.45e-30",
+    "ok": true
+   },
+   {
+    "q": 1,
+    "r": 1,
+    "eqP": "0.04435162444153186760919521",
+    "diff": "1.25e-29",
+    "ok": true
+   },
+   {
+    "q": 2,
+    "r": 2,
+    "eqP": "0.04515262143963775009845988",
+    "diff": "1.16e-29",
+    "ok": true
+   },
+   {
+    "q": 7,
+    "r": 7,
+    "eqP": "0.07593435507722124014980281",
+    "diff": "9.16e-30",
+    "ok": true
+   },
+   {
+    "q": 40,
+    "r": 40,
+    "eqP": "3.659714554401394923893791",
+    "diff": "1.38e-29",
+    "ok": true
+   },
+   {
+    "q": 0,
+    "r": 1,
+    "eqP": "0.0441605935705228012105017",
+    "diff": "1.31e-29",
+    "ok": true
+   },
+   {
+    "q": 3,
+    "r": 7,
+    "eqP": "0.05549530655597832466435284",
+    "diff": "2.66e-29",
+    "ok": true
+   },
+   {
+    "q": 2,
+    "r": 40,
+    "eqP": "0.04542968573879130204257847",
+    "diff": "9.7e-30",
+    "ok": true
+   }
+  ]
+ },
+ "mu": "1688286653932786719/109248748468303532426524291739177087748419720352823839299932287987941986104404083859807145179079545499532163655162810211465442126301091677476673225561388319475223061782757614525859074636379160981159362824370366086868021215846014341794428966928384",
+ "mu_float": 1.5453601781283666e-227,
+ "theta": "0",
+ "mu_rel": "2/3",
+ "mu_ref": "2.31804026719255e-227",
+ "lam_min_core_float": "1.8210771e-227",
+ "m_core": "9.1053855e-228",
+ "solve_err_a": "1.92e-290",
+ "solve_err_b": "2.82e-295",
+ "A_f_log2max": 400.28758146927896,
+ "balance": [
+  "1/256",
+  "256"
+ ],
+ "rbar": "0.44356157",
+ "V_h": "1.543471417",
+ "E_h": "183.2600261",
+ "N": 38912,
+ "tau_core": "1.06247",
+ "tau_pole": "1.78161e-15",
+ "tau_N": "1.06247",
+ "M": 155648,
+ "t_N": "1.0242744",
+ "tprime_N": "563100788119/549755813888",
+ "tprime_M": "2650437749769/1099511627776",
+ "r_M": "0.123732",
+ "C-tau_pole_sum": "1.754e-15",
+ "C-tau_sumQ": "0.3801",
+ "C-rbar_max": "0.1540",
+ "C-J2_sum": "2.9759e-5",
+ "J2": "3.9787e-5",
+ "C-ind": {
+  "tau_core": {
+   "mp": "1.06247474376",
+   "rel_excess": 3.326002747568736e-51,
+   "ok": true
+  },
+  "tau_pole": {
+   "mp": "1.78160830725e-15",
+   "rel_excess": 1.7228557760602397e-57,
+   "ok": true
+  },
+  "r_M": {
+   "mp": "0.12373227467",
+   "rel_excess": 2.0003034953573966e-13,
+   "ok": true
+  },
+  "t_N": {
+   "mp": "1.02427436672",
+   "tprime_N": "1.02427436672",
+   "ok": true
+  },
+  "L_ab": [
+   "13587.47",
+   "4.1809394e+8",
+   "4.688557e+8",
+   "1.7859005e+13"
+  ],
+  "n_pp": 21,
+  "dps": 160,
+  "ok": true
+ },
+ "G5p_Rq_max": 313,
+ "G5p_tail_log2_max": -225.7780552116206,
+ "C-rM_finite": "0.03949",
+ "eps_asm": "4.504e-27",
+ "H": "0.0225699",
+ "delta0": "1/8",
+ "e_h": "1.26e-29",
+ "SR_labels": {
+  "first": 1050625,
+  "last": 6056419329,
+  "n": 38400
+ },
+ "G5_core_solves": true,
+ "G5_Q_maxreldiff": 3.1524109320932946e-47,
+ "G5_parts": {
+  "Q_and_core_solves": true,
+  "S_input_entries": true
+ },
+ "float_pmin": 0.668213151713071,
+ "float_fail": -1,
+ "proj_SR_hours": 0.1678671712855573,
+ "SR_fail": -1,
+ "SR_seconds": 471.2,
+ "eps_E": 9.932449867080242e-17,
+ "min_pivot": 0.6682131517130167,
+ "SR_checksum": {
+  "T": "13d1b597ffe1e37670aeae8262c29e8d",
+  "sump": "4b2bb5875c85bfa0a42a7001f9d64",
+  "sumL": "-43b4ab0e9090babb9f70b20e79f6"
+ },
+ "V5_margin": "0.00126773",
+ "result": "PASS",
+ "failed_gates": [],
+ "certified_lower_bound": "[1.5453601781283666666e-227 +/- 2.02e-248]",
+ "label": "odd_1.9052734375_2o3",
+ "seconds": 979,
+ "peak_gb": 1.97,
+ "argv": [
+  "--L",
+  "1.9052734375",
+  "--Uev",
+  "1.91042644841387e-232",
+  "--s-file",
+  "~/rh60route/data/s/s_1.9052734375.json",
+  "--ritz",
+  "~/rh60route/data/ritz_1.9052734375.json",
+  "--workdir",
+  "~/rh60route/work",
+  "--cD",
+  "8.196639222927604e-07",
+  "--eps",
+  "-1",
+  "--mu-ref",
+  "2.31804026719255e-227",
+  "--tmin",
+  "1",
+  "--mu-rel",
+  "2/3",
+  "--sr-if-pmin",
+  "0.015625",
+  "--out",
+  "~/rh60route/grid_run/out/odd_1.9052734375_2o3.json",
+  "--label",
+  "odd_1.9052734375_2o3"
+ ],
+ "utc": "2026-10-31T22:28:58Z",
+ "log": [
+  {
+   "stage": "start",
+   "Ldec": "1.9052734375",
+   "eps": -1,
+   "K": 512,
+   "prec_core": 2880,
+   "prec_T": 1344,
+   "deflate": false,
+   "mut": null,
+   "t": 0.0,
+   "gb": 0.05
+  },
+  {
+   "stage": "G-S/G0-mini/G0i",
+   "gs": true,
+   "g0": true,
+   "g0i": true,
+   "t": 63.2,
+   "gb": 0.07
+  },
+  {
+   "stage": "M0",
+   "t": 71.3,
+   "gb": 0.3
+  },
+  {
+   "stage": "mu",
+   "mu": 1.5453601781283666e-227,
+   "t": 71.4,
+   "gb": 0.3
+  },
+  {
+   "stage": "core",
+   "lmin": "1.8210771e-227",
+   "m_core": "9.1053855e-228",
+   "V2": true,
+   "t": 153.3,
+   "gb": 1.14
+  },
+  {
+   "stage": "solves",
+   "a": "1.92e-290",
+   "b": "2.82e-295",
+   "t": 155.0,
+   "gb": 1.14
+  },
+  {
+   "stage": "moments",
+   "Rmax": 400,
+   "A_f_log2": 400.28758146927896,
+   "t": 155.9,
+   "gb": 1.14
+  },
+  {
+   "stage": "balance",
+   "scal": [
+    "1/256",
+    "256"
+   ],
+   "t": 158.0,
+   "gb": 1.15
+  },
+  {
+   "stage": "N",
+   "N": 38912,
+   "tau_N": "1.06247",
+   "t_N": "1.02427",
+   "t": 158.2,
+   "gb": 1.15
+  },
+  {
+   "stage": "entries",
+   "M": 155648,
+   "t": 212.1,
+   "gb": 1.23
+  },
+  {
+   "stage": "transfer conv",
+   "Q2": 311296,
+   "t": 295.7,
+   "gb": 1.97
+  },
+  {
+   "stage": "generators",
+   "Gmax": [
+    "5.38e+3",
+    "7.16e+2"
+   ],
+   "Grad": [
+    "1.46e-43",
+    "8.52e-46"
+   ],
+   "Gradarg": [
+    311071,
+    209407
+   ],
+   "uradarg": 311071,
+   "urad": "3.73e-41",
+   "Qmax": "1.33",
+   "t": 302.1,
+   "gb": 1.97
+  },
+  {
+   "stage": "r_M",
+   "M": 155648,
+   "r_M": "0.12373",
+   "t": 302.9,
+   "gb": 1.97
+  },
+  {
+   "stage": "controls",
+   "Ctau": true,
+   "Crbar": true,
+   "CJ2": true,
+   "t": 304.3,
+   "gb": 1.97
+  },
+  {
+   "stage": "C-ind",
+   "ok": true,
+   "tau_core": 3.326002747568736e-51,
+   "tau_pole": 1.7228557760602397e-57,
+   "r_M": 2.0003034953573966e-13,
+   "t": 307.7,
+   "gb": 1.97
+  },
+  {
+   "stage": "G5'",
+   "ok": true,
+   "Rq": [
+    39,
+    313
+   ],
+   "tail_log2_max": -225.7780552116206,
+   "t": 328.3,
+   "gb": 1.97
+  },
+  {
+   "stage": "stage I",
+   "n": 38400,
+   "t": 344.2,
+   "gb": 1.97
+  },
+  {
+   "stage": "C-rM",
+   "fin": "0.03949",
+   "ok": true,
+   "t": 358.8,
+   "gb": 1.97
+  },
+  {
+   "stage": "assembly",
+   "eps_asm": "4.504e-27",
+   "delta0": "1/8",
+   "t": 359.2,
+   "gb": 1.97
+  },
+  {
+   "stage": "G5",
+   "ok": true,
+   "Qrel": 3.1524109320932946e-47,
+   "t": 481.8,
+   "gb": 1.97
+  },
+  {
+   "stage": "float LDL",
+   "pmin": 0.668213151713071,
+   "fail": -1,
+   "t": 505.4,
+   "gb": 1.97
+  },
+  {
+   "stage": "SR",
+   "fail": -1,
+   "sec": 471.2,
+   "eps_E": 9.932449867080242e-17,
+   "V5": true,
+   "t": 976.7,
+   "gb": 1.97
+  }
+ ],
+ "code_sha256": {
+  "gap/elston/grid_certificate_rigorous.py": "3c988aa73f8b6f964bdc3304ba27637537a109085ce48dc97d34eeab677c8378",
+  "gap/elston/grid_norm.py": "f55399597a9affeffc050f4933227019148c03ae694a8e03b3aaaf71864c59b4",
+  "gap/elston/progress.py": "a1dcccae73f6b93d54106a1d049075bd0fbe4f7d31dcb23c64353e6fd86cc792",
+  "lb/rh60route/code/amend.py": "c5fc19d8bdfeb9b25234d2268d8400256ebe13ae263ed31fa727d658c6a0aeb2",
+  "lb/rh60route/code/bench_sr.py": "da6e507731a129c19f056383038633c2c273719810fd9c6f28cd27efdbf76f25",
+  "lb/rh60route/code/certify.py": "0cbb7e7f82c4bc935e2c14be1e0381ff4932e97012d4313a54147e2b98acaa3c",
+  "lb/rh60route/code/entries.py": "e01ff644fc09cde4d5307a8e5b724d83e36630e94fd15667f93edc7675f72db6",
+  "lb/rh60route/code/eqp.py": "b31e9227c7a56b3401888d45a2163c0a3b6790c171beeec9d060aa974ad372ca",
+  "lb/rh60route/code/g3.py": "b458efddc6810957dd3a14835db7a354a16a14dbd81d3da34514f996bee8344d",
+  "lb/rh60route/code/g4.py": "4b50b6ec2d4416c6e9a0cdf9f8b9ab656baf22743005bb5a2dce68d9e52ecec9",
+  "lb/rh60route/code/indep.py": "43bb28badd706eb1103ff77d808bf05b08ea0100ca9ecf43cd8765f07869b6cb",
+  "lb/rh60route/code/mp_entries.py": "84c801797164fda6d423b6797c2fa486942583bbe25b814171207e2cc1f6d483",
+  "lb/rh60route/code/p2.sh": "a7d77b1f4f8d230502ad9f04790dc9094417af261084c1668a2e4c381e4584d5",
+  "lb/rh60route/code/pilot.py": "e289962afc886204da73cbc1caa38f12aee34bee486a78fb3fedeebb566050de",
+  "lb/rh60route/code/ritz.py": "affc4d46b081a7e25a99fe9540fd435f5fc0be0f76550e0cbffb75aaac035f33",
+  "lb/rh60route/code/sr.c": "a2092c487eda0c16a27b94c358116e165a46cdee37d7670f56fb21d08d260426",
+  "lb/rh60route/code/sr.py": "d0bb8c895f544d007c162481c8c6ff879c04d7382bdf2ae0a992bf56e05e8f41",
+  "lb/rh60route/code/sr_kernel": "f46d6646c5c427f280adaa5fc47276175c623ab7b2a47e1d60656832f40d9a7c",
+  "lb/rh60route/code/stamp.sh": "6d288af8b614aa40a8b65ec5aac578773b83914f861b8e2c02bd19cdb148e117",
+  "lb/rh60route/code/summarize.py": "b600a41c1b485f4f682f61913972753fb774da37281c728724e703d341cdbff4",
+  "lb/rh60route/code/watchdog.sh": "f96f526f71cac0f001043df85e30b6f25d668fc480412ab6f140bfb0bf5e744a"
+ },
+ "archive_dir": "~/rh60route/hp/lb/rh60route/archive",
+ "amendments": {
+  "path": "~/rh60route/AMENDMENTS.log",
+  "sha256": "8fe0ff9b1b35add45089953bb8103b65d030b8e4ce49d1879aa8305ecea5e1d6",
+  "entries": 14
+ },
+ "stamp_sha256": "7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8"
+}

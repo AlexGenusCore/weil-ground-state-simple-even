@@ -1,0 +1,35 @@
+#!/bin/sh
+# Check the theorem "simple, even ground state for every L in (0, 2]" from the shipped data, without recomputing any
+# window (about 10 seconds). Needs a Python with python-flint 0.9.0 (code/requirements.txt); set PYTHON to choose one.
+#   Pieces I-II  (0, 1.19]      code/theorem.py --check            on data/theorem_bounds.json
+#   Piece III    [1.19, ...]    code/gap/check_steps.py             on data/piece3/   (only [1.19, 1.4035] is needed)
+#   Piece IV     [1.4035, 2]    code/rh60route/check_steps.py       on data/piece4/glue/
+# Each step test proves simple-even on a closed interval [L_i, L_{i+1}] (paper Cor. cor:step with Lemma lem:mono), and the
+# pieces share endpoints, so together they cover (0, 2].
+set -eu
+cd "$(dirname "$0")"
+PY=${PYTHON:-python3}
+# sha256 of the ORIGINAL GRID.stamp, which every Piece IV record carries (field stamp_sha256). The shipped GRID.stamp is a
+# redacted copy; data/piece4/REDACTION.sha256 lists original -> redacted hashes.
+STAMP=7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8
+grep -q "^$STAMP  .*data/piece4/GRID.stamp$" data/piece4/REDACTION.sha256 || { echo "FAIL: stamp hash not in REDACTION.sha256"; exit 1; }
+
+echo "== file hashes"
+(cd data/piece3 && sha256sum -c --quiet SHA256SUMS) && (cd data/piece4 && sha256sum -c --quiet SHA256SUMS) && echo "data/piece3, data/piece4: OK"
+
+echo; echo "== Pieces I-II: code/theorem.py --check"
+p12=$($PY code/theorem.py --check); echo "$p12"
+echo; echo "== Piece III: code/gap/check_steps.py data/piece3"
+p3=$($PY code/gap/check_steps.py data/piece3); echo "$p3"
+echo; echo "== Piece IV: code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt --stamp $STAMP"
+p4=$($PY code/rh60route/check_steps.py data/piece4/glue data/piece4/windows.txt --stamp "$STAMP"); echo "$p4"
+
+echo
+fail() { echo "NOT CERTIFIED: $1"; exit 1; }
+echo "$p12" | tail -n 1 | grep -qx "THEOREM CERTIFIED for all L in (0, 1.19]" || fail "Pieces I-II"
+e3=$(echo "$p3" | tail -n 1 | sed -n 's/^CERTIFIED: simple-even for all L in \[1\.19, \([0-9.]*\)\].*/\1/p')
+[ -n "$e3" ] && awk "BEGIN { exit !($e3 >= 1.4035) }" || fail "Piece III does not reach 1.4035"
+echo "$p4" | tail -n 1 | grep -q "^ALL STEPS PASS (53 comparisons): simple-even on \[1.4035, 2\]" || fail "Piece IV"
+echo "COMBINED: Pieces I-II (0, 1.19], Piece III [1.19, $e3], Piece IV [1.4035, 2]."
+echo "For every L in (0, 2], the lowest eigenvalue of A_L is simple and its eigenfunction is even."
+echo "(Computer-assisted, unrefereed, AI-assisted; conditional on the imported trust listed in REVIEWING.md.)"
