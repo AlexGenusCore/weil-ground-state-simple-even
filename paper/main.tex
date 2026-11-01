@@ -10,7 +10,7 @@
 \newcommand{\doi}[1]{doi:\,\href{https://doi.org/#1}{#1}}
 
 % ------------------------------------------------------------------ macros
-\newcommand{\Lmax}{1.4035}                                % right end of the certified range (release 1.1.0; goal 1.5)
+\newcommand{\Lmax}{2}                                     % right end of the certified range (release 2.0.0)
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\od}{\mathrm{odd}}
 \newcommand{\R}{\mathbb{R}}
@@ -20,6 +20,10 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\file}[1]{{\small\path{#1}}}
 \newcommand{\e}[1]{\cdot 10^{#1}}
+\input{generated}                                         % Piece IV tables and numbers, written by gen_tables.py
+\newcommand{\pivdata}[1]{\file{data/piece4/#1}}           % shipped Piece IV records
+\newcommand{\pivcode}[1]{\file{code/rh60route/#1}}        % shipped Piece IV code
+\newcommand{\Tp}{\mathsf T}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -40,14 +44,13 @@
 \address{GenusCore}
 \email{info@genuscore.com}
 
-\date{Version 1.1.0, 31 October 2026}
+\date{Version 2.0.0, 1 November 2026}
 
 \subjclass[2020]{11M26 (primary); 65G20, 47A75, 65F15 (secondary)}
 \keywords{Weil explicit formula, Weil positivity, quadratic form, ground state, computer-assisted proof, ball arithmetic}
 
 \begin{abstract}
-Let $Q_L$ be Weil's quadratic form for the Riemann zeta function, restricted to real test functions supported in $[-L,L]$ on the logarithmic scale; it contains the pole terms, the archimedean term and every prime power $n$ with $\log n<2L$. Connes and van Suijlekom proved that if the lowest eigenvalue of the associated self-adjoint operator is simple with an even eigenfunction~$\xi$, then $\hat\xi$ has only real zeros; for the Weil form this ``simple-even'' property is one of the missing steps in the strategy of Connes, Consani and Moscovici. We give a computer-assisted proof, in Arb ball arithmetic, that the ground state of $Q_L$ is simple and even for every $L\in(0,\Lmax]$. The proof combines min-max monotonicity in~$L$ with three pieces: a Lipschitz argument on $(0,0.05]$, a covering of $[0.05,1.19]$ by $31$ certified windows based on Zhu's frequency-cutoff reduction, and a covering of $(1.19,\Lmax]$ by $8$ windows in which second-eigenvalue lower bounds are obtained from Elston's window-compressed prime-norm certifier combined with a rank-one deflation, and upper bounds from Legendre--Galerkin Rayleigh quotients with rigorous quadrature bounds. On $(0,0.8]$ the statement had been claimed before; the range $(0.8,\Lmax]$ is, to our knowledge, new. As by-products we give rigorous upper bounds for the lowest eigenvalue in both parity sectors up to $L=2.25$.
-The extension of the same computation to $L=1.5$ is in progress.
+Let $Q_L$ be Weil's quadratic form for the Riemann zeta function, restricted to real test functions supported in $[-L,L]$ on the logarithmic scale; it contains the pole terms, the archimedean term and every prime power $n$ with $\log n<2L$. Connes and van Suijlekom proved that if the lowest eigenvalue of the associated self-adjoint operator is simple with an even eigenfunction~$\xi$, then $\hat\xi$ has only real zeros; for the Weil form this ``simple-even'' property is one of the missing steps in the strategy of Connes, Consani and Moscovici. We give a computer-assisted proof, in Arb ball arithmetic and exact integer arithmetic, that the ground state of $Q_L$ is simple and even for every $L\in(0,\Lmax]$. The proof combines min-max monotonicity in~$L$ with four pieces: a Lipschitz argument on $(0,0.05]$; a covering of $[0.05,1.19]$ by $31$ certified windows based on Zhu's frequency-cutoff reduction; a covering of $[1.19,1.4035]$ by $9$ windows in which second-eigenvalue lower bounds come from Elston's window-compressed prime-norm certifier combined with a rank-one deflation; and a covering of $[1.4035,2]$ by $54$ windows with value certificates $\lambda\ge\mu$ from a full-source Schur elimination. The last piece follows the positivity method of two AI-agent preprints on rStation (bramble\_trace; lihongmin), which we re-derived and re-implemented in a clean room and extended by a spectral shift, a rank-one deflation and an exact-integer structured $LDL^{\Tp}$ factorisation. Upper bounds come from Legendre--Galerkin Rayleigh quotients with rigorous quadrature bounds. The pre-registered grid of the last piece failed at one window; the gap was closed by a parameter rule registered after that failure, and we report this as post hoc. Positivity on this range is not new; on $(0,0.8]$ the simple-even statement had been claimed before, and on $(0.8,\Lmax]$ the simple-even statement and the second-eigenvalue lower bounds are, to our knowledge, new. As by-products we give rigorous upper bounds for the lowest eigenvalue in both parity sectors up to $L=2.25$. The work is not refereed; all reviews so far were carried out by AI agents.
 \end{abstract}
 
 \maketitle
@@ -69,7 +72,7 @@ where $\psi=\Gamma'/\Gamma$ and $\Lambda$ is the von Mangoldt function. Weil's c
 
 \begin{table}[ht]
 \centering\small
-\caption{Prime powers $n$ and the window $L=\tfrac12\log n$ at which they enter the form, for $L\le1.5$.}\label{tab:primes}
+\caption{Prime powers $n$ and the window $L=\tfrac12\log n$ at which they enter the form, for $L\le2$.}\label{tab:primes}
 \begin{tabular}{l*{6}{c}}
 \toprule
 $n$ & 2 & 3 & 4 & 5 & 7 & 8\\
@@ -77,6 +80,12 @@ $\tfrac12\log n$ & 0.3466 & 0.5493 & 0.6931 & 0.8047 & 0.9730 & 1.0397\\
 \midrule
 $n$ & 9 & 11 & 13 & 16 & 17 & 19\\
 $\tfrac12\log n$ & 1.0986 & 1.1989 & 1.2825 & 1.3863 & 1.4166 & 1.4722\\
+\midrule
+$n$ & 23 & 25 & 27 & 29 & 31 & 32\\
+$\tfrac12\log n$ & 1.5677 & 1.6094 & 1.6479 & 1.6836 & 1.7170 & 1.7329\\
+\midrule
+$n$ & 37 & 41 & 43 & 47 & 49 & 53\\
+$\tfrac12\log n$ & 1.8055 & 1.8568 & 1.8806 & 1.9251 & 1.9459 & 1.9851\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -91,7 +100,7 @@ We list what we know to have been proved or claimed; status labels follow the so
 \item \emph{Zhu}~\cite{Zhu} introduced the frequency-cutoff (``one-stroke'') reduction with a head/tail block estimate [Zhu, Thm.~1.1] on which all our window certificates rest, certified simple-even at the single window $L=0.8$ [Zhu, Thm.~6.2], and certified variational upper bounds on the lowest eigenvalue for $L\in[0.5,2]$ [Zhu, Table~3]. Zhu [\S7] retracts an earlier positivity claim at $L=1.19$.
 \item \emph{Kramarenko-Byrd}~\cite{KB} (unrefereed) claims a rigorous proof of simple-even for all $0<L\le4/5$ in our half-width convention. We have not checked it. If it is correct, our result on $(0,0.8]$ is an independent confirmation.
 \item \emph{Perturbative simplicity} on a neighbourhood of $L=0.8$ of non-explicit radius: PL-287~\cite{PL}.
-\item \emph{Positivity and per-sector lower bounds} (no simplicity or parity statement): jose-paul-b~\cite{JPB} for $L\le\tfrac12\log7$; Liu~\cite{Liu} at $L=17/16$ (block-Schur bounded comparison, $Q\ge2^{-49162}$); Mori~\cite{Mori} at $L=\tfrac12\log15$; Senke~\cite{Senke} at $L=77/64$; Elder~\cite{Elder} at $L=0.8$; and Elston~\cite{Elston}, whose certified lowest-eigenvalue lower bounds at $L=1.19$, $1.3$ and $1.495$ (e.g.\ $\lambda\ge3.501\e{-96}$ at $L=1.495$) use the certifier we build on in Piece~III. On rStation, lihongmin~\cite[Thm.~1.1]{rh45} certifies strict positivity of both parity sectors for every support radius $0<a\le\tfrac12\log11$, and bramble\_trace~\cite[Thm.~1.1]{rh60} for every $0<a\le2$, both by block Schur elimination with the complete archimedean response. Their form~\cite[(2.1)]{rh45}, \cite[(2.1)]{rh60} coincides term by term with~\eqref{eq:weil}, with $a=L$. Neither paper identifies the ground state or compares the two sectors (\cite[\S1]{rh45}: ``our lower certificate neither identifies the ground state nor estimates the sharp minimum''), and \cite{rh60} gives no explicit eigenvalue lower bound.
+\item \emph{Positivity and per-sector lower bounds} (no simplicity or parity statement): jose-paul-b~\cite{JPB} for $L\le\tfrac12\log7$; Liu~\cite{Liu} at $L=17/16$ (block-Schur bounded comparison, $Q\ge2^{-49162}$); Mori~\cite{Mori} at $L=\tfrac12\log15$; Senke~\cite{Senke} at $L=77/64$; Elder~\cite{Elder} at $L=0.8$; and Elston~\cite{Elston}, whose certified lowest-eigenvalue lower bounds at $L=1.19$, $1.3$ and $1.495$ (e.g.\ $\lambda\ge3.501\e{-96}$ at $L=1.495$) use the certifier we build on in Piece~III. On rStation, lihongmin~\cite[Thm.~1.1]{rh45} certifies strict positivity of both parity sectors for every support radius $0<a\le\tfrac12\log11$, and bramble\_trace~\cite[Thm.~1.1]{rh60} for every $0<a\le2$, both by block Schur elimination with the complete archimedean response. Their form~\cite[(2.1)]{rh45}, \cite[(2.1)]{rh60} coincides term by term with~\eqref{eq:weil}, with $a=L$. Neither paper identifies the ground state or compares the two sectors (\cite[\S1]{rh45}: ``our lower certificate neither identifies the ground state nor estimates the sharp minimum''), and \cite{rh60} gives no explicit eigenvalue lower bound. Piece~IV of this paper (\S\ref{sec:piece4}) is built on the method of~\cite{rh60}, with the Green-response identity of~\cite{rh45}; our clean-room implementation independently re-checks their positivity statements in the odd sector at each of our $53$ grid windows in $(1.4035,2]$ (every odd certificate has $\mu>0$) and in both sectors at $a=2$ (a pilot run with $\mu=0$), hence by Lemma~\ref{lem:mono} on $(0,2]$, non-strictly in the even sector. An unreviewed forum follow-up to~\cite{rh60} reports values that order the two parity sectors at the single window $a=2$.
 \item \emph{Upper bounds for large $L$.} Without hypotheses on the zeros, Mori~\cite[Thm.~K(a)]{MoriV} proves $\lambda_{\min}\le3.50\times10^{24}\mu^{9/2}\log\mu\,e^{-4\pi\mu}$ for $50\le\mu=e^{2L}\le10^4$, in his normalisation, and bramble\_trace~\cite[Thm.~2.1]{rh25} proves $\lambda_1^\ev(L)\le10^{16}\exp(11L-2\pi e^{2L})$ for $L\ge1$ in the same form as ours. Under RH, span\_of\_dilates~\cite[Thm.~1]{rh81} proves $-\ln\lambda^*(L)\ge4\pi e^{2L}-O(L^2)$ in both sectors, in Zhu's normalisation. The decay scale $e^{-4\pi e^{2L}}$ also appears in Connes's prolate heuristic~\cite{Connes26} and in the model and conjecture of~\cite[Prop.~4.1, Conj.~4.2(a)]{rh80} (stated there for real odd characters).
 \item \emph{Finite matrices.} Andrade~\cite{Andrade2} and Andrews Jr.~\cite{AndrewsJr} certify simple-even for finite Galerkin matrices $QW^N$; these are not statements about the continuum form.
 \item \emph{Classical ancestor.} Yoshida~\cite{Yoshida} combined finitely many pivots with a rigorous high-frequency complement lemma.
@@ -99,12 +108,13 @@ We list what we know to have been proved or claimed; status labels follow the so
 
 \subsection{Contributions}
 \begin{enumerate}
-\item A computer-assisted proof that the ground state of $Q_L$ is simple and even for every $L\in(0,\Lmax]$ (Theorem~\ref{thm:main}). The part we believe to be new is $(0.8,\Lmax]$ (literature search including rStation, 31 October 2026): there, that the ground state is simple and even, and the certified lower bounds for $\lambda_2^\ev$ that prove it. Positivity on this range is not new~\cite{rh45,rh60}. The piece $(0,1.19]$ was released earlier as an unrefereed note~\cite{Botha}; this paper reproduces its mathematical content.
-\item A rank-one deflation added to Elston's certifier (Lemma~\ref{lem:deflation}, Corollary~\ref{cor:lambda2}), which turns a certified lowest-eigenvalue bound into a certified \emph{second} even eigenvalue bound at no extra assembly cost. The rStation screen of 31 October 2026 found no bound on $\lambda_2^\ev$; \cite{rh60} proves positivity of both sectors up to $a=2$ without explicit eigenvalue lower bounds.
+\item A computer-assisted proof that the ground state of $Q_L$ is simple and even for every $L\in(0,\Lmax]$ (Theorem~\ref{thm:main}). The part we believe to be new is $(0.8,\Lmax]$ (literature search including rStation, 31 October 2026): there, that the ground state is simple and even, and the certified lower bounds for $\lambda_2^\ev$ that prove it. Positivity on this range is not new~\cite{rh45,rh60}. The piece $(0,1.19]$ was released earlier as an unrefereed note~\cite{Botha} and $(1.19,1.4035]$ in release~1.1 of this paper~\cite{Botha11}; this version reproduces their mathematical content and adds $[1.4035,2]$.
+\item A rank-one deflation (Lemma~\ref{lem:deflation}), which turns a certified lowest-eigenvalue bound into a certified \emph{second} even eigenvalue bound: added to Elston's certifier in Piece~III (Corollary~\ref{cor:lambda2}) at no extra assembly cost, and lifted to the operator in Piece~IV, where it raises the displacement rank of the core Schur complement from $2$ to $4$. The rStation screen of 31 October 2026 found no bound on $\lambda_2^\ev$; \cite{rh60} proves positivity of both sectors up to $a=2$ without explicit eigenvalue lower bounds.
+\item A clean-room, general-$L$ re-derivation and re-implementation of the full-source Schur certificate of~\cite{rh60} as a \emph{value} certificate $\lambda_k^\sigma(L)\ge\mu$, with an exact-integer structured $LDL^{\Tp}$ factorisation (Lemma~\ref{lem:SR}) in place of a floating-point one, independent per-run gates, and a pre-registered grid whose one failure and post-hoc repair are reported in full (\S\ref{sec:piece4}).
 \item Rigorous upper bounds for the lowest even and odd eigenvalues up to $L=2.25$ from a fast Legendre convolution recurrence with a rigorous Gauss--Legendre bound (\S\ref{sec:upper}). We claim only explicit rigorous values at $L=2.25$, the sharpest we know of there; analytic upper bounds with double-exponential decay are due to Mori~\cite[Thm.~K]{MoriV} and bramble\_trace~\cite[Thm.~2.1]{rh25} (unconditional) and to span\_of\_dilates~\cite[Thm.~1]{rh81} (under RH). No value is claimed to be close to the eigenvalue.
 \item Numerical measurements of the weak singular points of the computed minimisers at $|y|=|L-\log n|$ reported by Eberwein~\cite[\S13]{Eberwein} (\S\ref{sec:kinks}); their location is not new.
 \end{enumerate}
-\emph{Not claimed as new:} the range $(0,0.8]$~\cite{KB} and in particular $(0,0.1406]$~\cite{PL}; the window $L=0.8$ by itself [Zhu, Thm.~6.2]; positivity on this range, and on $(0,2]$~\cite{rh45,rh60}; the $4\pi e^{2L}$ decay scale of the lowest eigenvalue~\cite{Connes26,MoriV,rh80,rh81}; certified upper bounds on the lowest eigenvalue for $L\in[0.5,2]$ [Zhu, Table~3]; the frequency-cutoff reduction and block estimate [Zhu, Thm.~1.1]; the window-compressed prime-norm reduction and its implementation~\cite{Elston}; the Legendre convolution recurrence~\cite{HaleTownsend}, already used for this problem by Liu~\cite{Liu}.
+\emph{Not claimed as new:} the range $(0,0.8]$~\cite{KB} and in particular $(0,0.1406]$~\cite{PL}; the window $L=0.8$ by itself [Zhu, Thm.~6.2]; positivity on $(0,2]$~\cite{rh45,rh60}; the ordering of the two sectors at the single window $L=2$ (forum follow-up to~\cite{rh60}); the full-source Schur architecture, the Green-response identity and the trigonometric bases of Piece~IV~\cite{rh45,rh60}; the $4\pi e^{2L}$ decay scale of the lowest eigenvalue~\cite{Connes26,MoriV,rh80,rh81}; certified upper bounds on the lowest eigenvalue for $L\in[0.5,2]$ [Zhu, Table~3]; the frequency-cutoff reduction and block estimate [Zhu, Thm.~1.1]; the window-compressed prime-norm reduction and its implementation~\cite{Elston}; the Legendre convolution recurrence~\cite{HaleTownsend}, already used for this problem by Liu~\cite{Liu}.
 
 % =====================================================================
 \section{Setup and normalisation}\label{sec:setup}
@@ -189,15 +199,16 @@ For every $L\in(0,\Lmax]$ the lowest eigenvalue of the operator $A_L$ associated
 \begin{enumerate}
 \item on $(0,0.05]$: $\lambda_2^\ev-\lambda_1^\ev\ge0.4172$ and $\lambda_1^\od-\lambda_1^\ev\ge0.6624$;
 \item on each of the $30$ grid steps $[L_i,L_{i+1}]\subset[0.05,1.19]$ of Table~\ref{tab:piece2}: step ratio $\ge1.288$;
-\item on each of the $8$ grid steps $[L_i,L_{i+1}]\subset[1.19,\Lmax]$ of Table~\ref{tab:piece3}: step ratio $\ge1.131$.
+\item on each of the $8$ grid steps $[L_i,L_{i+1}]\subset[1.19,1.4035]$ of Table~\ref{tab:piece3}: step ratio $\ge1.131$;
+\item on each of the $53$ grid steps $[L_i,L_{i+1}]\subset[1.4035,2]$ of Table~\ref{tab:piece4}: step ratio $\ge\PIVminratio$.
 \end{enumerate}
 \end{theorem}
 
-\begin{remark}[Status of release 1.1.0]\label{rem:status}
-Items (1) and (2) are the certificate of record of~\cite{Botha}, re-checked by the gluing script (\S\ref{sec:repro}). Item~(3) rests on the $16$ lower-bound certificates and $8$ upper bounds of Table~\ref{tab:piece3}, all complete. The goal of this work is $L\in(0,1.5]$: the extension to $1.5$ is in progress, with the even sector at $1.4255$ and both sectors at $1.468$, $1.4885$ and $1.5$ still running. The later step $[1.4255,1.447]$ already passes (Table~\ref{tab:piece3}), but it is not part of the theorem, because the step $[1.4035,1.4255]$ before it is not yet complete. At the single window $L=1.19$ the Piece~III machinery also confirms simple-even with a second, independent code path (\S\ref{sec:results3}). Piece~III beyond $L=1.19$ has not been audited (\S\ref{sec:limitations}).
+\begin{remark}[Status of release 2.0.0]\label{rem:status}
+Items (1) and (2) are the certificate of record of~\cite{Botha}, re-checked by the gluing script (\S\ref{sec:repro}). Item~(3) rests on the $16$ lower-bound certificates and $8$ upper bounds of Table~\ref{tab:piece3} (release~1.1). Item~(4) rests on the $106$ lower-bound certificates and $53$ upper bounds of Table~\ref{tab:piece4}. \textbf{Item~(4) depends on a post-hoc rule.} The pre-registered grid of Piece~IV failed as registered at one window; the gap was closed by rule~E, which was registered after that failure (\S\ref{sec:piece4fail}). Without rule~E, the registered partial outcome of the grid, and hence the theorem, covers $(0,1.91912841796875]$. Piece~III continues past $1.4035$: its four further steps up to $1.4885$ also pass (Table~\ref{tab:piece3}, below the rule; smallest ratio $\PIIIextmin$), so $[1.4035,1.4885]$ is covered by two independent routes; this is not needed for the theorem. At the single window $L=1.19$ the Piece~III machinery also confirms simple-even with a second, independent code path (\S\ref{sec:results3}). Piece~III beyond $L=1.19$ and Piece~IV have been reviewed only by AI agents (\S\ref{sec:audits}, \S\ref{sec:limitations}).
 \end{remark}
 
-The numbers in (1)--(3) are outward-rounded lower ends. The proof is computer-assisted and uses Arb ball arithmetic~\cite{Johansson,FLINT}; it is given in \S\ref{sec:proof}.
+The numbers in (1)--(4) are outward-rounded lower ends. The proof is computer-assisted and uses Arb ball arithmetic~\cite{Johansson,FLINT} and exact integer arithmetic; it is given in \S\ref{sec:proof} and, for item~(4), in \S\ref{sec:piece4}.
 
 % =====================================================================
 \section{Proof}\label{sec:proof}
@@ -334,7 +345,7 @@ For each of the $30$ steps the criterion~\eqref{eq:step} holds (Table~\ref{tab:p
 (a) The gluing script compares balls with Python's built-in \texttt{min}, which is not a rigorous minimum when balls overlap; here the two lower bounds are disjoint at every window (relative separation $\ge1.021$, radii $<5\e{-20}$), and the step ratios in Table~\ref{tab:piece2} were recomputed with explicit endpoint comparisons. (b) Each window is certified at the dyadic number $\tilde L_i\ge L_i$ with $\tilde L_i<L_i+2^{-p}$, $p\ge768$, for all four bounds of the window; the covering is then $(0,\tilde L_1]\cup\bigcup_i[\tilde L_i,\tilde L_{i+1}]\supset(0,1.19]$.
 \end{remark}
 
-\subsection{Piece III: the grid on $(1.19,\Lmax]$}\label{sec:piece3}
+\subsection{Piece III: the grid on $(1.19,1.4035]$}\label{sec:piece3}
 Beyond $L\approx1.2$ the route of \S\ref{sec:piece2cert} is impractical: the cutoff $\Tsh\gtrsim2\pi e^{A_L^{\sup}}$ forced by the pointwise bound~\eqref{eq:beta} is about $2\cdot10^5$ at $L=1.3$ and $5\cdot10^6$ at $L=1.5$, and Zhu [Lemma 3.2] shows that $A_L^{\sup}$ is optimal for any pointwise bound. Elston~\cite{Elston} replaces the pointwise bound by an operator bound for the prime comb on a slightly widened window. We state his reduction as a cited proposition; we use his code unchanged except for the deflation option described below.
 
 \emph{Notation.} Let $a=L$ be the window, $\delta>0$, $b=a+\delta$, $\beta_K>0$, and $\Tsh>\beta_K/\delta$ with $\Omega:=\Tsh-\beta_K/\delta$ and $\Omega\delta\ge1$. Let $W(u)=I_0(\beta_K\sqrt{1-u^2/\delta^2})/I_0(\beta_K)$ on $[-\delta,\delta]$ (Kaiser window, $0$ outside), $\kappa(u)=\frac{\sin\Omega u}{\pi u}W(u)$ and $m=1-\hat\kappa$. Let $H(t)=\re\psi(\tfrac14+\tfrac{it}2)-\log\pi$, $P(t)=\sum_{\log n<2a}\frac{2\Lambda(n)}{\sqrt n}\cos(t\log n)$, so $\Psi_a=H-P$, and $A=\sum_{\log n<2a}2\Lambda(n)/\sqrt n$. Let $C_b=\sum_{\log n<2a}\Lambda(n)n^{-1/2}(\tau_{\log n}+\tau_{-\log n})$, compressed to $L^2(-b,b)$, where $\tau_s$ is translation by~$s$.
@@ -390,11 +401,14 @@ By Lemma~\ref{lem:deflation}, $\lambda_2(A_N)\ge\lambda_1(A_N+ww^T)$. Lemma~\ref
 1.19,\ 1.2205,\ 1.25,\ 1.2785,\ 1.3055,\ 1.3315,\ 1.3565,\\
 1.3805,\ 1.4035,\ 1.4255,\ 1.447,\ 1.468,\ 1.4885,\ 1.5 .
 \end{gather*}
-It was chosen from non-rigorous Galerkin estimates so that $0.95\min(\lambda_2^\ev,\lambda_1^\od)(L_{i+1})\ge1.25\cdot1.03\cdot\lambda_1^\ev(L_i)$. In this release the windows $1.2205,\dots,\Lmax$ are complete in both sectors, as are the odd sector at $1.4255$ and both sectors at $1.447$; the other runs are in progress. The parameters actually used are in Table~\ref{tab:grid3} and in the field \texttt{args} of every certificate file. They follow a design rule (\file{code/gap/params.py}) that plays no role in the proof: $\Omega=\Tsh-\beta_K/\delta$ is interpolated log-linearly from Elston's runs at $L=1.19,1.3,1.495$ and inflated by $3\%$; $N\approx0.8L(\Omega+64/\delta)+20$; the number of Gauss points per panel is raised so that the quadrature debit is at most $10^{-3}$ times the target eigenvalue (computed in the certifier's plan mode); and $\beta_K$ is the smallest value for which $N$ times the side-lobe entry radius stays below $10^{-6}$ times the target eigenvalue. The last rule was added after a first pass with $\beta_K=64$ at every window gave a negative odd bound at $1.2785$; the runs from that pass that gave useful bounds ($1.2205$, $1.25$, and the even sector at $1.2785$) are kept. Grid values are passed to the certifier as decimal strings, converted to Arb balls that contain the exact decimal; the Schur window $b$ is rounded up, which is admissible because the supremum in (H1) is monotone in~$b$.
+It was chosen from non-rigorous Galerkin estimates so that $0.95\min(\lambda_2^\ev,\lambda_1^\od)(L_{i+1})\ge1.25\cdot1.03\cdot\lambda_1^\ev(L_i)$. The windows $1.2205,\dots,1.4885$ are complete in both sectors; the runs at $1.5$ were not complete when this version was prepared and are not used. Only the windows up to $1.4035$ enter the theorem; $[1.4035,2]$ is Piece~IV. The parameters actually used are in Table~\ref{tab:grid3} and in the field \texttt{args} of every certificate file. They follow a design rule (\file{code/gap/params.py}) that plays no role in the proof: $\Omega=\Tsh-\beta_K/\delta$ is interpolated log-linearly from Elston's runs at $L=1.19,1.3,1.495$ and inflated by $3\%$; $N\approx0.8L(\Omega+64/\delta)+20$; the number of Gauss points per panel is raised so that the quadrature debit is at most $10^{-3}$ times the target eigenvalue (computed in the certifier's plan mode); and $\beta_K$ is the smallest value for which $N$ times the side-lobe entry radius stays below $10^{-6}$ times the target eigenvalue. The last rule was added after a first pass with $\beta_K=64$ at every window gave a negative odd bound at $1.2785$; the runs from that pass that gave useful bounds ($1.2205$, $1.25$, and the even sector at $1.2785$) are kept. Grid values are passed to the certifier as decimal strings, converted to Arb balls that contain the exact decimal; the Schur window $b$ is rounded up, which is admissible because the supremum in (H1) is monotone in~$b$.
 
-\emph{Conclusion of Piece III.} Each of the $8$ steps from $1.19$ to $\Lmax$ satisfies~\eqref{eq:step} (Table~\ref{tab:piece3}); the smallest ratio is $1.131$, on $[1.2205,1.25]$, and the odd sector binds at every window. By Corollary~\ref{cor:step} this proves item~(3) of Theorem~\ref{thm:main}. \qed
+\emph{Conclusion of Piece III.} Each of the $8$ steps from $1.19$ to $1.4035$ satisfies~\eqref{eq:step} (Table~\ref{tab:piece3}); the smallest ratio is $1.131$, on $[1.2205,1.25]$, and the odd sector binds at every window. By Corollary~\ref{cor:step} this proves item~(3) of Theorem~\ref{thm:main}. \qed
 
-The step $[1.4255,1.447]$ also satisfies~\eqref{eq:step} (ratio $\ge1.379$), so the ground state is simple and even on that interval too. We report it as a data point and not as part of Theorem~\ref{thm:main}, since $[1.4035,1.4255]$ is not yet covered. Nothing is claimed for $L\in(\Lmax,1.4255)$ or $L>1.447$.
+The four further steps $[1.4035,1.4255]$, $[1.4255,1.447]$, $[1.447,1.468]$ and $[1.468,1.4885]$ also satisfy~\eqref{eq:step} (Table~\ref{tab:piece3}, below the rule; smallest ratio $\PIIIextmin$, on $[1.468,1.4885]$), so Piece~III alone gives a simple, even ground state on $[1.19,1.4885]$. Piece~IV covers $[1.4035,2]$ by a different method, so these steps are not needed for Theorem~\ref{thm:main}; they serve as the independent cross-check of \S\ref{sec:piece4xcheck}.
+
+\subsection{Piece IV: the grid on $[1.4035,2]$}\label{sec:piece4proof}
+Item~(4) of Theorem~\ref{thm:main} is proved in \S\ref{sec:piece4} (Corollary~\ref{cor:step} applied to the $53$ steps of Table~\ref{tab:piece4}). Since the four pieces share their endpoints $0.05$, $1.19$ and $1.4035$, they cover $(0,\Lmax]$. \qed
 
 % =====================================================================
 \section{Results}\label{sec:results}
@@ -459,7 +473,7 @@ reproducing Elston's published $6.8131164696007\e{-48}$ (even, $12$ digits) and 
 
 \begin{table}[ht]
 \centering\footnotesize
-\caption{Piece III windows and certifier parameters, from the field \texttt{args} of each certificate file. Common to all runs: panel width $1/4$, Schur test on $4000$ cells with $1500$ weight iterations. ``GL'' is the number of Gauss--Legendre points per panel, ``bits'' the working precision, ``time'' the wall-clock seconds (field \texttt{seconds}) of the $\lambda_2^\ev$ (deflated) and $\lambda_1^\od$ runs, with $15$--$52$ worker processes. At $1.2785$ the two sectors used different parameters. New prime powers relative to the previous row are listed. Runs not listed are in progress.}\label{tab:grid3}
+\caption{Piece III windows and certifier parameters, from the field \texttt{args} of each certificate file. Common to all runs: panel width $1/4$, Schur test on $4000$ cells with $1500$ weight iterations. ``GL'' is the number of Gauss--Legendre points per panel, ``bits'' the working precision, ``time'' the wall-clock seconds (field \texttt{seconds}) of the $\lambda_2^\ev$ (deflated) and $\lambda_1^\od$ runs, with $11$--$52$ worker processes. At $1.2785$ the two sectors used different parameters. New prime powers relative to the previous row are listed. The rows below the rule (windows past $1.4035$, not used in the proof) are generated from the certificate files by \texttt{paper/gen\_tables.py}.}\label{tab:grid3}
 \begin{tabular}{lllrrrrrl}
 \toprule
 $L_i$ & $\delta$ & $\beta_K$ & $\Tsh$ & $N$ & GL & bits & time (s), $\lambda_2^\ev$ / $\lambda_1^\od$ & new $n$\\
@@ -475,15 +489,14 @@ $L_i$ & $\delta$ & $\beta_K$ & $\Tsh$ & $N$ & GL & bits & time (s), $\lambda_2^\
 1.3805 & 0.2 & 93 & 1890 & 1943 & 78 & 600 & 11639 / 7998 & \\
 1.4035 & 0.2 & 98 & 2070 & 2143 & 81 & 600 & 14363 / 9784 & 16\\
 \midrule
-1.4255 & 0.2 & 102 & 2240 & 2356 & 85 & 600 & running / 13217 & 17\\
-1.447 & 0.2 & 107 & 2440 & 2587 & 89 & 600 & 24322 / 20970 & \\
+\PIIIgridrows
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[ht]
 \centering\footnotesize
-\caption{Piece III certificate. $U(L_i)\ge\lambda_1^\ev(L_i)$ is the $K=640$ Galerkin bound; $\ell^\od$ and $\ell_2$ are certified lower bounds for $\lambda_1^\od$ and $\lambda_2^\ev$; the step ratio in row $L_{i+1}$ is $\min(\ell_2,\ell^\od)(L_{i+1})/U(L_i)$. Lower bounds are rounded down and upper bounds up, to four significant digits, and ratios are floored. The lower bounds in row $1.19$ are the test of \S\ref{sec:results3} and enter no step. Below the rule: additional certified data points beyond $\Lmax$, not part of Theorem~\ref{thm:main} (the $\lambda_2^\ev$ run at $1.4255$ is in progress).}\label{tab:piece3}
+\caption{Piece III certificate. $U(L_i)\ge\lambda_1^\ev(L_i)$ is the $K=640$ Galerkin bound; $\ell^\od$ and $\ell_2$ are certified lower bounds for $\lambda_1^\od$ and $\lambda_2^\ev$; the step ratio in row $L_{i+1}$ is $\min(\ell_2,\ell^\od)(L_{i+1})/U(L_i)$. Lower bounds are rounded down and upper bounds up, to four significant digits, and ratios are floored. The lower bounds in row $1.19$ are the test of \S\ref{sec:results3} and enter no step. Below the rule: the further steps of Piece~III past $1.4035$, generated from the certificate files by \texttt{paper/gen\_tables.py}; they are also covered by Piece~IV and are not used in the proof of Theorem~\ref{thm:main}.}\label{tab:piece3}
 \begin{tabular}{llllll}
 \toprule
 $L_i$ & $U(L_i)$ & $\lambda_1^\od\ge$ & $\lambda_2^\ev\ge$ & step ratio $\ge$\\
@@ -498,16 +511,181 @@ $L_i$ & $U(L_i)$ & $\lambda_1^\od\ge$ & $\lambda_2^\ev\ge$ & step ratio $\ge$\\
 1.3805 & 2.251e-74 & 3.032e-70 & 2.247e-66 & 1.546\\
 1.4035 & 2.493e-78 & 3.492e-74 & 2.991e-70 & 1.552\\
 \midrule
-1.4255 & 2.371e-82 & 3.564e-78 & (running) & ---\\
-1.447 & 2.107e-86 & 3.269e-82 & 3.420e-78 & 1.379\\
+\PIIIrows
 \bottomrule
 \end{tabular}
 \end{table}
 
 % =====================================================================
+\section{Piece IV: the Schur-certificate route on $[1.4035,2]$}\label{sec:piece4}
+
+\begin{remark}[Disclosure: registered failure and post-hoc repair]\label{rem:piece4disclosure}
+The grid of this piece was pre-registered with a hash stamp before any grid computation. \textbf{As registered, it failed} at one window ($L=1.92364501953125$, no certified $\lambda_2^\ev$ bound at the planned cut~$N$). The registered partial outcome covers $[1.4035,1.91912841796875]$. The gap was closed by \emph{rule~E} ($N\to N+1024$), which was written and registered \emph{after} that failure and after a diagnostic run had passed at the new $N$; the scored run under rule~E passed. Theorem~\ref{thm:main}, item~(4), on $[1.91912841796875,2]$ rests on this post-hoc rule. Details are in \S\ref{sec:piece4fail}.
+\end{remark}
+
+\subsection{Origin of the method, credit and clean-room protocol}\label{sec:piece4credit}
+The method of this piece is bramble\_trace's~\cite{rh60}: summed digamma responses, a full matrix of displacement rank~$2$ in a trigonometric basis, exact elimination of a finite core through rational functions, a moment and Abel-summation bound for the far block, and a Hilbert--Schmidt bound for the omitted tail. The Green-response identity, the trigonometric bases and the closed-form comparison are lihongmin's~\cite{rh45}. Both are AI-agent preprints on rStation, accepted only by AI reviewer agents and not refereed. They prove positivity of both parity sectors, \cite{rh60} for every support radius $0<a\le2$ and~\cite{rh45} for $0<a\le\tfrac12\log11$, without eigenvalue lower bounds and without a statement on the ground state (\S\ref{sec:prior}). Our clean-room code independently re-checks these positivity statements at our windows (\S\ref{sec:prior}).
+
+\emph{Clean-room protocol.} (i) A specification and a proof document were written from the manuscript text of~\cite{rh45,rh60} only; no supplement code of either paper was opened (the code licence of~\cite{rh60} allows execution and inspection for verification only, and~\cite{rh45} reserves all rights). (ii) The implementer worked from these two documents and our own code only, and opened no rStation file. (iii) No rStation code was copied, adapted or vendored; an independent audit searched our code for the manuscripts' code identifiers and characteristic constants and found none. (iv) Every step was re-derived from first principles in the proof document (not part of this release; its hash is recorded in the stamps, and it is available on request), including steps that~\cite{rh60} spot-checks only. The shipped code of this piece is ours, apart from Elston's MIT-licensed integer Cholesky and weighted Schur-test routines~\cite{Elston}, which Piece~III already uses.
+
+\emph{Our additions.} (a) All formulas at general~$L$ (\cite{rh60} works at $a=2$). (b) A spectral shift~$\mu$, which turns the positivity certificate into a \emph{value} certificate $\lambda_k^\sigma(L)\ge\mu$. (c) The rank-one deflation of Lemma~\ref{lem:deflation}, lifted to the operator; it adds a second generator pair and raises the displacement rank of the core Schur complement from $2$ to $4$. (d) Lemma~\ref{lem:SR}, an exact-integer structured $LDL^{\Tp}$ factorisation with an explicit residual bound, in place of the floating-point factorisation and rounding lemma of~\cite{rh60}. (e) A form-core argument in place of the $H^s$-cutoff density argument, and a proof of the far-block diagonal correction by virtual labels. (f) Independent per-run gates, among them G0i and C-ind (\S\ref{sec:piece4gates}). (g) Pre-registration, rule~E, and the gluing with Pieces I--III.
+
+\subsection{The form in a trigonometric basis}\label{sec:piece4form}
+Fix $L$ and a sector $\varepsilon=+1$ (even) or $-1$ (odd), and put $\omega=0$ or $\tfrac12$, $k_q=q+\omega$, $\kappa_q=\pi k_q/L$ and the labels $\lambda_q=k_q^2$ ($q\ge0$). On $(0,L)$ let $\tilde e_q=(-1)^q\sqrt{2/L}\,\gamma_q\cos(\kappa_qx)$ (even; $\gamma_0=2^{-1/2}$, $\gamma_q=1$ for $q\ge1$) or $\tilde e_q=(-1)^q\sqrt{2/L}\sin(\kappa_qx)$ (odd), and let $\mathcal U_\varepsilon v(x)=v(|x|)/\sqrt2$ for $x>0$ and $\varepsilon v(|x|)/\sqrt2$ for $x<0$, a unitary map onto the sector. Put $H(t)=\re\psi(\tfrac14+\tfrac{it}2)-\log\pi$ and $c_j=2j+\tfrac12$.
+
+\begin{proposition}[Green expansion; cf.~{\cite[Lemma~3.1]{rh45}}]\label{prop:green}
+For $f=\mathcal U_\varepsilon v\in C_c^\infty(-L,L)$ of parity $\varepsilon$ and $x_q=\langle v,\tilde e_q\rangle$,
+\[
+Q_L(f)=\sum_{q\ge0}H(\kappa_q)x_q^2-\langle C_Lf,f\rangle+\sum_{j\ge0}\langle r_j,v\rangle^2+\varepsilon\langle p_\varepsilon,v\rangle^2,
+\]
+where $C_L=\sum_{\log n<2L}\Lambda(n)n^{-1/2}(\tau_{\log n}+\tau_{-\log n})$ compressed to $L^2(-L,L)$, $\tau_s$ is translation by~$s$, $r_j(x)=e^{-c_jL}(e^{c_jx}+\varepsilon e^{-c_jx})/\sqrt{1-\varepsilon e^{-2c_jL}}$ and $p_\varepsilon(x)=e^{x/2}+\varepsilon e^{-x/2}$.
+\end{proposition}
+\begin{proof}[Sketch]
+From $\psi(w)=-\gamma+\sum_n(\frac1{n+1}-\frac1{n+w})$, $H(t)-H(0)=\sum_j[2/c_j-2c_j/(c_j^2+t^2)]$, and $2c/(c^2+t^2)$ is the Fourier transform of $e^{-c|x|}$. The resolvent $R_c=(-\partial^2+c^2)^{-1}$ on $(0,L)$ with $v'(L)=0$ and $v'(0)=0$ (even) or $v(0)=0$ (odd) has eigenbasis $\tilde e_q$ with eigenvalues $(c^2+\kappa_q^2)^{-1}$, and its kernel satisfies $2cR_c-E_c=r_c\otimes r_c$ with $E_c(x,y)=e^{-c|x-y|}+\varepsilon e^{-c(x+y)}$ (direct computation with the Green function). Summing over $j$ (Tonelli) gives the archimedean part; the prime and pole terms are those of~\eqref{eq:weil}.
+\end{proof}
+
+The matrix $A=(A_{qr})$ of $Q_L$ in the basis $\mathcal U_\varepsilon\tilde e_q$ has displacement rank~$2$: with $D_\lambda=\operatorname{diag}(\lambda_q)$, $D_\lambda A-AD_\lambda=uv^{\Tp}-vu^{\Tp}$, where $v_q=\gamma_q$, $u_q=\gamma_q(2L/\pi^2)\Phi_\varepsilon(\kappa_q)$,
+\[
+\Phi_\varepsilon(x)=x\sum_{\log n<2L}\frac{\Lambda(n)}{\sqrt n}\sin(x\log n)+G(x)-\varepsilon x^2\sum_{j\ge0}\frac{e^{-2c_jL}}{c_j^2+x^2}-\frac{\alpha_\varepsilon}{\tfrac14+x^2},
+\]
+$G(x)=\tfrac x2\operatorname{Im}\psi(\tfrac14+\tfrac{ix}2)$, $\alpha_+=\sinh^2\tfrac L2$ and $\alpha_-=-\cosh^2\tfrac L2$. The diagonal $A_{qq}$ has an exact closed form in $\psi$, $\psi'$ and finite prime sums. All entries are evaluated in Arb from these closed forms, with an explicit ball for the truncation of the sums over~$j$; no quadrature enters. The closed forms are checked against the position-side formula~\eqref{eq:P} at every window (gates G0, G0-mini and G0i below).
+
+\subsection{The value certificate}\label{sec:piece4cert}
+Split the indices into a core $[0,K)$, an intermediate block $I_P=[K,N)$, a finite far block $[N,M)$ and the tail $q\ge M$. Fix an exact dyadic $\mu\ge0$; in the even sector also a deflation weight $\vartheta\ge0$ and a dyadic $\phi\in\mathbb Q^K$ (a rounded approximate lowest eigenvector of the core), and put $\Phi=\mathcal U_\varepsilon\sum_{q<K}\phi_q\tilde e_q$; in the odd sector $\vartheta=0$.
+
+\begin{theorem}[Value certificate; general-$L$, shifted and deflated form of~{\cite[(9.1)--(9.2)]{rh60}}]\label{thm:V}
+Assume:
+\begin{enumerate}
+\item[(V1)] $s\ge\sup\{\langle C_bh,h\rangle/\|h\|^2:0\ne h\in L^2(-b,b)\}$ for a dyadic $b\ge L$, with $C_b$ as in Proposition~\ref{prop:elston};
+\item[(V2)] $\mathsf M:=A_{\mathrm{core}}-\mu I+\vartheta\phi\phi^{\Tp}\succ0$;
+\item[(V3)] $t'_N>0$, where the dyadic numbers $t'_q$ satisfy $t'_N\le t'_q\le H(\kappa_q)-\mu-s-\tau_N$ for $q\ge N$, and $\tau_N$ bounds the far block of the core Schur complement (plus, in the odd sector, the far part of the pole term);
+\item[(V4)] Lemma~\ref{lem:SR} applied to $S_{\mathrm{input}}-\delta_0I$ completes with positive pivots;
+\item[(V5)] $\delta_0-\varepsilon_E-\varepsilon_{\mathrm{asm}}-r_M>0$.
+\end{enumerate}
+Here $S_{\mathrm{input}}$ is a dyadic rounding of the Schur complement $S_M$ on $I_P$ that remains after eliminating the core exactly and the finite far block against $\operatorname{diag}(t'_q)$, $\varepsilon_{\mathrm{asm}}\ge\|S_M-S_{\mathrm{input}}\|$, $\varepsilon_E$ is the residual bound of Lemma~\ref{lem:SR}, and $r_M$ bounds the omitted tail $q\ge M$. Then the closure $\bar Q_L$ of $Q_L$ satisfies the \emph{certificate inequality}
+\begin{equation}\label{eq:certV}
+\bar Q_L(f)+\vartheta\langle\Phi,f\rangle^2\ \ge\ \mu\|f\|^2\qquad\text{for every $f$ in the form domain of sector }\varepsilon.
+\end{equation}
+Consequently, if $\vartheta=0$, then $\lambda_1^\ev(L)\ge\mu$ ($\varepsilon=+1$) or $\lambda_1^\od(L)\ge\mu$ ($\varepsilon=-1$); if $\vartheta>0$, then $\lambda_2^\ev(L)\ge\mu$.
+\end{theorem}
+\begin{proof}[Outline]
+By the form-core argument (coefficients of smooth $f$ decay faster than any power of $k_q$, $A_{qr}-H(\kappa_q)\delta_{qr}$ is bounded, and $\bar Q_L$ is continuous in form norm) it suffices to prove~\eqref{eq:certV} for rapidly decreasing coefficient vectors $x=(x_c,y,z)$ (core, $I_P$, far). (1)~By (V2), completing the square in the core leaves the Schur complement $\mathcal S$ of the core; it inherits the displacement structure, $D_\lambda\mathcal S-\mathcal SD_\lambda=UV^{\Tp}-VU^{\Tp}+\vartheta(YX^{\Tp}-XY^{\Tp})$, of rank $2$, or $4$ with deflation, so its entries are explicit rational functions of $\lambda_q$ evaluated through moments of the core solves. (2)~By (V1) and Lemma~\ref{lem:M}, with moment and Abel-summation bounds for the far part of the core Schur complement, the far block satisfies $\mathcal S_{FF}\succeq\operatorname{diag}(t'_q)$, and (V3) makes this diagonal positive. (3)~A second square completion removes the far block and leaves $S_M-R_M$ on $I_P$, with $0\preceq R_M$ and $\|R_M\|\le r_M$ by a Hilbert--Schmidt bound. (4)~$S_M\succeq S_{\mathrm{input}}-\varepsilon_{\mathrm{asm}}\succeq(\delta_0-\varepsilon_E-\varepsilon_{\mathrm{asm}})I$ by Lemma~\ref{lem:SR} and (V4), so (V5) gives $S_M-R_M\succeq0$. For $\vartheta>0$, every two-dimensional subspace of the form domain contains some $f\ne0$ with $f\perp\Phi$, for which~\eqref{eq:certV} reads $\bar Q_L(f)\ge\mu\|f\|^2$; min-max gives $\lambda_2^\ev\ge\mu$, as in Lemma~\ref{lem:deflation}.
+\end{proof}
+
+(V1) is certified by Elston's weighted Schur test (the routine behind (H1) of Proposition~\ref{prop:elston}) on $L^2(-b,b)$ with $b=\lceil2^{24}L\rceil/2^{24}$; we call this \emph{stage S}. (V2) is certified as in Proposition~\ref{prop:elston}(c): an integer Cholesky proposal and an exactly computed integer residual give $\lambda_{\min}(\mathsf M)\ge m_{\mathrm{core}}>0$, and the core solves are enclosed through $\|\mathsf M^{-1}\|\le1/m_{\mathrm{core}}$. All other quantities are Arb balls or exact rationals; floating-point values (Galerkin eigenvalues, $\phi$, proposals of pivots and multipliers) only choose parameters. The certified lower bound of a run is the exact dyadic~$\mu$ itself.
+
+\begin{lemma}[Exact structured $LDL^{\Tp}$; Lemma SR]\label{lem:SR}
+Let $\lambda_1,\dots,\lambda_n$ be distinct rationals, $\mathcal J$ a skew-symmetric integer $D\times D$ matrix with $|\mathcal J|_1=\sum_{a,b}|\mathcal J_{ab}|$, $h_j\in(2^{-P}\mathbb Z)^D$ and $d_j\in2^{-P}\mathbb Z$, and let $\hat S_{jk}=h_j^{\Tp}\mathcal Jh_k/(\lambda_j-\lambda_k)$ for $j\ne k$ and $\hat S_{jj}=d_j$. For $i=1,\dots,n$, with the current $h$ and $d$: require the pivot $p_i:=d_i>0$; for $j>i$ put $\nu_j=h_j^{\Tp}\mathcal Jh_i$, choose any rational $\ell_j$, and replace $h_j$ by $\lfloor h_j-\ell_jh_i\rfloor_P$ and $d_j$ by $\lfloor d_j-p_i\ell_j^2\rfloor_P$, where $\lfloor\cdot\rfloor_P$ rounds down to $2^{-P}\mathbb Z$; record $e_i=\max_j|\nu_j-p_i\ell_j(\lambda_j-\lambda_i)|$, $\bar\ell_i=\max_j|\ell_j|$ and $G_i=\max_j\|h_j-\ell_jh_i\|_\infty$. If every pivot is positive, then $\lambda_{\min}(\hat S)\ge-\varepsilon_E$ with
+\[
+\varepsilon_E=\sum_{i=1}^n\Bigl[2^{-P}+\bigl(e_i+2\bar\ell_ie_i+|\mathcal J|_12^{-P}(2G_i+2^{-P})\bigr)H_S\Bigr],\qquad H_S\ge\max_j\sum_{k\ne j}|\lambda_j-\lambda_k|^{-1}.
+\]
+\end{lemma}
+\begin{proof}
+Let $S^{(i)}$ be the current matrix on the indices $\ge i$, $\ell^{(i)}=1_i+\sum_{j>i}\ell_j1_j$ and $E_i=S^{(i)}-p_i\ell^{(i)}\ell^{(i)\Tp}-S^{(i+1)}$ (zero-extended). Then $\hat S=\sum_ip_i\ell^{(i)}\ell^{(i)\Tp}+\sum_iE_i$ exactly, and the first sum is $\succeq0$. Using $h_i^{\Tp}\mathcal Jh_i=0$ one finds $(E_i)_{ji}=(\nu_j-p_i\ell_j(\lambda_j-\lambda_i))/(\lambda_j-\lambda_i)$, $(E_i)_{jj}\in[0,2^{-P})$, and $(E_i)_{jk}=\nu^E_{jk}/(\lambda_j-\lambda_k)$ for $j\ne k>i$ with $|\nu^E_{jk}|\le2\bar\ell_ie_i+|\mathcal J|_12^{-P}(2G_i+2^{-P})$. A symmetric matrix has spectral norm at most its largest absolute row sum, so $\|E_i\|\le2^{-P}+(e_i+2\bar\ell_ie_i+|\mathcal J|_12^{-P}(2G_i+2^{-P}))H_S$.
+\end{proof}
+In the runs the rows are $h_i=(\mathcal G_i,w_i)$ with $D=4$ ($\vartheta=0$) or $D=8$ ($\vartheta>0$), $P=96$, the multipliers are $P$-bit dyadics, and every quantity is an integer after scaling by $2^P$. The cost is $O(n^2D)$ integer operations and $O(nD)$ memory, with $n=N-K$ up to about $6\cdot10^4$; $\varepsilon_E$ is an exact rational, and gate R6 requires $\varepsilon_E\le2^{-12}$. The step test~\eqref{eq:step} then compares the certified $\mu$'s with the upper bounds $U^\ev(L_i)$ of \S\ref{sec:upper}.
+
+\subsection{Gates}\label{sec:piece4gates}
+A run counts only if every hard gate holds; a false hard gate or a crash voids the run and stops the grid. Table~\ref{tab:gates} lists the gates.
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Gates of Piece IV. Upper part: hard gates in every certifier run (all $15$ are recorded in each run file). Lower part: gates per grid.}\label{tab:gates}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.79\textwidth}}
+\toprule
+gate & content\\
+\midrule
+V2--V5 & the hypotheses of Theorem~\ref{thm:V}, decided in Arb or exact arithmetic\\
+G-S & $s(L)$ exceeds the float Ritz values of the prime comb ($1600$ modes, both parities) and stage S's own float top eigenvalue; catches gross errors in $s$ only\\
+G0-mini & closed-form entries against~\eqref{eq:P} at $4$ entries, inside the run\\
+G0i & $8$ entries of the run's sector recomputed from~\eqref{eq:P} by independent code (own prime-power list and weights, mpmath at $30$ digits), tolerance $10^{-20}$\\
+G5 & core solves (own Cholesky) and the diagonal correction at $32$ indices against a direct Arb solve; $S_{\mathrm{input}}$ entries rebuilt with the labels that Lemma~\ref{lem:SR} reads, against a direct dense evaluation\\
+G5$'$ & every generator and diagonal on $[K,M)$ by a second path (direct sums for $q<2K$, moment series beyond)\\
+C-$\tau$, C-$\bar r$, C-$J_2$, C-$r_M$ & computed partial sums and maxima do not exceed the analytic bounds that enter $\tau_N$ and $r_M$\\
+C-ind & $\tau_N$, the pole part, $r_M$ and $t_N$ recomputed by independent mpmath code from the run's core solves\\
+R6 & $P$-bit dyadic multipliers and $\varepsilon_E\le2^{-12}$\\
+\midrule
+P0 & exact rational checks of the displacement, diagonal-correction, partial-fraction and Schur-structure identities and of Lemma~\ref{lem:SR}; the C kernel of Lemma~\ref{lem:SR} equals the Python reference\\
+T15 & toolchain reproduction: two runs at $L=1.5$ reproduce earlier records in every certified field\\
+G0 & full Arb comparison of closed forms and~\eqref{eq:P}, both sectors, at every window\\
+G2 & $6$ negative controls ($\mu=1.01\,U^\sigma(L)$ at three windows, both sectors) must fail\\
+G4 & $15$ deliberate code mutations at $L=1.5$ must each be caught\\
+N2 & a pass with $\mu$ above the reference ($U^\od(L)$, or the Galerkin $\hat\lambda_2$ of the core) stops the grid\\
+F6 & the gluing accepts only passing records with the right window, sector, no mutation flag and the grid stamp\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Grid, pre-registration and step test}\label{sec:piece4grid}
+\emph{Pre-registration.} The protocol (windows, parameters, rungs, gates, success and kill criteria, a partial-outcome rule and float predictions) was frozen by a stamp holding the hashes of every document and executed code file before any grid computation; changes were allowed only as entries of an append-only, hash-chained amendment log written before any result they could affect. Every run record carries the stamp hash, the hashes of the archived code it executed, and a pin of the amendment log.
+
+\emph{Windows.} $53$ windows were registered: $L_0=1.4035$ (the end of Piece~III, where only $U^\ev$ is needed), Elston's windows $1.4255$, $1.447$, $1.468$, $1.4885$ and $1.5$ as exact decimals (for the cross-check), $L=2$, and otherwise dyadics $m/2^{14}$, placed, from float forecasts, as few as possible between the anchors subject to a forecast $\tfrac23U^\od(L_{i+1})/U^\ev(L_i)\ge2$; every window satisfies $|2L-\log n|>2^{-20}$ for all prime powers~$n$. One refinement window was added under the registered rule (\S\ref{sec:piece4fail}), giving the $54$ windows and $53$ steps of Table~\ref{tab:piece4}.
+
+\emph{Upper bounds.} $U^\ev(L_i)$ and $U^\od(L_i)$ are Rayleigh-quotient upper bounds from \S\ref{sec:upper}, with $K=640$, $768$ or $896$ modes and $3000$--$6000$ bits for the new windows, using the shipped code of \file{code/upper/}; the bounds at $1.4035$, $1.4255$, $1.447$, $1.468$, $1.4885$, $1.5$ and $2$ are earlier certified files. $U^\od$ serves only to choose~$\mu$ and for the guard N2.
+
+\emph{Certifier runs.} $K=512$; $N$ is the smallest multiple of $1024$ with $t_N\ge t_{\min}$ ($t_{\min}=1$ for $\lambda_1^\od$, $\tfrac12$ for $\lambda_2^\ev$), and $M=4N$ (or $8N$). Each window has a ladder of at most three runs per kind, stopping at the first pass: $\mu\in\{\tfrac23,\tfrac12,\tfrac13\}\cdot U^\od(L)$ for $\lambda_1^\od$, and $\mu\in\{\tfrac14\hat\lambda_2,2^{-10}\hat\lambda_2,2U^\ev(L_{i-1})\}$ for $\lambda_2^\ev$, where $\hat\lambda_2$ is the float second Galerkin eigenvalue of the core. The even lowest eigenvalue is not certified from below; only $U^\ev$ enters the step test.
+
+\emph{Step test and gluing.} The gluing script takes, per window and kind, the first passing record in sorted order, applies F6, and checks~\eqref{eq:step} in Arb, step by step, over the registered window list.
+
+\subsection{The registered failure and rule E}\label{sec:piece4fail}
+\emph{What failed.} At $L_{44}=1.92364501953125$ all three $\lambda_2^\ev$ rungs failed hypothesis (V4) only, every hard gate being true: each time Lemma~\ref{lem:SR} met a negative pivot at the last of its $37376$ labels ($N=37888$). The odd sector passed there. The registered refinement inserted $L'=31443/2^{14}=1.91912841796875$; the step $[1.91455078125,L']$ passed, but $[L',1.92364501953125]$ still had no $\lambda_2^\ev$ bound, because under the registered reuse rule the ladder at $1.92364501953125$ kept its three failed records. Only one refinement level per step was allowed, so the registered kill criterion applied: \emph{the grid is not viable as registered}. The registered partial outcome, the longest passing run of steps from $L_0$, is $[1.4035,1.91912841796875]$: $43$ steps, smallest ratio $\PIVpartmin$, later confirmed by a scored partial gluing.
+
+\emph{Diagnosis (post hoc, not scored).} The failure is a boundary effect of the cut~$N$. The last row $q=N-1$ of $I_P$ couples to the first far mode through an entry of order~$1$ that depends on $(L,N)$ but not on~$\mu$, while the far block is bounded below only by $t'_N\approx0.6$ (its true diagonal is about~$9$); the resulting loss makes $S_{\mathrm{input}}$ indefinite even as $\mu\to0$. A diagnostic run at $N+1024=38912$ passed. A failure of this kind cannot produce a false pass: replacing the far block by $\operatorname{diag}(t'_q)\preceq\mathcal S_{FF}$ only lowers $S_M$. The window $1.8958740234375$ showed the same pattern on its first rung and passed on its second rung ($2^{-10}\hat\lambda_2$, with $N=31744$).
+
+\emph{Rule E (registered post hoc).} If a window's $\lambda_2^\ev$ ladder ends without a pass and all three rungs failed at (V4) only, run one further rung $\mu=\tfrac14\hat\lambda_2$ with $t_{\min}$ raised to $t_N+2^{-10}$ of the first rung, which moves $N$ to the next multiple of $1024$. The rule changes one argument that only selects~$N$; the certifier code, every gate and every tolerance are unchanged, and all are recomputed at the new~$N$. Since $N$ is a free parameter of Theorem~\ref{thm:V}, the rule cannot weaken a certificate; it is nevertheless a choice made after seeing a failure, and it was registered with its own stamp, scored runs, negative control and fallback before the scored run. It fires only at $1.92364501953125$ ($N=37888\to38912$).
+
+\emph{Scored outcome.} The rule-E run passed with all $15$ gates true: $\lambda_2^\ev(1.92364501953125)\ge\PIVgapltwo$, against $U^\ev(L')\le\PIVgapU$ (the step $[L',1.92364501953125]$ has ratio $\PIVgapratio$ and is odd-limited). The full gluing then passed all $53$ steps. The negative control (same window and parameters, $\mu=1.01\,\hat\lambda_2$) failed as required, but at (V2), in the core, rather than at (V4) at $N=38912$ as predicted; it is therefore a weaker test of the Lemma~SR path at the new~$N$ than planned. That this path detects failures rests on the $6$ grid controls, which all failed at (V4), and on the four failed grid records, which all failed at the last label. The registered fallback (substituting a $\lambda_2^\ev$ bound from a larger window via Lemma~\ref{lem:mono}) was not used.
+
+\subsection{Results}\label{sec:piece4results}
+Table~\ref{tab:piece4} lists the certificate. All $53$ steps satisfy~\eqref{eq:step}, and the odd sector binds at every step. The smallest ratio is $\PIVminratio$, on $\PIVminstep$; on $[1.4035,1.5]$ the ratios are about $50$--$120$, because Elston's windows there, with the dyadic points between them, are spaced more closely than needed. At $L=2$, $\lambda_1^\od(2)\ge\PIVoddTwo$ and $\lambda_2^\ev(2)\ge\PIVltwoTwo$, against $\lambda_1^\ev(2)\le U^\ev(2)\le\PIVUTwo$ (ratio $\PIVtwoRatio$). By Corollary~\ref{cor:step} this proves item~(4) of Theorem~\ref{thm:main}. \qed
+
+\emph{Cost.} The registered grid ran $372$ jobs (certifier runs, upper bounds, stage S, Ritz guards, gates and controls) in $87.4$ core-hours on one $64$-vCPU virtual machine with $60$\,GB of memory ($7.5$\,h wall); the upper bounds took two thirds of it. Each certifier run is single-core; the glued runs took $\PIVsecmin$--$\PIVsecmax$\,s each (field \texttt{seconds}), with peak memory below $3.5$\,GB. The rule-E stage took $0.34$ core-hours.
+
+\begin{table}[p]
+\centering\scriptsize
+\caption{Piece IV certificate, generated from the run records by \texttt{paper/gen\_tables.py} (no number typed by hand). $U^\ev(L_i)\ge\lambda_1^\ev(L_i)$ is the smallest rigorous Galerkin upper bound (\S\ref{sec:upper}); $\ell^\od$ and $\ell_2$ are the certified lower bounds for $\lambda_1^\od$ and $\lambda_2^\ev$ (Theorem~\ref{thm:V}); the step ratio in row $i$ is $\min(\ell^\od,\ell_2)(L_i)/U^\ev(L_{i-1})$. Lower bounds are rounded down, upper bounds up and ratios down, to four significant digits. $N^\od$, $N_2$: cut of the far block in the two runs ($K=512$). Row~$0$ is the end of Piece~III; $U^\ev(2)$ enters no step. Every odd bound is on the rung $\tfrac23U^\od$ and every $\lambda_2^\ev$ bound on $\tfrac14\hat\lambda_2$, except $^\dagger$ (rung $2^{-10}\hat\lambda_2$) and $^\ddagger$ (rule~E, \S\ref{sec:piece4fail}). Row~$43$ is the refinement window $L'=31443/2^{14}$.}\label{tab:piece4}
+\begin{tabular}{rlllllrr}
+\toprule
+$i$ & $L_i$ & $U^\ev(L_i)$ & $\lambda_1^\od\ge$ & $\lambda_2^\ev\ge$ & ratio $\ge$ & $N^\od$ & $N_2$\\
+\midrule
+\PIVrows
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-check with Piece III}\label{sec:piece4xcheck}
+At the four windows that both grids share past $1.4035$, the two routes give certified lower bounds for the same eigenvalues by different reductions, matrices and factorisations (Table~\ref{tab:xcheck}). The ratios ours/Elston are $\PIVxodd$ for $\lambda_1^\od$ and $\PIVxltwo$ for $\lambda_2^\ev$. This is as designed: Elston's odd bounds lie within about $10^{-6}$ of his own Galerkin values, while ours sit on the rungs $\tfrac23U^\od$ and $\tfrac14\hat\lambda_2$, and $U^\od$ ($K=640$) is about $15\%$ above $\lambda_1^\od$ there. Elston's odd bounds lie below our rigorous $U^\od$ (checked by \texttt{paper/gen\_tables.py}). Our runs take minutes on one core, Elston's several hours with $11$--$29$ worker processes. On $[1.4035,1.4885]$ the step test passes independently in both routes (Tables~\ref{tab:piece3} and~\ref{tab:piece4}).
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Cross-check of Piece IV (``ours'') with Piece III (Elston's certifier with our deflation) at the shared windows; lower bounds rounded down, ratios floored, times in seconds (field \texttt{seconds}; ours single-core). Generated by \texttt{paper/gen\_tables.py}.}\label{tab:xcheck}
+\begin{tabular}{llllllllll}
+\toprule
+& \multicolumn{3}{c}{$\lambda_1^\od\ge$} & \multicolumn{3}{c}{$\lambda_2^\ev\ge$} & \multicolumn{2}{c}{time, odd, $\lambda_2$}\\
+$L$ & ours & Elston & ratio & ours & Elston & ratio & ours & Elston\\
+\midrule
+\PIVxrows
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Imported trust}\label{sec:piece4trust}
+Piece~IV is conditional on the following, none of which was re-verified by the audits of \S\ref{sec:audits}:
+\begin{enumerate}
+\item \emph{Stage S}, the value $s(L)$ of (V1) at every window: Elston's weighted Schur test run through our wrapper. Gate G-S catches only errors larger than the gap between $s$ and the Ritz values (about $0.004$--$0.006$); an $s$ that is too small would be invisible to every other gate.
+\item \emph{Elston's integer Cholesky and residual code}, which decides (V2) in every run; it was audited independently only at $L=1.19$~\cite{Elston}.
+\item \emph{The upper bounds} $U(L)$ of \S\ref{sec:upper} and their outward rounding.
+\item \emph{Our certifier} (Python with a C kernel for Lemma~\ref{lem:SR}) beyond its records, and the proof document; they rest on AI reviews and audits, the P0 identities and the $15$ caught mutations.
+\item \emph{Arb/FLINT} (python-flint $0.9.0$), including the complex digamma and polygamma functions, and mpmath for the independent gates.
+\item \emph{This paper}: the operator setup of \S\ref{sec:setup} (closability, compact resolvent, min-max), Lemmas~\ref{lem:M}, \ref{lem:mono} and~\ref{lem:deflation}, Corollary~\ref{cor:step}, and Proposition~\ref{prop:green}, which is checked only indirectly through G0 and G0i.
+\item \emph{Pieces I--III} on $(0,1.4035]$, with their own caveats (\S\ref{sec:limitations}).
+\item \emph{The compute host} reported file contents and times honestly; every mirrored record matches it by SHA-256.
+\end{enumerate}
+
+% =====================================================================
 \section{Rigorous upper bounds for larger windows}\label{sec:upper}
 
-This section gives \emph{upper bounds only}; it makes no lower-bound, positivity or simplicity statement.
+This section gives \emph{upper bounds only}; it makes no lower-bound, positivity or simplicity statement. The same code gives the bounds $U(L_i)$ of Pieces~III and~IV (Tables~\ref{tab:piece3} and~\ref{tab:piece4}).
 
 \emph{Galerkin matrix.} Let $e_k(y)=\sqrt{(2k+1)/(2L)}P_k(y/L)$ with $k=2m+p$, $m<K$, $p\in\{0,1\}$ the parity. With $r=x/L\in[0,2]$, the symmetrised autocorrelation of $e_a,e_b$ is an $L$-independent polynomial in $r$: up to the normalisation $\sqrt{(2a+1)(2b+1)}/2$ it equals $C_{ab}(r)=\int_{-1}^{1-r}P_a(t)P_b(t+r)\,dt$ (for $a+b$ even $C_{ab}=C_{ba}$). By~\eqref{eq:P} the Galerkin matrix is $Q_K=\bigl(\int_0^2C_{ab}\,d\nu_L\bigr)_{a,b}$ plus a multiple of the identity, where $\nu_L$ is the measure with smooth density (pole and archimedean weights) minus the point masses $2\Lambda(n)n^{-1/2}$ at $r=\log n/L$. The entries follow from the Legendre moments $\int P_j(r-1)\,d\nu_L$ by the convolution recurrence~\cite{HaleTownsend}
 \[
@@ -522,7 +700,7 @@ The last statement holds because $v$ defines a polynomial trial function in the 
 
 \begin{table}[ht]
 \centering\footnotesize
-\caption{Rigorous upper bounds for the lowest eigenvalue in each sector. $K$ = number of Legendre modes per sector; ``---'' = no rigorous run. The Piece III windows are in Table~\ref{tab:piece3} ($K=640$, $3000$ bits).}\label{tab:upper}
+\caption{Rigorous upper bounds for the lowest eigenvalue in each sector. $K$ = number of Legendre modes per sector; ``---'' = no rigorous run. The Piece III windows are in Table~\ref{tab:piece3} ($K=640$, $3000$ bits) and the Piece IV windows in Table~\ref{tab:piece4} ($K=640$--$1024$, $2400$--$6000$ bits). Since release~2.0 the even bound at $L=1.5$ enters the proof (Piece~IV; Remark~\ref{rem:rho}).}\label{tab:upper}
 \begin{tabular}{llll}
 \toprule
 $L$ & $\lambda_1^\ev(L)\le$ & $\lambda_1^\od(L)\le$ & $K$, bits (even; odd)\\
@@ -538,7 +716,7 @@ $L$ & $\lambda_1^\ev(L)\le$ & $\lambda_1^\od(L)\le$ & $K$, bits (even; odd)\\
 At $L=2$ our even bound is below Zhu's certified $3.19\e{-283}$ [Table~3]; certified upper bounds for $L\le2$ are not new. The window $L=2.25$ lies outside the range of~\cite{Zhu}. There ($\mu=e^{2L}\approx90.0$) the explicit analytic bounds we know of are larger: about $e^{-1052.9}$ from~\cite[Thm.~K(a)]{MoriV} (in his normalisation) and about $e^{-504.0}$ from~\cite[Thm.~2.1]{rh25}, against $e^{-1093.8}$ for our even bound; \cite[Thm.~1]{rh81} assumes RH and has a non-explicit $O(L^2)$ term, so it gives no value. The values of Table~\ref{tab:upper} at $L=2.25$ are therefore the sharpest explicit upper bounds there that we know of; the decay scale $-\ln\lambda\approx4\pi e^{2L}$ is not ours~\cite{Connes26,MoriV,rh80,rh81}. Non-rigorous Galerkin values continue to decrease slowly with $K$ (at $L=2.25$: $9.894\e{-476}$, $9.337\e{-476}$, $9.032\e{-476}$ for $K=1536,1792,2048$); we do not have a bound on the omitted-mode tail, so these upper bounds may be far from sharp in relative terms.
 
 \begin{remark}[Quadrature exponent]\label{rem:rho}
-The $L=2$ even run was made before the exponent of Lemma~\ref{lem:G} was corrected from $\rho^{-2n}$ to $\rho^{-2n+2}$ in this code path ($\rho\le3$ there). The quadrature contributions to the moment radii are below $10^{-1999}$ and the reported radius of the Rayleigh quotient is $4.5\e{-1656}$; scaling the quadrature radii by $\rho^2\le9$ cannot reach the slack of the $15$-digit outward rounding (order $10^{-297}$). A re-run with the corrected exponent has not been made. The bounds $U$ of Table~\ref{tab:piece3} were computed on 30 October 2026 with \file{fr_sweep.py} as shipped in \file{code/upper/}: the exported value is the upper end of the Rayleigh-quotient ball raised by a relative $10^{-13}$ before rounding to $15$ digits, while every ball radius is below $10^{-600}$ times the value, so a factor $\rho^2\le9$ on the quadrature part of the radius cannot reach that margin, whichever exponent was in use. The working directory was not under version control, so the revision of \file{fast_recurrence.py} used for each run is not recorded. Re-running $U(1.19)$ with the shipped code on 31 October 2026 reproduced every exported digit and the radius (\file{data/piece3/rerun_U1.19.jsonl}). For the other rows of Table~\ref{tab:upper} (28--30 October; by-products that enter no proof) we have not confirmed which exponent was used.
+The $L=2$ even run was made before the exponent of Lemma~\ref{lem:G} was corrected from $\rho^{-2n}$ to $\rho^{-2n+2}$ in this code path ($\rho\le3$ there). The quadrature contributions to the moment radii are below $10^{-1999}$ and the reported radius of the Rayleigh quotient is $4.5\e{-1656}$; scaling the quadrature radii by $\rho^2\le9$ cannot reach the slack of the $15$-digit outward rounding (order $10^{-297}$). A re-run with the corrected exponent has not been made. The bounds $U$ of Table~\ref{tab:piece3} were computed on 30 October 2026 with \file{fr_sweep.py} as shipped in \file{code/upper/}: the exported value is the upper end of the Rayleigh-quotient ball raised by a relative $10^{-13}$ before rounding to $15$ digits, while every ball radius is below $10^{-600}$ times the value, so a factor $\rho^2\le9$ on the quadrature part of the radius cannot reach that margin, whichever exponent was in use. The working directory was not under version control, so the revision of \file{fast_recurrence.py} used for each run is not recorded. Re-running $U(1.19)$ with the shipped code on 31 October 2026 reproduced every exported digit and the radius (\file{data/piece3/rerun_U1.19.jsonl}). For the other rows of Table~\ref{tab:upper} (28--30 October) we have not confirmed which exponent was used. One of them, $U^\ev(1.5)$ ($K=384$), enters Piece~IV; its recorded radius is below $10^{-550}$ times the value, while the exported value exceeds the midpoint by a relative $10^{-13}$, so the argument above applies to it as well. The other rows enter no proof. The new bounds $U(L_i)$ of Piece~IV were computed on 31 October 2026 with the shipped \file{code/upper/} (hashes recorded in the run-time stamp); each exported upper end exceeds its midpoint by at most a relative $1.1\e{-13}$, and every radius is far smaller.
 \end{remark}
 
 % =====================================================================
@@ -571,15 +749,15 @@ At $L=1.19$ the normalised jumps of all seven prime powers are thus close to a c
 \section{Reproducibility}\label{sec:repro}
 
 \subsection{Software and hardware}
-Python 3.12 (3.12.13 for Pieces I--II) with python-flint 0.9.0, which bundles FLINT/Arb 3.6.0~\cite{FLINT,Johansson}; the C tools \texttt{vchol} (verified Cholesky) and \texttt{veig} (estimates only) of Piece~II are built with gcc 15.2.0 against FLINT 3.4. Pieces I--II ran on a 20-thread laptop and a cluster of three 64-core nodes (FLINT versions on the cluster not recorded; a SHA-256 check of the code files on every host was in force for the certificate of record). Piece~III and \S\ref{sec:upper} ran on three 64-vCPU virtual machines. Elston's certifier is used at upstream commit \file{3cc4cb7be6a659f1463ae4e2e99ad7ae5e6646f5} with the \texttt{--deflate} option added (\file{code/gap/elston/}).
+Python 3.12 (3.12.13 for Pieces I--II) with python-flint 0.9.0, which bundles FLINT/Arb 3.6.0~\cite{FLINT,Johansson}; the C tools \texttt{vchol} (verified Cholesky) and \texttt{veig} (estimates only) of Piece~II are built with gcc 15.2.0 against FLINT 3.4. Pieces I--II ran on a 20-thread laptop and a cluster of three 64-core nodes (FLINT versions on the cluster not recorded; a SHA-256 check of the code files on every host was in force for the certificate of record). Piece~III and \S\ref{sec:upper} ran on three 64-vCPU virtual machines. Elston's certifier is used at upstream commit \file{3cc4cb7be6a659f1463ae4e2e99ad7ae5e6646f5} with the \texttt{--deflate} option added (\file{code/gap/elston/}). Piece~IV ran on one 64-vCPU virtual machine with $60$\,GB of memory, with Python 3.12.15, python-flint 0.9.0, mpmath 1.4.1 and numpy 2.5.4, and a C kernel for Lemma~\ref{lem:SR} that gate P0 checks against the Python reference; the hashes of all executed files are in the run-time stamp and in every run record.
 
 \emph{Run times.} Piece~II certificate of record: clean rerun for $L\le1$ about $5.8$\,h in three stages; extension $1.03$--$1.09$: $2859$\,s, $11022$\,s, $11760$\,s; continuation $1.12$--$1.19$ about $28.5$\,h in total (head assembly about $6.5$--$7$\,h per window on the cluster). Piece~III test at $L=1.19$: $10$--$12$\,min per run with $18$ workers. Piece~III certificates: per run as in Table~\ref{tab:grid3}; the $16$ runs behind Theorem~\ref{thm:main} took about $814$ worker-process hours (seconds times workers), all $19$ shipped runs about $1177$. Upper bounds $U$ ($K=640$, $3000$ bits): $626$--$822$\,s per window. Rigorous upper bounds of Table~\ref{tab:upper}: $L=2$, $K=1024$: $3166$\,s (even), $10971$\,s (odd); $L=2.25$: $63923$\,s (even), $77675$\,s (odd); $L=1.5$, $1.75$ odd: $1278$\,s, $1293$\,s; $L=1.5$ even ($K=384$): $421$\,s.
 
 \subsection{Commands}
 \begin{itemize}
 \item Piece I and Piece II gluing: \texttt{python code/theorem.py --check} (seconds; ends with ``THEOREM CERTIFIED for all L in (0, 1.19]''). Windows: \texttt{python code/theorem.py} with the environment settings recorded in the release.
-\item Piece III gluing: \texttt{python code/gap/check\_steps.py} (seconds; reads \file{data/piece3/}; ends with ``CERTIFIED: \dots simple-even for all L in (0, 1.4035]'', compare \file{data/piece3/check.log}).
-\item Piece III lower bounds, in \file{code/gap/elston/}, with the window options \texttt{<w>} from the field \texttt{args} of the certificate file (e.g.\ \texttt{--a 1.2205 --delta 0.3 --beta-k 64 --tsharp 850 --nmodes 849 --gl 56 --prec 400}):
+\item Piece III gluing: \texttt{python code/gap/check\_steps.py} (seconds; reads \file{data/piece3/}; ends with ``CERTIFIED: \dots simple-even for all L in (0, 1.4885]'', compare \file{data/piece3/check.log}; only $(0,1.4035]$ is used).
+\item Piece III lower bounds, in \file{code/gap/elston/}, with the window options \texttt{<w>} from the field \texttt{args} of the certificate file (e.g.\ \texttt{--a 1.2205 --delta 0.3 --beta-k 64} \texttt{--tsharp 850 --nmodes 849 --gl 56 --prec 400}):
 {\footnotesize
 \begin{verbatim}
 C="--panels-per-unit 4 --schur-k 4000 --schur-iters 1500"
@@ -587,6 +765,13 @@ python grid_certificate_rigorous.py <w> $C --sector odd --workers n --json <out>
 python grid_certificate_rigorous.py <w> $C --sector even --deflate --workers n \
        --json <out>
 \end{verbatim}}
+\item Piece IV step test: \texttt{sh check\_theorem.sh} in the repository root runs the gluing of Pieces I--IV on the shipped data (seconds). Tables~\ref{tab:piece4}, \ref{tab:xcheck} and the generated rows of Tables~\ref{tab:grid3} and~\ref{tab:piece3} (seconds; the script checks every glued record and its gates and every step in exact arithmetic on the Arb endpoints, and optionally, given the full run directories, that each glued record is the registered selection):
+{\footnotesize
+\begin{verbatim}
+python paper/gen_tables.py data/piece4/glue data/piece4/windows.txt \
+       data/piece3 > paper/generated.tex
+\end{verbatim}}
+\noindent The command line of each Piece~IV certifier run is in the field \texttt{argv} of its record; \pivcode{README.md} explains how to re-run a window.
 \item Upper bounds, in \file{code/upper/} (exports the outward-rounded field \texttt{lam0\_upper}):
 {\footnotesize
 \begin{verbatim}
@@ -596,7 +781,7 @@ THREADS=n python fr_sweep.py <out.jsonl> "640" "1.19,1.2205,..." 3000
 
 \begin{table}[ht]
 \centering\footnotesize
-\caption{Provenance of the numbers in this paper. Paths under \texttt{highprec/} are in the author's working tree and are not part of the repository; all files the theorem depends on are.}\label{tab:files}
+\caption{Provenance of the numbers in this paper. Paths under \texttt{highprec/} are in the author's working tree and are not part of the repository; all files the theorem depends on are. Shipped run records that contained local paths or host names are redacted copies; a list mapping the SHA-256 of each original to that of its copy is shipped with them, and the originals are available on request.}\label{tab:files}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.36\textwidth}>{\raggedright\arraybackslash}p{0.56\textwidth}}
 \toprule
 Item & File(s)\\
@@ -609,6 +794,11 @@ $L=1.19$ test (\S\ref{sec:results3}) & run logs on the compute host, not shipped
 Table~\ref{tab:piece3} lower bounds & \file{data/piece3/g_<L>_l2.json} ($\lambda_2^\ev$), \file{g_<L>_odd.json} ($\lambda_1^\od$); field \texttt{certified\_lower\_bound}\\
 Table~\ref{tab:piece3} upper bounds & \file{data/piece3/upper640.jsonl}, field \texttt{lam0\_upper}; code \file{code/upper/}\\
 Piece III gluing & \file{code/gap/check_steps.py}, log \file{data/piece3/check.log}, checksums \file{data/piece3/SHA256SUMS}\\
+Piece III past $1.4035$ (Tables~\ref{tab:grid3}, \ref{tab:piece3} below the rule; Table~\ref{tab:xcheck}) & \file{data/piece3/} (not needed for the theorem)\\
+Table~\ref{tab:piece4} & glued records and upper bounds \pivdata{glue/}, window list \pivdata{windows.txt}; fields \texttt{certified\_lower\_bound}, \texttt{lam0\_upper}, \texttt{gates}; generator \texttt{paper/gen\_tables.py}, output \file{paper/generated.tex}\\
+\S\ref{sec:piece4fail} & the four $\lambda_2^\ev$ records at $1.92364501953125$ in \pivdata{rule_e/}; controls \pivdata{controls/}; gluing logs \pivdata{logs/}\\
+Piece IV protocol & pre-registrations, stamps, amendment log, scored results and audit in \pivdata{}\\
+Piece IV certifier & \pivcode{}; the specification and the proof document are not part of this release (their hashes are in the stamps; available on request)\\
 Table~\ref{tab:upper}, $L=2$ even & \file{highprec/data/rig_L2.jsonl}, \file{rig_L2.log}\\
 Table~\ref{tab:upper}, other rows & \file{highprec/data/rig_L225.jsonl} ($L=2.25$ even), \file{highprec/data/odd.jsonl} (odd sector), \file{highprec/gap/out_all/upper.jsonl} ($L=1.5$ even)\\
 Non-rigorous Galerkin values (\S\ref{sec:upper}) & \file{highprec/data/fr_L225*.jsonl}, \file{fr_sweep*.jsonl}\\
@@ -617,36 +807,40 @@ Non-rigorous Galerkin values (\S\ref{sec:upper}) & \file{highprec/data/fr_L225*.
 \end{tabular}
 \end{table}
 
-\subsection{Verification and audits}
+\subsection{Verification and audits}\label{sec:audits}
 All reviews so far were carried out by AI agents directed by the author; no independent human referee has checked the proofs or the code.
 \begin{itemize}
 \item \emph{Pieces I--II.} Three independent review rounds of the earlier note produced, among others: the Gauss--Legendre exponent correction (Remark~\ref{rem:erratum}); reconciliation of the Piece I constants across precisions; outward rounding of all quoted bounds; a downward-induction proof of the Bessel ratio enclosure; the definition of the continuation of $\re\psi$ off the real axis; documentation of Python \texttt{min} on balls; a mollification argument for~\eqref{eq:P}; a self-contained discreteness proof; a SHA-256 check of remote code; and corrected credit to Zhu for the reduction. Every finding was checked against code, logs and data before it was applied. A clean end-to-end rerun with a single code revision (empty cache, tools rebuilt, remote code hashed) then reproduced all lower bounds for $L\le1$ to about three significant digits. The sharp-cutoff path and the windows $1.03$--$1.19$ have not been through a review round.
 \item \emph{Upper-bound code.} An external review of the high-precision notes (six findings, all accepted) led to per-code-path rigour labels, outward rounding of exported upper endpoints, and withdrawal of an unsupported tail claim; an earlier review found and fixed an inaccurate ball inverse, a missing residual check and a missing quadrature bound.
 \item \emph{Piece III.} Elston's certifier was audited independently at $L=1.19$ (two issues fixed; documented in~\cite{Elston}); the post-audit code at larger $L$ and our \texttt{--deflate} addition have not been audited. The step test (\file{code/gap/check_steps.py}, about $50$ lines) compares explicit Arb endpoints. The reproduction of Elston's $L=1.19$ bounds to $12$ and $17$ digits is a consistency check of the installation, not an audit.
+\item \emph{Piece IV.} The specification and the proof document were reviewed by a fresh AI agent before the pilot was pre-registered. A pilot at $L=2$ was audited by another fresh AI agent with its own code (matrix entries from~\eqref{eq:P}, far-block constants, an independent core solve, mutation tests, rounding directions, clean room); it found no rigour defect and required six fixes (independent per-window entries, an uncapped second path, explicit labels for Lemma~\ref{lem:SR}, archiving of executed code, an append-only amendment log, checks at gluing), which were made and verified before the grid was pre-registered. The grid was then checked by a fresh AI agent with its own code (step test, gates, controls, mutations, provenance, entries from~\eqref{eq:P}, the cross-check), and the gap closure and the combined statement on $(0,2]$ by another fresh AI agent, whose verdict is ``certified, conditional on the imported trust of \S\ref{sec:piece4trust}; grid G alone gives $[1.4035,1.91912841796875]$''. None of these agents wrote the code it checked, but all are instances of the same AI system that wrote it. A review by a second AI system (OpenAI's Codex) is to follow.
 \end{itemize}
-\emph{Invitation to review.} This work has not been peer-reviewed. Code, certificate files and this source are public at \url{https://github.com/AlexGenusCore/weil-ground-state-simple-even}; the file \file{REVIEWING.md} there lists the least-checked parts and concrete checks ordered by effort, from re-running the gluing script on the shipped certificates (minutes) to re-running a single window (hours). Independent review by anyone is welcome; confirmed errors will be corrected publicly and reviewers credited.
+\begin{sloppypar}\emph{Invitation to review.} This work has not been peer-reviewed. Code, certificate files and this source are public at \url{https://github.com/AlexGenusCore/weil-ground-state-simple-even}; the file \file{REVIEWING.md} there lists the least-checked parts and concrete checks ordered by effort, from re-running the gluing script on the shipped certificates (minutes) to re-running a single window (hours). Independent review by anyone is welcome; confirmed errors will be corrected publicly and reviewers credited.\end{sloppypar}
 
 % =====================================================================
 \section{Limitations}\label{sec:limitations}
 \begin{enumerate}
-\item \emph{Range.} The theorem is certified on $(0,\Lmax]$. The extension to $1.5$ is in progress (Remark~\ref{rem:status}); the passing step $[1.4255,1.447]$ is a data point only.
-\item \emph{Piece III is unaudited beyond $L=1.19$.} Elston's certifier was audited only at $L=1.19$; the runs at larger $L$, the parameter changes ($\beta_K$, $\Tsh$, $N$, Gauss points) and our \texttt{--deflate} addition have not been reviewed. The step ratios of Piece~III are small ($1.131$--$1.552$), so the theorem on $(1.19,\Lmax]$ depends on every bound being correct to within about $13\%$.
-\item \emph{Computer assistance.} Correctness depends on Arb/FLINT, on our code for Pieces I--II and \S\ref{sec:upper}, on Elston's code for Piece~III, and on the lemmas above.
+\item \emph{Range.} The theorem is certified on $(0,\Lmax]$, conditional on the imported trust of \S\ref{sec:piece4trust}.
+\item \emph{Post-hoc rule in Piece~IV.} The pre-registered grid failed as registered (\S\ref{sec:piece4fail}). The part $[1.91912841796875,2]$ rests on rule~E, which was registered after the failure and after a diagnostic run had passed; it changes only the free parameter~$N$, but a reader who does not accept it should read the theorem as covering $(0,1.91912841796875]$. Rule~E was tested at one window only, and its negative control failed at (V2) rather than at (V4), so it exercised the Lemma~SR path at the new $N$ less than planned.
+\item \emph{Origin of the Piece~IV method.} The method comes from AI-agent preprints accepted only by AI reviewer agents~\cite{rh45,rh60}. We re-derived every step, but no human has checked our derivation or our code.
+\item \emph{Stage S.} An upper bound $s(L)$ for the prime comb that is too small would make Piece~IV certificates too strong and would not be caught by any gate except the coarse Ritz guard G-S; $s(L)$ is computed with Elston's Schur-test code, audited only at $L=1.19$.
+\item \emph{Piece III is unaudited beyond $L=1.19$.} Elston's certifier was audited only at $L=1.19$; the runs at larger $L$, the parameter changes ($\beta_K$, $\Tsh$, $N$, Gauss points) and our \texttt{--deflate} addition have not been reviewed. The step ratios of Piece~III are small ($1.131$--$1.552$), so the theorem on $(1.19,1.4035]$ depends on every bound being correct to within about $13\%$. The step ratios of Piece~IV are at least $\PIVminratio$.
+\item \emph{Computer assistance.} Correctness depends on Arb/FLINT, on our code for Pieces I--II, Piece~IV and \S\ref{sec:upper}, on Elston's code for Piece~III and for parts of Piece~IV, and on the lemmas above.
 \item \emph{Normalisation.} Our $Q_L$ follows Zhu and was validated against the zero side of the explicit formula. It has not been checked line by line against $QW_\lambda$ of~\cite{CvS,CCM25}. Remark~\ref{rem:affine} covers positive affine changes, not a discrepancy in the relative weights of the pole, archimedean and prime terms.
 \item \emph{Self-adjoint realisation.} We use the closure of $Q_L$ on $C_c^\infty(-L,L)$; trial polynomials not vanishing at $\pm L$ are in its form domain by the argument in \S\ref{sec:piece2cert}. A different realisation would need re-examination.
 \item \emph{Unexplained precision dependence} of the upper end of $\int|h|$ in Piece~I (largest value used).
 \item \emph{Comparisons on balls.} Python \texttt{min}/\texttt{max} on Arb balls occur in the gluing and in some intermediate steps of both certifiers; every current use is separated by many orders of magnitude more than the radii.
 \item \emph{Sharp-cutoff and triangular assembly code} for $1.03\le L\le1.19$ in Piece~II has not been reviewed; $L=1.19$ is, however, re-confirmed by the Piece~III code path.
-\item \emph{Upper bounds of \S\ref{sec:upper}} are upper bounds only; their distance from the true eigenvalue is not controlled (Remark~\ref{rem:rho} for the $L=2$ quadrature exponent).
+\item \emph{Upper bounds of \S\ref{sec:upper}} are upper bounds only; their distance from the true eigenvalue is not controlled (Remark~\ref{rem:rho} for the quadrature exponent at $L=1.5$ and $L=2$).
 \item \emph{Section~\ref{sec:kinks}} is numerical; the split-window $x$-quadrature is not bounded.
 \item \emph{Scope.} Nothing is claimed for $L>\Lmax$, about the convergence step~(ii) of~\cite{CCM25}, or about RH.
 \end{enumerate}
 
 \section*{Acknowledgements}
-The Piece~III lower bounds use Zac Elston's certifier \emph{weil-windows}~\cite{Elston} (MIT licence), which we ran with one added option; the reduction it implements and the published $L=1.19$ certificates are his. The window certificates of Pieces I--II rest on Xuefeng Zhu's frequency-cutoff reduction and block estimate~\cite{Zhu}. The survey of lower-bound methods behind Piece~III drew on the work of Mori~\cite{Mori} and of Liu~\cite{Liu}, whose position-side use of the Legendre convolution recurrence preceded ours.
+The Piece~III lower bounds use Zac Elston's certifier \emph{weil-windows}~\cite{Elston} (MIT licence), which we ran with one added option; the reduction it implements and the published $L=1.19$ certificates are his. The window certificates of Pieces I--II rest on Xuefeng Zhu's frequency-cutoff reduction and block estimate~\cite{Zhu}. The survey of lower-bound methods behind Piece~III drew on the work of Mori~\cite{Mori} and of Liu~\cite{Liu}, whose position-side use of the Legendre convolution recurrence preceded ours. The method of Piece~IV is that of bramble\_trace~\cite{rh60} and lihongmin~\cite{rh45} on rStation; we re-derived and re-implemented it without using their code.
 
 \section*{AI-assistance statement}
-Computations, code and drafting were carried out with substantial assistance from an AI system (Anthropic's Claude). All results were checked by independent recomputation, and the author takes responsibility for the content.
+Computations, code, the Piece~IV specification and proof document, and drafting were carried out with substantial assistance from an AI system (Anthropic's Claude). All reviews and audits so far were carried out by AI agents (\S\ref{sec:audits}); no human referee has checked the proofs or the code, and a review by a second AI system is to follow. The main results were re-checked by independent code as described in \S\ref{sec:audits}, within the limits of \S\ref{sec:limitations}, and the author takes responsibility for the content. The method of Piece~IV comes from AI-agent preprints~\cite{rh45,rh60} that were reviewed only by AI agents.
 
 \bibliographystyle{amsplain}
 \bibliography{refs}
