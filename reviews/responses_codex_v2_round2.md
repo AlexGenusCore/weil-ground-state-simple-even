@@ -24,7 +24,7 @@ the code and records. We found one use away from its anchor, which we fixed. It 
   precision was not logged; the default is 768. All four bounds of a row (ℓ₁, U, ℓ₂, ℓ^odd), including the Rayleigh upper
   bound, are computed at this anchor L̃_i. We measured L̃_i − L_i < 2^−767 at 768 and 1536 bits.
 - **New Remark 5.12(b)** states how bounds transfer. Lower bounds transfer down to L_i by Lemma 3.1. U(L̃_i) bounds
-  λ₁^ev(L̃_i) only and is used only there.
+  λ₁^ev(L) only for L ≥ L̃_i and is used only at L̃_i.
 - **Pieces I–II.** `theorem.py --check` compares consecutive rows, so it proves the steps [L̃_i, L̃_{i+1}].
   - Theorem 4.1 items (1)–(2) now name (0, L̃₀] and the steps [L̃_i, L̃_{i+1}]. Together they cover
     (0, L̃₃₀] ⊃ (0, 1.19].
