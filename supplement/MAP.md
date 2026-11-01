@@ -9,6 +9,7 @@ This folder holds the derivations behind Piece IV of the paper (§7, Theorem `th
 | `PROOFS.md` | P1–P23: first-principles proofs of every formula and constant the certifier uses, and Theorem V (§8) | `7e18f2d0…4c8a2`, **byte-identical** to the file stamped in `data/piece4/GAP.stamp` (line `hp/lb/rh60route/PROOFS.md`) |
 | `SPEC.md` | the specification the code was written from (stages C, T, F, I, P; gates; constants table) | redacted copy, see `REDACTION.sha256`; the original's sha256 `c9862cb7…f446` is the `SPEC.md` line of `GAP.stamp` |
 | `MAP.md` | this file | — |
+| `AUDITS.md` | the clean-room protocol and the review and audit history, moved out of the paper (second Codex review, point 9) | — |
 
 `SHA256SUMS` lists the shipped bytes; `check_theorem.sh` checks it and that `PROOFS.md` matches `GAP.stamp`.
 

@@ -62,8 +62,10 @@ These are the parts we consider least checked, roughly in order of how much the 
 
 ### Minutes (no heavy computation)
 
-- **Run `./check_theorem.sh`.** It checks the SHA-256 sums (including `supplement/` against `GAP.stamp`) and runs the
-  gluing checks (Pieces I–II, III, and IV with and without rule E). It should end with the combined statement for (0, 2].
+- **Run `./check_theorem.sh`.** It checks the SHA-256 sums (including `supplement/` against `GAP.stamp`), runs the
+  gluing checks (Pieces I–II, III, and IV with and without rule E), and validates every glued Piece IV record (all 15
+  gates, schema, provenance) through `paper/gen_tables.py`, whose output must equal `paper/generated.tex`. It should end
+  with the combined statement for (0, 2]. This validates records; it does not regenerate any certificate.
 - **Check the Piece IV provenance.**
   - Every glued record in `data/piece4/glue/` should be a PASS with all 15 gates true.
   - Each record should carry `stamp_sha256` 7a3c6b28…, and an amendment pin that is a prefix of the chain.

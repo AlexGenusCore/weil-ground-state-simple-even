@@ -5,3 +5,8 @@
 # original sha256                                                   shipped sha256                                                    file
 b71d1b5b0270e3991afe8a495a28f7b8046ce23717ae7f448995343e1ce99d31  e67ca67e7b5e186e467b132a0035f7b89140559c77fd18942cda60b89a6a4f41  reviews/review_codex_20261101_0407.md
 ea73f74581a3ef8b2b7d004068138b47bd64eff6a5767ffef3f88882f7f5aae6  (not shipped)                                                     review_codex_20261101_0407.md.log
+# Second Codex review (round 2, 2026-11-01 04:38): the review as received contains no local path, host name or account name,
+# so the shipped codex_review_v2_round2.md is byte-identical to it. Its session log (review_codex_20261101_0438.md.log,
+# 517 KB) is not shipped: it lists many paths of the author's private working tree. Available on request (info@genuscore.com).
+cdf3bd72a5ba91abe0e8b1276803debbe6d1f74406cf58929c37e4605e46e7d3  cdf3bd72a5ba91abe0e8b1276803debbe6d1f74406cf58929c37e4605e46e7d3  reviews/codex_review_v2_round2.md
+71eb76a3a959ba1ef1ce50b44a818bfd63daf6d66bf41b82e5a880c1a20eca41  (not shipped)                                                     review_codex_20261101_0438.md.log

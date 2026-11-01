@@ -40,8 +40,10 @@ function on `L^2(-L, L)` is simple, and its eigenfunction is even.
     to the zeta zeros). Neither is addressed here.
   - We verify the hypothesis only on the bounded range `(0, 2]`.
 
-**Check it in seconds:** `./check_theorem.sh`. It runs the three gluing checks on the shipped data and prints the combined
-statement; see [Reproducing](#reproducing).
+**Check it in seconds:** `./check_theorem.sh`. It validates the shipped records (hashes, schema, all 15 Piece IV gates,
+provenance) and runs the gluing checks, then prints the combined statement; see [Reproducing](#reproducing). This is record
+validation: it shows that the recorded bounds prove the theorem, not that they are correct. Regenerating a certificate means
+re-running its window (hours).
 
 The paper is [`paper/main.pdf`](paper/main.pdf), with source in `paper/main.tex` and `paper/refs.bib`. Piece IV is
 documented in four more places:
@@ -483,8 +485,9 @@ code/rh60route/         Piece IV: our clean-room rh_60-route certifier, Lemma SR
 data/piece4/            Piece IV records, upper bounds, controls, pre-registrations, stamps, results, audit, SHA256SUMS
 data/upper/             original records of the paper's upper-bound table (L = 1.5 ... 2.25)
 data/kinks/             raw jump measurements of paper §9 (L = 1.19, four resolutions)
-supplement/             Piece IV specification (SPEC.md), proofs P1-P23 (PROOFS.md), formula -> code -> field map (MAP.md)
-reviews/                the second AI review (Codex) of the release candidate and our point-by-point responses
+supplement/             Piece IV specification (SPEC.md), proofs P1-P23 (PROOFS.md), formula -> code -> field map (MAP.md),
+                        protocol and review history (AUDITS.md)
+reviews/                the two Codex reviews of the release candidates and our point-by-point responses
 exploratory/            NON-RIGOROUS scripts behind `paper/NOTE.md` Appendix A and the normalization check
 ```
 

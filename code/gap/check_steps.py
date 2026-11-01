@@ -2,8 +2,9 @@
 Inputs (directory argument, default ./out): upper*.jsonl (fr_sweep, field lam0_upper, rigorous outward-rounded upper ends; every
 run is a valid upper bound, so the smallest one per L is used),
 g_<L>_odd.json and g_<L>_l2.json (Elston certifier; field certified_lower_bound, an Arb ball whose lower end is used).
-U(1.19): the smaller of Piece II's certified 1.312e-47 (data/theorem_bounds.json) and the K = 640 Galerkin bound in upper640.jsonl
-(8.712e-48; the first step needs it).
+Every bound here is at the decimal window itself (each code encloses its computation for the Arb ball of the decimal string).
+U(1.19) is the K = 640 Galerkin bound in upper640.jsonl (8.712e-48). Piece II's 1.312e-47 (data/theorem_bounds.json) is a bound
+at the dyadic anchor arb("1.19").upper() >= 1.19, not at 1.19, and is not used (paper, Remark rem:dyadic).
 All comparisons are done in Arb: a step passes only if the lower end of the left side exceeds the upper end of U.
 The last line states the range certified by the contiguous passing prefix of steps from 1.19, together with Pieces I-II
 (checked separately by code/theorem.py --check on data/theorem_bounds.json).
@@ -12,7 +13,7 @@ import sys, json, os
 from flint import arb
 
 d = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "piece3")
-U = {"1.19": arb("1.312e-47")}
+U = {}
 for fn in sorted(f for f in os.listdir(d) if f.startswith("upper") and f.endswith(".jsonl")):
     for line in open(os.path.join(d, fn)):
         r = json.loads(line)

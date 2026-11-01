@@ -6,15 +6,20 @@ Usage: python paper/gen_tables.py GLUE WINDOWS PIECE3 [OUT ...] > paper/generate
   PIECE3   Piece III (Elston-route) records g_<L>_{odd,l2}.json and upper*.jsonl (shipped: data/piece3)
   OUT      optional run-record directories (all runs, passing or not); if given, every glued record must equal, byte for
            byte, the first passing record in sorted order over them (the registered selection rule)
-Every number in generated.tex comes from these files; nothing is typed by hand. Checks: each glued record has result PASS, no
-failed gate, all 15 gates true, mut null, the grid stamp, Ldec equal to its window and the right sector; every step
-min(l_odd, l_2)(L_{i+1}) > U_ev(L_i) holds in exact arithmetic on the Arb endpoints. Lower bounds are rounded down, upper
-bounds up, ratios down, to 4 significant digits."""
+Every number in generated.tex comes from these files and from data/kinks/ (Table tab:kinks, numerical only); nothing is typed
+by hand. Record validation (check_theorem.sh runs this script and compares its output with paper/generated.tex): each glued
+Piece IV record has result PASS, no failed gate, exactly the 15 hard gates of certify.py all true, mut null, the grid stamp,
+Ldec equal to its window, the right sector, and a certified_lower_bound ball that contains its exact mu; every Piece III record
+has args.a equal to its window and the right sector; every upper bound is rigorous_quadrature; every step
+min(l_odd, l_2)(L_{i+1}) > U_ev(L_i) holds in exact arithmetic on the Arb endpoints. This validates the records; it does not
+regenerate any certificate. Lower bounds are rounded down, upper bounds up, ratios down, to 4 significant digits."""
 import json, os, sys
 from fractions import Fraction
 from flint import arb, ctx
 
+if not __debug__: sys.exit("gen_tables.py: run without -O (the checks are asserts)")
 ctx.prec = 512
+GATES = {"G-S", "G0-mini", "G0i", "V2", "V3", "V4", "V5", "R6", "G5", "G5p", "C-tau", "C-rbar", "C-J2", "C-rM", "C-ind"}  # certify.py
 STAMP = "7a3c6b287f840aba50fc11d49e6f919eb0cb758a6a0ce03e6248298feda4b9e8"  # sha256 of the run-time stamp of grid G
 glue, wfile, p3, outdirs = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4:]
 
@@ -74,7 +79,8 @@ for L in W[1:]:
         g = os.path.join(glue, f"g_{L}_{kind}.json")
         r = json.load(open(g))
         assert (r["Ldec"], r["mut"], r["result"], r["failed_gates"], r["stamp_sha256"]) == (L, None, "PASS", [], STAMP), g
-        assert all(r["gates"].values()) and len(r["gates"]) == 15, g
+        assert set(r["gates"]) == GATES and all(v is True for v in r["gates"].values()), g
+        assert frac(arb(r["certified_lower_bound"]).lower()) <= Fraction(r["mu"]) <= frac(arb(r["certified_lower_bound"]).upper()), g
         assert (r["eps"], bool(r["deflate"])) == ((-1, False) if kind == "odd" else (1, True)), g
         if outs:
             ok = [f for f in sorted(outs) if f.startswith(f"{kind}_{L}_") and json.load(open(outs[f]))["result"] == "PASS"]
@@ -110,8 +116,10 @@ assert e1["label"] == f"l2_{Lg}_1o4_e1" and e1["N"] == 38912
 P = ["1.4035", "1.4255", "1.447", "1.468", "1.4885"]
 U3 = uppers(p3)
 g3 = {(L, k): json.load(open(os.path.join(p3, f"g_{L}_{k}.json"))) for L in P for k in ("odd", "l2")}
-for (L, k), r in g3.items():
-    assert r["args"]["a"] == L and r["sector"] == ("odd" if k == "odd" else "even") and bool(r["deflate"]) == (k == "l2")
+for f in sorted(f for f in os.listdir(p3) if f.startswith("g_") and f.endswith(".json")):  # every Piece III record
+    L, k = f[2:-5].rsplit("_", 1)
+    r = json.load(open(os.path.join(p3, f)))
+    assert r["args"]["a"] == L and r["sector"] == ("odd" if k == "odd" else "even") and bool(r["deflate"]) == (k == "l2"), f
 rows3, grid3, ratios3, xrows, xo, x2 = [], [], [], [], [], []
 for a, b in zip(P, P[1:]):
     o, t = g3[b, "odd"], g3[b, "l2"]
@@ -136,6 +144,17 @@ for a, b in zip(P, P[1:]):
                  f"{rec[b, 'odd']['seconds']}, {rec[b, 'l2']['seconds']} & {o['seconds']}, {t['seconds']}\\\\")
     assert lo(o) <= U[b, 1], ("X1", b)  # Elston's odd lower bound below our rigorous U_od
 
+# ---------------------------------------------------------------- Table tab:kinks (numerical, non-rigorous): L = 1.19 jumps
+KD = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "kinks")
+krows = []
+for Nt in (600, 800, 1200, 1600):
+    k = json.load(open(os.path.join(KD, f"kink_119_{Nt}.json")))
+    v = {b["n"][0]: abs(b["jump_f"]) / (b["weight"] * k["f_at_L"]) for b in k["breaks"] if b["y"] > 0}
+    x = [v[n] for n in (3, 4, 5, 2, 7, 8, 9)]
+    m = sum(x) / 7
+    cv = (sum((a - m) ** 2 for a in x) / 7) ** .5 / m  # population standard deviation over the seven prime powers
+    krows.append(f"{Nt} & " + " & ".join(f"{a:.3f}" for a in x + [m, cv]) + "\\\\")
+
 # ---------------------------------------------------------------- output
 mac = {
     "PIVrows": "\n".join(rows), "PIVminratio": fix(qmin[0]), "PIVminstep": f"[{qmin[1]},{qmin[2]}]",
@@ -144,7 +163,7 @@ mac = {
     "PIVsecmin": str(min(r["seconds"] for r in rec.values())), "PIVsecmax": str(max(r["seconds"] for r in rec.values())),
     "PIVtwoRatio": tex(min(lo(rec["2", "odd"]), lo(rec["2", "l2"])) / U["2", 0]),
     "PIIIrows": "\n".join(rows3), "PIIIgridrows": "\n".join(grid3), "PIIIextmin": fix(min(ratios3)),
-    "PIVxrows": "\n".join(xrows), "PIVxodd": f"{fix(min(xo))}--{fix(max(xo))}", "PIVxltwo": f"{fix(min(x2))}--{fix(max(x2))}",
+    "PIVxrows": "\n".join(xrows), "KINKrows": "\n".join(krows), "PIVxodd": f"{fix(min(xo))}--{fix(max(xo))}", "PIVxltwo": f"{fix(min(x2))}--{fix(max(x2))}",
 }
 print("% Generated by gen_tables.py from the run records; do not edit.")
 for k, v in mac.items(): print(f"\\newcommand{{\\{k}}}{{{v}}}")
